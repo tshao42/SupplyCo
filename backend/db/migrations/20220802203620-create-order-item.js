@@ -18,16 +18,15 @@ module.exports = {
         allowNull:false,
         references: { model: 'Products'}
       },
-      defaultPlaceId: {
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       }
     });
   },
