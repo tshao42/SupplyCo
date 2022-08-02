@@ -7,6 +7,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Product.associate = function(models) {
     // associations can be defined here
+    Product.hasMany(models.Review, {foreignKey: 'productId', onDelete: 'CASCADE', hooks: true });
+    Product.belongsToMany(models.Orderdetail, { through: 'Orderitem', as: 'products', foreignKey: 'productId', otherKey: 'orderId'});
   };
   return Product;
 };

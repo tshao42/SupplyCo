@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Order_details', {
+    return queryInterface.createTable('Orderdetails', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,7 +10,8 @@ module.exports = {
       },
       buyerId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {model: 'Users'}
       },
       addressPlaceId: {
         type: Sequelize.STRING,
@@ -35,6 +36,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Order_details');
+    return queryInterface.dropTable('Orderdetails');
   }
 };

@@ -10,11 +10,13 @@ module.exports = {
       },
       productId: {
         type: Sequelize.INTEGER,
-        allowNull:false
+        allowNull:false,
+        references: { model: 'Products' }
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: { model: 'Users' }
       },
       title: {
         type: Sequelize.TEXT
