@@ -124,8 +124,9 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
         orderFor: temp.orderFor,
         total: temp.total
     }
+    const orderIdCond = {where:{id:orderId}}
 
-    await order.update(tempDetail);
+    await order.update(tempDetail, orderIdCond);
     //done with order editing
     //now proceeding with editing...
     //note: if quantity gets to zero, need to delete the listing
@@ -145,20 +146,13 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
     })
     
     //what it will return
-    const newCopy = await db.Order.findAll({
-        where: {
-            id: orderId
-        }, include: {
-            model: db.Orderitem,
-            required: true
-        }
-    });
-    return res.json(newCopy);
+    return res.json(orderId);
 
 }));
 
 router.delete('/:orderId', asyncHandler(async function (req, res) {
     const orderId = req.params.orderId;
+    await db.Orderitem.destroy({ where: { orderId: orderId } });
     await db.Order.destroy({ where: { id: orderId } });
     return res.json(orderId);
 }));
