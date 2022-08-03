@@ -6,14 +6,15 @@ const { setTokenCookie, requireAuth, restoreUser } = require("../../utils/auth")
 router.use(cookieParser());
 router.use(express.urlencoded({ extended: false }));
 const db = require('../../db/models');
+const e = require('express');
 // const { Result } = require('express-validator');
 // const Op = require('sequelize');
 
 //CREATE
 router.post('/', asyncHandler(async function (req, res) {
-    const temp = req.body;
-    console.log(`line 15`)
-    console.dir(temp)
+    const temp = await req.body;
+    // console.log(`line 15`)
+    // console.dir(temp)
     //breaking down:
     const tempDetail = {
         buyerId: temp.buyerId,
@@ -37,9 +38,9 @@ router.post('/', asyncHandler(async function (req, res) {
 
     const tempContentArr = temp.Orderitems;
     
-    for (let i = 0 ; i < tempContentArr; i++){
-        let tempProductId = tempContentArr.productId;
-        let tempQuantity = tempContentArr.quantity;
+    for (let i = 0 ; i < tempContentArr.length; i++){
+        let tempProductId = tempContentArr[i].productId;
+        let tempQuantity = tempContentArr[i].quantity;
         let tempItemObj = {
             orderId: newOrderId,
             productId: tempProductId,
@@ -49,13 +50,32 @@ router.post('/', asyncHandler(async function (req, res) {
         await tempBuildObj.save();
     }
 
-    res.json(newOrderId);
+    const newCopy = await db.Order.findAll({
+        where: {
+            id: newOrderId
+        }, include: {
+            model: db.Orderitem,
+            required: true
+        }
+    });
+    return res.json(newCopy);
+
 }));
 
 
 //READ (single)
 router.get('/:orderId', asyncHandler(async function (req, res) {
     const orderId = req.params.orderId;
+    //if empty, need to delete
+    const emptyCheck = await db.Orderitem.findAll({ where: { orderId: orderId } });
+    console.log(`line 136, ${emptyCheck}`)
+    // if everything gets deleted from the order...
+    if (emptyCheck.length == 0) {
+        console.log('hit line 137')
+        await db.Order.destroy({ where: { id: orderId } })
+        return res.json('empty order...');
+    }
+
     const order = await db.Order.findAll({
         where:{
             id: orderId
@@ -63,6 +83,7 @@ router.get('/:orderId', asyncHandler(async function (req, res) {
             model: db.Orderitem,
             required: true
         }});
+        
     return res.json(order);
 }));
 
@@ -80,6 +101,66 @@ router.get('/users/:userId', asyncHandler(async function (req, res) {
         }
     });
     return res.json(order);
+}));
+
+//UPDATE (update an order)
+router.put('/:orderId', asyncHandler(async function (req, res) {
+    const orderId = req.params.orderId;
+    //if we are changing addy/name: we are making changes to the Order listing
+    //if we are changing quantity: we are making changes to the Orderite
+    //Depending on cases
+
+    const order= await db.Order.findByPk(orderId);
+    //then we deal with the req...
+
+    //first: get what is in the req
+    const temp = await req.body;
+    //take the response object apart
+    //still expecting similar json format... (ref: outputs.md)
+
+    //STEP 1: details
+    const tempDetail = {
+        addressPlaceId: temp.addressPlaceId,
+        orderFor: temp.orderFor,
+        total: temp.total
+    }
+
+    await order.update(tempDetail);
+    //done with order editing
+    //now proceeding with editing...
+    //note: if quantity gets to zero, need to delete the listing
+    const tempContentArr = temp.Orderitems;
+    await tempContentArr.forEach((item)=>{
+        if (item.quantity ===0){
+            db.Orderitem.destroy({
+                where:{
+                    id: item.id
+                }
+            })
+        } else {
+            const tempval = { quantity: item.quantity };
+            const tempcond = { where: { id: item.id } }
+            db.Orderitem.update(tempval, tempcond);
+        };
+    })
+    
+    //what it will return
+    const newCopy = await db.Order.findAll({
+        where: {
+            id: orderId
+        }, include: {
+            model: db.Orderitem,
+            required: true
+        }
+    });
+    return res.json(newCopy);
+
+}));
+
+router.delete('/:orderId', asyncHandler(async function (req, res) {
+    const orderId = req.params.orderId;
+    await db.Order.destroy({ where: { id: orderId } });
+    return res.json(orderId);
 }));
 
 module.exports = router;

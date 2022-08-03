@@ -94,3 +94,43 @@ GET /api/orders/users/1
         ]
     }
 ]
+
+POST /api/orders
+
+(sample request)
+{
+    "buyerId": 2,
+    "addressPlaceId": "ChIJPwi-Dpne3IARhY3NJXuK8g0",
+    "orderFor": "Demo User",
+    "total": "8995",
+    "Orderitems": [
+        {
+            "productId": 1,
+            "quantity": 2
+        },
+        {
+            "productId": 2,
+            "quantity": 1
+        }
+    ]
+}
+
+Response json for now is the new order Id created
+TODO: figure out what needs to be returned
+
+PUT /api/orders/:orderId
+{
+    "addressPlaceId": "ChIJPwi-Dpne3IARhY3NJXuK8g1",
+    "orderFor": "TSS",
+    "total": "12000",
+    "Orderitems": [
+        {
+            "id": 3,
+            "quantity": 3
+        },
+        {
+            "id": 4,
+            "quantity": 4
+        }
+    ]
+}

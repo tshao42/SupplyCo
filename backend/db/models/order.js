@@ -8,9 +8,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Order.associate = function(models) {
     // associations can be defined here
-    Order.belongsTo(models.User, { foreignKey: 'id', onDelete: 'CASCADE', hooks: true });
+    Order.belongsTo(models.User, { foreignKey: 'id' });
     // Order.belongsToMany(models.Product, { through: 'Orderitem', foreignKey: 'orderId'})
-    Order.hasMany(models.Orderitem, {foreignKey: 'orderId'})
+    Order.hasMany(models.Orderitem, { foreignKey: 'orderId', onDelete: 'CASCADE', hooks: true })
 
   };
   return Order;
