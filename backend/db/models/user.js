@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [60, 60]
       }
+    },
+    defaultPlaceId: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   },
   {
@@ -50,6 +54,8 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function(models) {
     // associations can be defined here
+    User.hasMany(models.Review, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
+    User.hasMany(models.Order, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true });
   };
 
   User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
