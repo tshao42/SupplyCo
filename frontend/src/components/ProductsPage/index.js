@@ -10,22 +10,20 @@ function ProductsPage() {
     const products = useSelector( state => state.products );
 
     const [loaded, setLoaded ] = useState(false);
-    console.dir(products);
-    useEffect(async ()=>{
-        await dispatch(loadAllProducts())
-        .then(()=>setLoaded(true));
+    // console.dir(products);
+    useEffect(()=>{
+        dispatch(loadAllProducts());
     }, [dispatch]);
 
-
     return (
-        setLoaded&&
+        loaded&&
         <div>
+            {console.log('hit line 23')}
             {Object.values(products).map(({name, price})=>{
                 <div>
-                    {console.log('hit line 25')}
-                    {console.log(name)}
-                    <div>{name}</div>
-                    <div>${price}</div>
+                    {/* {console.log('iterated through line 26')} */}
+                    <p>Name:{name}</p>
+                    <p>${price}</p>
                 </div>
             })}
         </div>
