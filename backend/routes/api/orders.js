@@ -11,7 +11,7 @@ const db = require('../../db/models');
 
 //CREATE
 router.post('/', asyncHandler(async function (req, res) {
-    const temp = await req.body;
+    const temp = req.body;
     console.log(`line 15`)
     console.dir(temp)
     //breaking down:
