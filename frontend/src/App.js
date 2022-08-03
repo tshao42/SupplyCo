@@ -7,6 +7,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import { loadAllProducts } from "./store/product";
 import { loadAllUserOrders } from "./store/order";
+import CheckoutPage from "./components/CheckoutPage";
+import ProductsPage from "./components/ProductsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     // testing area
     // dispatch(loadAllProducts());
-    dispatch(loadAllUserOrders(1));
+    // dispatch(loadAllUserOrders(1));
   }, [dispatch]);
 
   return (
@@ -31,6 +33,12 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route exact path="/checkout">
+            <CheckoutPage />
+          </Route>
+          <Route exact path="/products">
+            <ProductsPage />
           </Route>
         </Switch>
       )}
