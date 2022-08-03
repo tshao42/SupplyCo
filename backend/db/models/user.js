@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function(models) {
     // associations can be defined here
     User.hasMany(models.Review, { foreignKey: 'userId', onDelete: 'CASCADE', hooks: true })
-    User.hasMany(models.Orderdetail, { foreignKey: 'buyerId', onDelete: 'CASCADE', hooks: true })
+    User.hasMany(models.Order, { foreignKey: 'buyerId', onDelete: 'CASCADE', hooks: true })
 
   };
 
