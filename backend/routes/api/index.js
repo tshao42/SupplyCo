@@ -43,6 +43,7 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const productsRouter = require('./products.js');
 const ordersRouter = require('./orders.js')
+const reviewsRouter = require('./reviews.js')
 
 router.use('/session', sessionRouter);
 
@@ -51,6 +52,8 @@ router.use('/users', usersRouter);
 router.use('/products', productsRouter);
 
 router.use('/orders', ordersRouter);
+
+router.use('/reviews', reviewsRouter );
 
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
