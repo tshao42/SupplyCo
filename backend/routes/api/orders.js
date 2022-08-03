@@ -17,7 +17,7 @@ router.post('/', asyncHandler(async function (req, res) {
     // console.dir(temp)
     //breaking down:
     const tempDetail = {
-        buyerId: temp.buyerId,
+        userId: temp.userId,
         addressPlaceId: temp.addressPlaceId,
         orderFor: temp.orderFor,
         total: temp.total
@@ -50,10 +50,8 @@ router.post('/', asyncHandler(async function (req, res) {
         await tempBuildObj.save();
     }
 
-    const newCopy = await db.Order.findAll({
-        where: {
-            id: newOrderId
-        }, include: {
+    const newCopy = await db.Order.findByPk(newOrderId,{
+        include: {
             model: db.Orderitem,
             required: true
         }
@@ -92,7 +90,7 @@ router.get('/users/:userId', asyncHandler(async function (req, res) {
     const userId = req.params.userId;
     const order = await db.Order.findAll({
         where: {
-            buyerId:userId
+            userId:userId
         },
         include: {
             model: db.Orderitem,
@@ -102,6 +100,7 @@ router.get('/users/:userId', asyncHandler(async function (req, res) {
     });
     return res.json(order);
 }));
+
 
 //UPDATE (update an order)
 router.put('/:orderId', asyncHandler(async function (req, res) {
@@ -118,23 +117,13 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
     //take the response object apart
     //still expecting similar json format... (ref: outputs.md)
 
-    //STEP 1: details
-    const tempDetail = {
-        addressPlaceId: temp.addressPlaceId,
-        orderFor: temp.orderFor,
-        total: temp.total
-    }
-    const orderIdCond = {where:{id:orderId}}
-
-    await order.update(tempDetail, orderIdCond);
-    //done with order editing
     //now proceeding with editing...
     //note: if quantity gets to zero, need to delete the listing
     const tempContentArr = temp.Orderitems;
-    await tempContentArr.forEach((item)=>{
-        if (item.quantity ===0){
+    await tempContentArr.forEach((item) => {
+        if (item.quantity === 0) {
             db.Orderitem.destroy({
-                where:{
+                where: {
                     id: item.id
                 }
             })
@@ -144,11 +133,41 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
             db.Orderitem.update(tempval, tempcond);
         };
     })
-    
-    //what it will return
-    return res.json(orderId);
 
+    //edit order details
+    const tempDetail = {
+        addressPlaceId: temp.addressPlaceId,
+        orderFor: temp.orderFor,
+        total: temp.total
+    }
+    const orderIdCond = { where:{id:orderId} }
+
+    await order.update(tempDetail, orderIdCond);
+    //done with order editing
+
+    //standardized format
+    const updatedOrder = await db.Order.findAll({
+        where: {
+            id: orderId
+        },
+        include: {
+            model: db.Orderitem,
+            required: true
+
+        }
+    });
+
+    //empty check?
+    if (updatedOrder.length == 0) {
+        // console.log('hit line 137')
+        await db.Order.destroy({ where: { id: orderId } })
+        return res.json('empty order...');
+    }
+    //what it will return
+    return res.json(updatedOrder);
 }));
+
+
 
 router.delete('/:orderId', asyncHandler(async function (req, res) {
     const orderId = req.params.orderId;

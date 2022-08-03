@@ -37,7 +37,7 @@ GET /api/orders/1
     [
         {
             "id": 1,
-            "buyerId": 1,
+            "userId": 1,
             "addressPlaceId": "ChIJPwi-Dpne3IARhY3NJXuK8g0",
             "orderFor": "Demo User",
             "total": "8995",
@@ -68,7 +68,7 @@ GET /api/orders/users/1
 [
     {
         "id": 1,
-        "buyerId": 1,
+        "userId": 1,
         "addressPlaceId": "ChIJPwi-Dpne3IARhY3NJXuK8g0",
         "orderFor": "Demo User",
         "total": "8995",
@@ -99,7 +99,7 @@ POST /api/orders
 
 (sample request)
 {
-    "buyerId": 2,
+    "userId": 2,
     "addressPlaceId": "ChIJPwi-Dpne3IARhY3NJXuK8g0",
     "orderFor": "Demo User",
     "total": "8995",
@@ -133,4 +133,36 @@ PUT /api/orders/:orderId
             "quantity": 4
         }
     ]
+}
+
+
+## Review
+GET (any one's format) JSON
+[
+    {
+        "id": 1,
+        "productId": 1,
+        "userId": 1,
+        "title": "Best Camera Ever",
+        "content": "I cannot express how much I am satisfied with this viewfinder",
+        "rating": 5,
+        "createdAt": "2022-08-03T06:56:08.868Z",
+        "updatedAt": "2022-08-03T06:56:08.868Z"
+    }
+]
+
+POST REVIEW
+{
+        "productId": 1,
+        "userId": 2,
+        "title": "Trying to post",
+        "content": "Not sure why I bought this, but I like it",
+        "rating": 5
+}
+
+UPDATE REVIEW
+{
+        "title": "Trying to post!!!",
+        "content": "Not sure why I bought this, but I like it",
+        "rating": 5
 }

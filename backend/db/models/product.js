@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Product.hasMany(models.ProductImage, { foreignKey: 'productId', onDelete: 'CASCADE', hooks: true });
     Product.hasMany(models.Review, {foreignKey: 'productId', onDelete: 'CASCADE', hooks: true });
-    Product.hasMany(models.Orderitem, { foreignKey: 'productId', onDelete: 'CASCADE', hooks: true });
+    Product.hasMany(models.Orderitem, { foreignKey: 'productId',onDelete: 'CASCADE', hooks: true });
   };
   return Product;
 };
