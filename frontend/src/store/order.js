@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 export const LOAD_ORDERS = "orders/LOAD_ORDERS";
+export const LOAD_SINGLE_ORDER = "orders/LOAD_SINGLE_ORDER";
 export const CREATE_ORDER = "orders/CREATE_ORDER";
 export const EDIT_ORDER = "orders/EDIT_ORDER";
 export const DELETE_ORDER = "orders/DELETE_ORDER";
@@ -10,14 +11,18 @@ const load_orders = (orders) => ({
     orders
 });
 
+const load_single_order = (order) => ({
+    type: LOAD_SINGLE_ORDER,
+    order
+})
 const create_order = (order) => ({
     type: CREATE_ORDER,
     order
 })
-const edit_order = (orderId, order) => ({
+const edit_order = (orderId, order, dprice) => ({
     type: EDIT_ORDER,
     orderId,
-    order
+    order, dprice
 })
 const delete_order = (orderId) => ({
     type: DELETE_ORDER,
@@ -37,7 +42,7 @@ export const loadSingleOrder = (orderId) => async dispatch => {
     const response = await csrfFetch(`/api/orders/${orderId}`);
     if (response.ok) {
         const order = await response.json();
-        dispatch(load_orders(order))
+        dispatch(load_single_order(order[0]))
     }
 
 }
@@ -58,7 +63,7 @@ export const createOrder = (payload) => async dispatch => {
     }
 }
 
-export const editOrder = (orderId, payload) => async dispatch => {
+export const editOrder = (orderId, payload, dprice) => async dispatch => {
     const { address, orderFor, total, Orderitems } = payload;
     const response = await csrfFetch(`/api/orders/${orderId}`, {
         method: 'PUT',
@@ -92,11 +97,14 @@ const orderReducer =  (state = initialState, action) => {
                 order => allOrders[order.id] =order
             );
             return allOrders;
+        case LOAD_SINGLE_ORDER:
+            return{[action.order.id]: action.order}
         case CREATE_ORDER:
             return { ...state, [action.order.id]: action.order}
         case EDIT_ORDER:
             const temp = {...state};
             temp[action.orderId] = action.order;
+            temp[action.orderId].total += action.dprice;
             return temp;
         case DELETE_ORDER:
             const copy = {...state};

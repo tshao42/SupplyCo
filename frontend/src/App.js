@@ -16,6 +16,7 @@ import { getKey } from "./store/map";
 import HomePage from "./components/Home";
 import OrderStatusPage from "./components/OrderStatusPage";
 import OrderSuccess from "./components/OrderSuccess";
+import EditOrder from "./components/EditOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,9 @@ function App() {
           </Route>
           <Route exact path="/thankyou">
             <OrderSuccess />
+          </Route>
+          <Route exact path='/orders/:orderId/edit'>
+            <EditOrder />
           </Route>
         </Switch>
       )}
