@@ -44,7 +44,7 @@ function OrderStatusPage(){
                     )
                 )
             }
-            <Link to='/orders/:orderId/edit'>Edit order</Link>
+            <Link to={`/orders/${orderId}/edit`}>Edit order</Link>
             <button>Cancel order</button>
         </div>
     )
