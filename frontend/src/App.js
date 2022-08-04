@@ -17,6 +17,7 @@ import HomePage from "./components/Home";
 import OrderStatusPage from "./components/OrderStatusPage";
 import OrderSuccess from "./components/OrderSuccess";
 import EditOrder from "./components/EditOrder";
+import MyOrders from "./components/MyOrders";
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +69,9 @@ function App() {
           </Route>
           <Route exact path='/orders/:orderId/edit'>
             <EditOrder />
+          </Route>
+          <Route exact path='/myorders'>
+            <MyOrders />
           </Route>
         </Switch>
       )}

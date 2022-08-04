@@ -5,7 +5,8 @@ import { loadSingleOrder } from '../../store/order';
 import { loadAllProducts } from '../../store/product';
 
 function OrderStatusPage(){
-
+//TODO: state shape changed from array to Object
+//need to change the .map
     const dispatch = useDispatch();
     const [loaded, setLoaded] = useState(false);
     const { orderId } = useParams();
@@ -28,7 +29,8 @@ function OrderStatusPage(){
             <h1>Order detail</h1>
             <div>Order #{order.id}</div>
             <div>Items in your order</div>
-            {
+
+            {/* {
                 order.Orderitems.map(({productId, quantity})=>(
                         <div key={productId}>
                             <div>
@@ -43,7 +45,7 @@ function OrderStatusPage(){
                         </div>
                     )
                 )
-            }
+            } */}
             <Link to={`/orders/${orderId}/edit`}>Edit order</Link>
             <button>Cancel order</button>
         </div>

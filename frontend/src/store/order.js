@@ -22,7 +22,7 @@ const create_order = (order) => ({
 const edit_order = (orderId, order, dprice) => ({
     type: EDIT_ORDER,
     orderId,
-    order, dprice
+    order
 })
 const delete_order = (orderId) => ({
     type: DELETE_ORDER,
@@ -63,7 +63,7 @@ export const createOrder = (payload) => async dispatch => {
     }
 }
 
-export const editOrder = (orderId, payload, dprice) => async dispatch => {
+export const editOrder = (orderId, payload) => async dispatch => {
     const { address, orderFor, total, Orderitems } = payload;
     const response = await csrfFetch(`/api/orders/${orderId}`, {
         method: 'PUT',
@@ -92,13 +92,39 @@ const initialState = {};
 const orderReducer =  (state = initialState, action) => {
     switch (action.type) {
         case LOAD_ORDERS:
+            //init
             const allOrders = { ...state };
+            //iterate through all orders
             action.orders.forEach(
-                order => allOrders[order.id] =order
+                order => {
+                    //destruct
+                    //iterate through everything BUT the Orderitems
+                    const { Orderitems, ...orderProperty} = order;
+                    allOrders[order.id]=orderProperty;
+                    //init Orderitems
+                    allOrders[order.id].Orderitems={};
+                    Orderitems.forEach(
+                        item=> {
+                            allOrders[order.id].Orderitems[item.id] = item;
+                        }
+                    )
+                }
             );
             return allOrders;
         case LOAD_SINGLE_ORDER:
-            return{[action.order.id]: action.order}
+            //init
+            const oneOrder = {};
+            //destruct
+            //iterate through everything BUT the Orderitems
+            const { Orderitems, ...orderProperty } = action.order;
+            oneOrder[action.order.id] = orderProperty;
+            oneOrder[action.order.id].Orderitems={};
+            Orderitems.forEach(
+                item => {
+                    oneOrder[action.order.id].Orderitems[item.id] = item;
+                }
+            )
+            return oneOrder;
         case CREATE_ORDER:
             return { ...state, [action.order.id]: action.order}
         case EDIT_ORDER:

@@ -26,6 +26,7 @@ function Navigation({ isLoaded }){
         <NavLink exact to="/cart">Cart</NavLink>
         <NavLink exact to="/">Home</NavLink>
         <NavLink exact to="/products">Offerings</NavLink>
+        <NavLink exact to="/myorders">My orders</NavLink>
         {isLoaded && sessionLinks}
       </li>
     </ul>
