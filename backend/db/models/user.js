@@ -30,10 +30,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [60, 60]
       }
-    },
-    defaultAddress: {
-      type: DataTypes.STRING,
-      default: ""
     }
   },
   {

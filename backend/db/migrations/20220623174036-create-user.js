@@ -22,10 +22,6 @@ module.exports = {
         type: Sequelize.STRING.BINARY,
         allowNull: false
       },
-      defaultAddress: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
