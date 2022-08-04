@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         len: [60, 60]
       }
     },
-    defaultPlaceId: {
+    defaultAddress: {
       type: DataTypes.STRING,
       allowNull: true,
       default: ""

@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.STRING.BINARY,
         allowNull: false
       },
-      defaultPlaceId: {
+      defaultAddress: {
         type: Sequelize.STRING,
         allowNull: true
       },

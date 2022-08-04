@@ -27,7 +27,7 @@ function ProductsPage() {
             {Object.values(products).map(({id, name, price})=>{return(
                 <div key={id}>
                     <Link to={`/products/${id}`}>{name}</Link>
-                    <div>{price}</div>
+                    <div>$ {parseFloat(price).toFixed(2)}</div>
                 </div>
             )
             })}

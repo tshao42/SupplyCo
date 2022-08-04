@@ -12,6 +12,8 @@ import ProductsPage from "./components/ProductsPage";
 import SingleProductPage from "./components/SingleProductPage";
 import { load_cart_items_function } from "./store/cart";
 import ShoppingCart from "./components/ShoppingCart";
+import { getKey } from "./store/map";
+import HomePage from "./components/Home";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ function App() {
     // testing area
     // dispatch(loadAllProducts());
     // dispatch(loadAllUserOrders(1));
+    // dispatch(getKey());
     dispatch(load_cart_items_function());
   }, [dispatch]);
 
@@ -33,6 +36,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
           <Route path="/login">
             <LoginFormPage />
           </Route>

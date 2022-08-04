@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
         references: {model: 'Users'}
       },
-      addressPlaceId: {
+      address: {
         type: Sequelize.STRING,
         allowNull: false
       },

@@ -36,7 +36,8 @@ function SingleProductPage(){
         <div>
             <Link to='/products'> {`<--`}Back to products</Link>
             <h1>{product.name}</h1>
-            <div>{product.price}</div>
+            <div>$ {parseFloat(product.price).toFixed(2)}</div>
+            <div>{product.info}</div>
             {!isInCart &&
                 <button onClick={addToCart}>Add to cart</button>
             }

@@ -44,6 +44,7 @@ const usersRouter = require('./users.js');
 const productsRouter = require('./products.js');
 const ordersRouter = require('./orders.js')
 const reviewsRouter = require('./reviews.js')
+const mapsRouter = require('./maps.js')
 
 router.use('/session', sessionRouter);
 
@@ -54,6 +55,9 @@ router.use('/products', productsRouter);
 router.use('/orders', ordersRouter);
 
 router.use('/reviews', reviewsRouter );
+
+router.use('/map', mapsRouter)
+
 
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
