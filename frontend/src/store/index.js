@@ -3,15 +3,17 @@ import thunk from "redux-thunk";
 import productReducer from "./product";
 import sessionReducer from "./session";
 import orderReducer from "./order"
-
+import cartReducer from "./cart";
+//reducer
 
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
   products: productReducer,
-  orders: orderReducer
-
+  orders: orderReducer,
+  cart: cartReducer
 });
+
 
 let enhancer;
 

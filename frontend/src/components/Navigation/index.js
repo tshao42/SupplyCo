@@ -23,7 +23,9 @@ function Navigation({ isLoaded }){
   return (
     <ul>
       <li>
+        <NavLink exact to="/cart">Cart</NavLink>
         <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/products">Offerings</NavLink>
         {isLoaded && sessionLinks}
       </li>
     </ul>
