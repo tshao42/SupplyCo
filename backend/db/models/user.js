@@ -33,7 +33,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     defaultAddress: {
       type: DataTypes.STRING,
-      allowNull: true,
       default: ""
     }
   },

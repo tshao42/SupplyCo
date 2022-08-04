@@ -54,6 +54,7 @@ function CartItemModuleCore() {
             {Object.values(cartItems).slice(0, -1).map(({ productId, quantity }) => {
                 return (
                     <div key={productId}>
+                        <form>
                         <button onClick={e => handleItemEdit(e, productId, 0)}>×</button>
                         <div>productId: {productId}</div>
                         <div>{products[productId].name}</div>
@@ -61,17 +62,16 @@ function CartItemModuleCore() {
                         <button onClick={e => handleSimplePlusMinus(e, productId, quantity -= 1)}>
                             -
                         </button>
-                        <form>
                             <input
                                 type='text'
                                 name='quantity'
                                 value={quantity}
                                 onChange={e => handleItemEdit(e, productId, e.target.value)}>
                             </input>
-                        </form>
                         <button onClick={e => handleSimplePlusMinus(e, productId, quantity += 1)}>
                             +
                         </button>
+                        </form>
                     </div>
                 )
             })}

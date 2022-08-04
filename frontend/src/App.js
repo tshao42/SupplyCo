@@ -14,6 +14,8 @@ import { load_cart_items_function } from "./store/cart";
 import ShoppingCart from "./components/ShoppingCart";
 import { getKey } from "./store/map";
 import HomePage from "./components/Home";
+import OrderStatusPage from "./components/OrderStatusPage";
+import OrderSuccess from "./components/OrderSuccess";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +58,12 @@ function App() {
           </Route>
           <Route exact path="/cart">
             <ShoppingCart />
+          </Route>
+          <Route exact path="/orders/:orderId">
+            <OrderStatusPage />
+          </Route>
+          <Route exact path="/thankyou">
+            <OrderSuccess />
           </Route>
         </Switch>
       )}
