@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
@@ -18,6 +18,7 @@ import OrderStatusPage from "./components/OrderStatusPage";
 import OrderSuccess from "./components/OrderSuccess";
 import EditOrder from "./components/EditOrder";
 import MyOrders from "./components/MyOrders";
+import { loadAllUserOrders } from "./store/order";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,14 +26,17 @@ function App() {
 
 
   // testing area
+  const currentUser = useSelector(state=>state.session.user);
   // const products = useSelector(state=>state.products)
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-    // testing area
-    // dispatch(loadAllProducts());
-    // dispatch(loadAllUserOrders(1));
+    async function hydrate(){
+      await dispatch(sessionActions.restoreUser())
+        .then(() => dispatch(load_cart_items_function()))
+        .then(() => dispatch(loadAllUserOrders(currentUser?.id)))
+        .then(() => setIsLoaded(true))
+    }
+    hydrate();
     // dispatch(getKey());
-    dispatch(load_cart_items_function());
   }, [dispatch]);
 
   return (
@@ -67,7 +71,7 @@ function App() {
           <Route exact path="/thankyou">
             <OrderSuccess />
           </Route>
-          <Route exact path='/orders/:orderId/edit'>
+          <Route exact path='/orders/:orderId/edit' >
             <EditOrder />
           </Route>
           <Route exact path='/myorders'>

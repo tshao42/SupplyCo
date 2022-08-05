@@ -5,6 +5,7 @@ export const LOAD_SINGLE_ORDER = "orders/LOAD_SINGLE_ORDER";
 export const CREATE_ORDER = "orders/CREATE_ORDER";
 export const EDIT_ORDER = "orders/EDIT_ORDER";
 export const DELETE_ORDER = "orders/DELETE_ORDER";
+export const NO_ORDER = "orders/NO_ORDER"
 
 const load_orders = (orders) => ({
     type: LOAD_ORDERS,
@@ -28,14 +29,20 @@ const delete_order = (orderId) => ({
     type: DELETE_ORDER,
     orderId
 })
+const no_order = () => ({
+    type: NO_ORDER
+})
 
 
 export const loadAllUserOrders = (userId) => async dispatch => {
-    const response = await csrfFetch(`/api/orders/users/${userId}`);
-    if (response.ok) {
-        const orders = await response.json();
-        dispatch (load_orders(orders));
+    if (userId){
+        const response = await csrfFetch(`/api/orders/users/${userId}`);
+        if (response.ok) {
+            const orders = await response.json();
+            dispatch (load_orders(orders));
+        }
     }
+    else dispatch(no_order());
 }
 
 export const loadSingleOrder = (orderId) => async dispatch => {
@@ -136,6 +143,8 @@ const orderReducer =  (state = initialState, action) => {
             const copy = {...state};
             delete copy[action.orderId];
             return copy;
+        case NO_ORDER:
+            return {};
         default: return state;
     }
 }

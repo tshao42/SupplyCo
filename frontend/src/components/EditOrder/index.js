@@ -9,15 +9,14 @@ function EditOrder(){
     const [loaded, setLoaded] = useState(false);
     const { orderId } = useParams();
     const orderIdInt = parseInt(orderId);
+
     const order = useSelector(state => state.orders)[orderId];
-    const [address, setAddress] = useState("");
-    const [ orderItem, setOrderItem ] = useState({});
+
+    const [address, setAddress] = useState(order.address)
     const products = useSelector(state => state.products)
     useEffect(() => {
         async function hydrate() {
         await dispatch(loadSingleOrder(orderIdInt))
-            .then(() => setOrderItem(order?.Orderitems))
-            .then(() => setAddress(order?.address))
             .then(() => dispatch(loadAllProducts()))
             .then(() => setLoaded(true));
         }
@@ -40,16 +39,17 @@ function EditOrder(){
     //only accessible when the current user is the buyer
     //TODO: HANDLE UPDATE AMOUNT
     return (
-        loaded &&
+        loaded && order &&
         <div>
+            {/* {console.dir(Orderitems)} */}
             <h1>Edit order</h1>
             <div>Order #{order.id}</div>
             <div>Items in your order</div>
-            {console.dir(order)}
-            {console.dir(orderItem)}
+            {/* {console.dir(order)}
+            {console.dir(orderItem)} */}
             <form>
                 {
-                    Object.values(order.Orderitems).map(({ productId, quantity }) => (
+                    Object.values(order.Orderitems).map(({ id, productId, quantity }) => (
                         <div key={productId}>
                             <div>
                                 {products[productId].name}
@@ -57,18 +57,18 @@ function EditOrder(){
                             <div>
                                 $ {parseFloat(products[productId].price).toFixed(2)}
                             </div>
-                            <input type="text" value={quantity}>
+                            <input type="text" 
+                                value={quantity} 
+                            >
                             </input>
                         </div>
                     )
                     )
                 }
-                <div>Edit Address</div>
-                    <input 
-                        type="text"
-                        value={address}
-                        onChange={e=>setAddress(e.target.value)}>
-                    </input>
+                <div>Edit address</div>
+                <input type="text"
+                    value={address}
+                ></input>
                 <button>Update order</button>
             </form>
             <button>Cancel order</button>
