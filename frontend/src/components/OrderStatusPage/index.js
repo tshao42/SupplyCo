@@ -30,8 +30,8 @@ function OrderStatusPage(){
             <div>Order #{order.id}</div>
             <div>Items in your order</div>
 
-            {/* {
-                order.Orderitems.map(({productId, quantity})=>(
+            {
+                Object.values(order.Orderitems).map(({productId, quantity})=>(
                         <div key={productId}>
                             <div>
                                 {products[productId].name}
@@ -45,7 +45,7 @@ function OrderStatusPage(){
                         </div>
                     )
                 )
-            } */}
+            }
             <Link to={`/orders/${orderId}/edit`}>Edit order</Link>
             <button>Cancel order</button>
         </div>

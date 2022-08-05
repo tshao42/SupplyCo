@@ -49,7 +49,7 @@ function EditOrder(){
             {console.dir(orderItem)}
             <form>
                 {
-                    order.Orderitems.map(({ productId, quantity }) => (
+                    Object.values(order.Orderitems).map(({ productId, quantity }) => (
                         <div key={productId}>
                             <div>
                                 {products[productId].name}
