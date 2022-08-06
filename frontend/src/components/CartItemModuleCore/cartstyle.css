@@ -1,0 +1,23 @@
+#cart-container{
+    color:red;
+}
+#individual-item-cart{
+    color:blue;
+    display: grid;
+    grid-template-columns: ;
+}
+.delete-item-from-cart{
+    grid-column: 0/1 100px;
+}
+.item-names-in-cart{
+    grid-column: 1/2;
+}
+.item-prices-in-cart{
+    grid-column: 2/3;
+}
+.item-quantity-options-in-cart{
+    grid-column: 3/4;
+}
+.item-total-price-in-cart{
+    grid-column: 4/5;
+}

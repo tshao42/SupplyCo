@@ -31,9 +31,18 @@ function EditOrder(){
         e.preventDefault();
     }
 
+    const handleQuantityUpdate = async (e, id, newQuantity) => {
+        e.preventDefault();
+        console.log(`line 36 ${newQuantity}`)
+        if (newQuantity.length>0){
+            newQuantity = parseInt(newQuantity)
+        }
+        setQuantityChanges({ ...quantityChanges, [id]: { ["id"]: id, ["quantity"]: newQuantity} });
+    }
     useEffect(()=>{
         console.log(`line 35`)
         setAddress(order?.address);
+        setQuantityChanges((order?.Orderitems))
     }, [order])
 
     //the payload this time:
@@ -48,7 +57,7 @@ function EditOrder(){
     //only accessible when the current user is the buyer
     //TODO: HANDLE UPDATE AMOUNT
     return (
-        loaded && order &&
+        loaded && order && 
         <div>
             {/* {console.dir(Orderitems)} */}
             <h1>Edit order</h1>
@@ -58,7 +67,7 @@ function EditOrder(){
             {console.dir(orderItem)} */}
             <form>
                 {
-                    Object.values(order.Orderitems).map(({ id, productId, quantity }) => (
+                    Object.values(order.Orderitems).map(({ id, productId }) => (
                         <div key={id}>
                             <div>
                                 {products[productId].name}
@@ -67,19 +76,19 @@ function EditOrder(){
                                 $ {parseFloat(products[productId].price).toFixed(2)}
                             </div>
                             <input type="text" 
-                                value={quantity} 
+                                value={quantityChanges[id]?.quantity}
                                 key={id}
                                 onChange = {e=>{
-                                    e.preventDefault;
-                                    setQuantityChanges({...quantityChanges, [id]: {["id"]: id, ["quantity"]: e.target.value}});
+                                   handleQuantityUpdate(e,id, e.target.value)
                                 }}
                             >
+                            {console.dir(quantityChanges)}
                             </input>
                         </div>
                     )
                     )
                 }
-                {console.dir(itemsInOrder)}
+                {/* {console.dir(itemsInOrder)} */}
                 <div>Edit address</div>
                 <input type="text"
                     value={address}
