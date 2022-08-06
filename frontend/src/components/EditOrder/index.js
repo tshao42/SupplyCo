@@ -10,10 +10,13 @@ function EditOrder(){
     const { orderId } = useParams();
     const orderIdInt = parseInt(orderId);
 
+    //useSelector for orderId
     const order = useSelector(state => state.orders)[orderId];
 
-    const [address, setAddress] = useState(order.address)
-    const products = useSelector(state => state.products)
+    //the useState
+    const [address, setAddress] = useState(order?.address);
+    const [ quantityChanges, setQuantityChanges ] = useState({});
+    const products = useSelector(state => state.products); 
     useEffect(() => {
         async function hydrate() {
         await dispatch(loadSingleOrder(orderIdInt))
@@ -23,9 +26,15 @@ function EditOrder(){
         hydrate();
     }, [dispatch])
 
+    //need to get this done
     const handleSubmit = async e => {
         e.preventDefault();
     }
+
+    useEffect(()=>{
+        console.log(`line 35`)
+        setAddress(order?.address);
+    }, [order])
 
     //the payload this time:
     /*
@@ -50,7 +59,7 @@ function EditOrder(){
             <form>
                 {
                     Object.values(order.Orderitems).map(({ id, productId, quantity }) => (
-                        <div key={productId}>
+                        <div key={id}>
                             <div>
                                 {products[productId].name}
                             </div>
@@ -59,15 +68,25 @@ function EditOrder(){
                             </div>
                             <input type="text" 
                                 value={quantity} 
+                                key={id}
+                                onChange = {e=>{
+                                    e.preventDefault;
+                                    setQuantityChanges({...quantityChanges, [id]: {["id"]: id, ["quantity"]: e.target.value}});
+                                }}
                             >
                             </input>
                         </div>
                     )
                     )
                 }
+                {console.dir(itemsInOrder)}
                 <div>Edit address</div>
                 <input type="text"
                     value={address}
+                    onChange={e=>{
+                        e.preventDefault();
+                        setAddress(e.target.value)
+                    }}
                 ></input>
                 <button>Update order</button>
             </form>

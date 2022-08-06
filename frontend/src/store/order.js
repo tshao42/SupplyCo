@@ -35,14 +35,11 @@ const no_order = () => ({
 
 
 export const loadAllUserOrders = (userId) => async dispatch => {
-    if (userId){
-        const response = await csrfFetch(`/api/orders/users/${userId}`);
-        if (response.ok) {
-            const orders = await response.json();
-            dispatch (load_orders(orders));
-        }
+    const response = await csrfFetch(`/api/orders/users/${userId}`);
+    if (response.ok) {
+        const orders = await response.json();
+        dispatch (load_orders(orders));
     }
-    else dispatch(no_order());
 }
 
 export const loadSingleOrder = (orderId) => async dispatch => {

@@ -32,7 +32,7 @@ function App() {
     async function hydrate(){
       await dispatch(sessionActions.restoreUser())
         .then(() => dispatch(load_cart_items_function()))
-        .then(() => dispatch(loadAllUserOrders(currentUser?.id)))
+        // .then(() => dispatch(loadAllUserOrders(currentUser?.id)))
         .then(() => setIsLoaded(true))
     }
     hydrate();
