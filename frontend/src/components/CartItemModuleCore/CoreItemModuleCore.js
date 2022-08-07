@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { delete_cart_itemfunction, load_cart_items_function, update_quantity_function } from '../../store/cart';
 import { loadAllProducts } from '../../store/product'
 import { Link } from 'react-router-dom'
-import './cartstyle.css'
 
 function CartItemModuleCore() {
 
@@ -57,18 +56,18 @@ function CartItemModuleCore() {
 
     return (
         loaded &&
-        <div id="cart-container">
-            <div className>
+        <div>
+            <div>
                 {Object.values(cartItems).slice(0, -1).map(({ productId, quantity }) => {
                     return (
-                        <ul key={productId} id="individual-item-cart" >
-                            <form id="individual-item-cart">
-                                <div className="delete-item-from-cart">
+                        <ul key={productId} >
+                            <form>
+                                <div>
                                     <button onClick={e => handleItemEdit(e, productId, 0)} >×</button>
                                 </div>
-                                <div className="item-names-in-cart">{products[productId].name}</div>
-                                <div className="item-prices-in-cart">$ {parseFloat(products[productId].price).toFixed(2)}</div>
-                                <div className="item-quantity-options-in-cart">
+                                <div>{products[productId].name}</div>
+                                <div>$ {parseFloat(products[productId].price).toFixed(2)}</div>
+                                <div>
                                     <button onClick={e => handleSimplePlusMinus(e, productId, quantity -= 1)}>
                                         -
                                     </button>
@@ -82,7 +81,7 @@ function CartItemModuleCore() {
                                         +
                                     </button>
                                 </div>
-                                <div className="item-total-price-in-cart">$ {parseFloat(products[productId].price * quantity).toFixed(2)}</div>
+                                <div>$ {parseFloat(products[productId].price * quantity).toFixed(2)}</div>
                             </form>
                         </ul>
                     )
