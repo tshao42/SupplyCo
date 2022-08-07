@@ -4,7 +4,10 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
       return queryInterface.bulkInsert('Orders', [{
         userId: 1,
-        address: '1214 Synergy, Irvine, CA 92614',
+        addressLine1: "200 N. Spring St.",
+        city: "Los Angeles",
+        state: "CA",
+        zipCode: "90012",
         orderFor: 'Demo User',
         total: 8995.00 
       }], {});

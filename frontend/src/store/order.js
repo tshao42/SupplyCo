@@ -52,13 +52,13 @@ export const loadSingleOrder = (orderId) => async dispatch => {
 }
 
 export const createOrder = (payload) => async dispatch => {
-    const { userId, address, orderFor, total, Orderitems} = payload;
+    const { userId, addressLine1, addressLine2, city, state, zipCode, orderFor, total, Orderitems} = payload;
     const response = await csrfFetch(`/api/orders`, {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ userId, address, orderFor, total, Orderitems })
+        body: JSON.stringify({ userId, addressLine1, addressLine2, city, state, zipCode, orderFor, total, Orderitems })
     });
     
     if (response.ok) {
@@ -68,13 +68,13 @@ export const createOrder = (payload) => async dispatch => {
 }
 
 export const editOrder = (orderId, payload) => async dispatch => {
-    const { address, orderFor, total, Orderitems } = payload;
+    const { addressLine1, addressLine2, city, state, zipCode, orderFor, total, Orderitems } = payload;
     const response = await csrfFetch(`/api/orders/${orderId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({address, orderFor, total, Orderitems})
+        body: JSON.stringify({ addressLine1, addressLine2, city, state, zipCode, orderFor, total, Orderitems})
     })
     if (response.ok) {
         const updatedOrder = await response.json();

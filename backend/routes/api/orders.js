@@ -18,7 +18,11 @@ router.post('/', asyncHandler(async function (req, res) {
     //breaking down:
     const tempDetail = {
         userId: temp.userId,
-        address: temp.address,
+        addressLine1: temp.addressLine1,
+        addressLine2: temp.addressLine2,
+        city: temp.city,
+        state: temp.state,
+        zipCode: temp.zipCode,
         orderFor: temp.orderFor,
         total: temp.total
     }
@@ -136,7 +140,11 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
 
     //edit order details
     const tempDetail = {
-        address: temp.address,
+        addressLine1: temp.addressLine1,
+        addressLine2: temp.addressLine2,
+        city: temp.city,
+        state: temp.state,
+        zipCode: temp.zipCode,
         orderFor: temp.orderFor,
         total: temp.total
     }

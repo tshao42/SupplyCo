@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { loadSingleOrder } from '../../store/order';
 import { loadAllProducts } from '../../store/product';
 
 function EditOrder(){
     const dispatch = useDispatch();
+    const history = useHistory();
     const [loaded, setLoaded] = useState(false);
     const { orderId } = useParams();
     const orderIdInt = parseInt(orderId);

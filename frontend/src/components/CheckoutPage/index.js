@@ -26,9 +26,9 @@ function CheckoutPage(){
     const [lastName, setLastName] = useState("");
     const [addressLine1, setAddressLine1] = useState("");
     const [addressLine2, setAddressLine2] = useState("");
+    const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
-    const [city, setCity] = useState("");
 
     const reset = () =>{
         setFirstName("");
@@ -71,7 +71,11 @@ function CheckoutPage(){
         const orderArr = Object.values(cartItems).slice(0,-1);
         const payload = {
             userId: currentUserId,
-            address: address,
+            addressLine1: addressLine1,
+            addressLine2: addressLine2,
+            city: city,
+            state: state,
+            zipCode: zipCode,
             orderFor: name,
             total: cartItems.total,
             Orderitems: orderArr
@@ -141,6 +145,14 @@ function CheckoutPage(){
                         />
                     </label>
                     <label>
+                        City
+                        <input
+                            type="text"
+                            name="city"
+                            value={city}
+                            onChange={e => setCity(e.target.value)} />
+                    </label>
+                    <label>
                         State
                         <select 
                         onChange={e=>setState(e.target.value)}
@@ -160,14 +172,6 @@ function CheckoutPage(){
                         value={zipCode}
                         onChange={e=>setZipCode(e.target.value)}
                         />
-                    </label>
-                    <label>
-                        City
-                        <input 
-                        type="text" 
-                        name="city"
-                        value={city}
-                        onChange={e=>setCity(e.target.value)} />
                     </label>
                 </form>
                     <div>Your order</div>
