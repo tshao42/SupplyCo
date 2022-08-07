@@ -21,9 +21,9 @@ function EditOrder(){
     const [city, setCity] = useState(order?.city);
     const [state, setState] = useState(order?.state);
     const [zipCode, setZipCode] = useState(order?.zipCode);
-    const [accumPrice, setAccumPrice] = useState(order?.total);
     const [quantityChanges, setQuantityChanges ] = useState({});
     const products = useSelector(state => state.products); 
+    // const [totalPrice, setTotalPrice] = useState(order?.total);
     useEffect(() => {
         async function hydrate() {
         await dispatch(loadSingleOrder(orderIdInt))
@@ -36,19 +36,35 @@ function EditOrder(){
     //need to get this done
     const handleSubmit = async e => {
         e.preventDefault();
+
+        let totalPrice = 0;
+        for (const item in quantityChanges){
+            const productId = quantityChanges[item].productId;
+            const newQuantity = quantityChanges[item].quantity;
+            const product = products[productId]
+            const itemPrice = parseFloat(product.price);
+            totalPrice += newQuantity * itemPrice;
+        }
+
         const payload = {
             addressLine1: addressLine1,
             addressLine2: addressLine2,
             city: city,
             state: state,
             zipCode: zipCode,
-            total: accumPrice,
+            total: parseFloat(totalPrice),
             Orderitems: quantityChanges
         }
 
+        console.log(`line 51`)
+        console.dir(payload);
+        console.log(typeof payload);
+        console.log (Array.isArray(payload));
         if (!errors.length){
             await dispatch(editOrder(orderId, payload))
-            .then(()=>history.push(`/orders/${orderId}`));
+            .then(()=>console.log(`line 55 edit dispatched`))
+            .then(()=>history.push(`/orders/${orderId}`))
+            .then(()=>console.log(`history.push dispatched`))
         }
 
     }
@@ -62,34 +78,40 @@ function EditOrder(){
             if (!addressLine1.length && addressLine2.length) errors.push("Please enter Line 1 first!")
             if (addressLine1.length > 46) errors.push("Address exceeding USPS limit; please shorten!");
             if (!/^\d+$/.test(zipCode) || zipCode.length !== 5) errors.push("Please enter a valid five-digit zipcode!");
-            if (!city.length) errors.push("Please enter a valid city!")
+            if (!city.length) errors.push("Please enter a valid city!");
             setErrors(errors);
         }
     }, [addressLine1, addressLine2, state, zipCode, city])
 
     const handleQuantityUpdate = async (e, id, newQuantity, productId) => {
         e.preventDefault();
-        console.log(`line 36 ${newQuantity}`)
-        if (newQuantity.length>0){
-            newQuantity = parseInt(newQuantity)
+        if (newQuantity.length > 0 && "0123456789".includes(newQuantity[0]))
+            newQuantity = parseInt(newQuantity);
+        if ((newQuantity.length > 0 && !"0123456789".includes(newQuantity[0]))) {
+            newQuantity= 1;
+            alert('Please only enter numbers!');
         }
-        setAccumPrice(()=>{
-            let accumPrice = 0;
-            for (let item in quantityChanges) {
-                accumPrice += item.quantity * products[item.productId].price;
-            }
-            return accumPrice;
-        }
-        )
-        setQuantityChanges({ ...quantityChanges, [id]: { ["id"]: id, ["quantity"]: newQuantity, [productId]: productId}, ["total"]: accumPrice });
+
+        const prevState = quantityChanges;
+
+        // console.log(`line 82 ${totalPrice}`)
+        setQuantityChanges({ ...quantityChanges, [id]: {
+             ...quantityChanges[id], 
+             ["quantity"]: newQuantity
+        } }); 
+        
     }
+    
+    
     useEffect(()=>{
+        console.log(`triggered line 88`)
         setAddressLine1(order?.addressLine1);
         setAddressLine2(order?.addressLine2);
         setCity(order?.city);
         setState(order?.state);
         setZipCode(order?.zipCode);
         setQuantityChanges((order?.Orderitems));
+        // setTotalPrice(order?.total);
     }, [order])
 
 
@@ -100,6 +122,8 @@ function EditOrder(){
         loaded && order && 
         <div>
             {/* {console.dir(Orderitems)} */}
+            {/* {console.dir(quantityChanges)} */}
+
             <h1>Edit order</h1>
             <div>Order #{order.id}</div>
             <div>Items in your order</div>
@@ -108,7 +132,7 @@ function EditOrder(){
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <form>
+            <form onSubmit={handleSubmit}>
                 {
                     Object.values(order.Orderitems).map(({ id, productId }) => (
                         <div key={id}>
@@ -125,7 +149,6 @@ function EditOrder(){
                                    handleQuantityUpdate(e,id, e.target.value, productId)
                                 }}
                             >
-                            {console.dir(quantityChanges)}
                             </input>
                         </div>
                     )
@@ -180,11 +203,7 @@ function EditOrder(){
                             onChange={e => setZipCode(e.target.value)}
                         />
                     </label>
-                <button
-                    type="submit"
-                    onChange = {handleSubmit}>
-                        Update order
-                </button>
+                <button type="submit">Update order</button>
             </form>
             <button>Cancel order</button>
             <div>Subtotal</div>

@@ -46,6 +46,9 @@ function OrderStatusPage(){
                     )
                 )
             }
+
+            <div>Subtotal</div>
+            <div>$ {parseInt(order.total).toFixed(2)}</div>
             <Link to={`/orders/${orderId}/edit`}>Edit order</Link>
             <button>Cancel order</button>
         </div>

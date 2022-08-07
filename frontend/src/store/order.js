@@ -20,7 +20,7 @@ const create_order = (order) => ({
     type: CREATE_ORDER,
     order
 })
-const edit_order = (orderId, order, dprice) => ({
+const edit_order = (orderId, order) => ({
     type: EDIT_ORDER,
     orderId,
     order
@@ -78,7 +78,8 @@ export const editOrder = (orderId, payload) => async dispatch => {
     })
     if (response.ok) {
         const updatedOrder = await response.json();
-        dispatch(edit_order(orderId, updatedOrder));
+        const updatedOrderConverted = updatedOrder[0];
+        dispatch(edit_order(orderId, updatedOrderConverted));
     }
 }
 
@@ -134,7 +135,7 @@ const orderReducer =  (state = initialState, action) => {
         case EDIT_ORDER:
             const temp = {...state};
             temp[action.orderId] = action.order;
-            temp[action.orderId].total += action.dprice;
+            // temp[action.orderId].total += action.dprice;
             return temp;
         case DELETE_ORDER:
             const copy = {...state};

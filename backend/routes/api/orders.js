@@ -123,7 +123,21 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
 
     //now proceeding with editing...
     //note: if quantity gets to zero, need to delete the listing
-    const tempContentArr = temp.Orderitems;
+    //TODO: CHECK THIS
+    const tempContentArr = Object.values(temp.Orderitems);
+    // await (()=>{for (const item in tempContentArr){
+    //     if (item.quantity === 0) {
+    //         db.Orderitem.destroy({
+    //             where: {
+    //                 id: item.id
+    //             }
+    //         })
+    //     } else {
+    //         const tempval = { quantity: item.quantity };
+    //         const tempcond = { where: { id: item.id } }
+    //         db.Orderitem.update(tempval, tempcond);
+    //     };
+    // }});
     await tempContentArr.forEach((item) => {
         if (item.quantity === 0) {
             db.Orderitem.destroy({
