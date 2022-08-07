@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { loadSingleOrder } from '../../store/order';
+import { editOrder, loadAllUserOrders, loadSingleOrder } from '../../store/order';
 import { loadAllProducts } from '../../store/product';
 
 function EditOrder(){
@@ -15,8 +15,14 @@ function EditOrder(){
     const order = useSelector(state => state.orders)[orderId];
 
     //the useState
-    const [address, setAddress] = useState(order?.address);
-    const [ quantityChanges, setQuantityChanges ] = useState({});
+    const [errors, setErrors] = useState([]);
+    const [addressLine1, setAddressLine1] = useState(order?.addressLine1);
+    const [addressLine2, setAddressLine2] = useState(order?.addressLine2);
+    const [city, setCity] = useState(order?.city);
+    const [state, setState] = useState(order?.state);
+    const [zipCode, setZipCode] = useState(order?.zipCode);
+    const [accumPrice, setAccumPrice] = useState(order?.total);
+    const [quantityChanges, setQuantityChanges ] = useState({});
     const products = useSelector(state => state.products); 
     useEffect(() => {
         async function hydrate() {
@@ -30,29 +36,62 @@ function EditOrder(){
     //need to get this done
     const handleSubmit = async e => {
         e.preventDefault();
+        const payload = {
+            addressLine1: addressLine1,
+            addressLine2: addressLine2,
+            city: city,
+            state: state,
+            zipCode: zipCode,
+            total: accumPrice,
+            Orderitems: quantityChanges
+        }
+
+        if (!errors.length){
+            await dispatch(editOrder(orderId, payload))
+            .then(()=>history.push(`/orders/${orderId}`));
+        }
+
     }
 
-    const handleQuantityUpdate = async (e, id, newQuantity) => {
+
+    const stateArray = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
+    useEffect(() => {
+        if (order){
+            let errors = [];
+            if (!addressLine1.length) errors.push("Please enter an address");
+            if (!addressLine1.length && addressLine2.length) errors.push("Please enter Line 1 first!")
+            if (addressLine1.length > 46) errors.push("Address exceeding USPS limit; please shorten!");
+            if (!/^\d+$/.test(zipCode) || zipCode.length !== 5) errors.push("Please enter a valid five-digit zipcode!");
+            if (!city.length) errors.push("Please enter a valid city!")
+            setErrors(errors);
+        }
+    }, [addressLine1, addressLine2, state, zipCode, city])
+
+    const handleQuantityUpdate = async (e, id, newQuantity, productId) => {
         e.preventDefault();
         console.log(`line 36 ${newQuantity}`)
         if (newQuantity.length>0){
             newQuantity = parseInt(newQuantity)
         }
-        setQuantityChanges({ ...quantityChanges, [id]: { ["id"]: id, ["quantity"]: newQuantity} });
+        setAccumPrice(()=>{
+            let accumPrice = 0;
+            for (let item in quantityChanges) {
+                accumPrice += item.quantity * products[item.productId].price;
+            }
+            return accumPrice;
+        }
+        )
+        setQuantityChanges({ ...quantityChanges, [id]: { ["id"]: id, ["quantity"]: newQuantity, [productId]: productId}, ["total"]: accumPrice });
     }
     useEffect(()=>{
-        console.log(`line 35`)
-        setAddress(order?.address);
-        setQuantityChanges((order?.Orderitems))
+        setAddressLine1(order?.addressLine1);
+        setAddressLine2(order?.addressLine2);
+        setCity(order?.city);
+        setState(order?.state);
+        setZipCode(order?.zipCode);
+        setQuantityChanges((order?.Orderitems));
     }, [order])
 
-    //the payload this time:
-    /*
-        address
-        orderFor
-        total
-        Orderitems
-    */
 
     //TODO: conditional rendering
     //only accessible when the current user is the buyer
@@ -66,6 +105,9 @@ function EditOrder(){
             <div>Items in your order</div>
             {/* {console.dir(order)}
             {console.dir(orderItem)} */}
+            <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
             <form>
                 {
                     Object.values(order.Orderitems).map(({ id, productId }) => (
@@ -80,7 +122,7 @@ function EditOrder(){
                                 value={quantityChanges[id]?.quantity}
                                 key={id}
                                 onChange = {e=>{
-                                   handleQuantityUpdate(e,id, e.target.value)
+                                   handleQuantityUpdate(e,id, e.target.value, productId)
                                 }}
                             >
                             {console.dir(quantityChanges)}
@@ -91,14 +133,58 @@ function EditOrder(){
                 }
                 {/* {console.dir(itemsInOrder)} */}
                 <div>Edit address</div>
-                <input type="text"
-                    value={address}
-                    onChange={e=>{
-                        e.preventDefault();
-                        setAddress(e.target.value)
-                    }}
-                ></input>
-                <button>Update order</button>
+                    <label>
+                        Address
+                        <input
+                            type="text"
+                            name="addressLine1"
+                            value={addressLine1}
+                            onChange={e => setAddressLine1(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        Address (cont.)
+                        <input
+                            type="text"
+                            name="addressLine2"
+                            value={addressLine2}
+                            onChange={e => setAddressLine2(e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        City
+                        <input
+                            type="text"
+                            name="city"
+                            value={city}
+                            onChange={e => setCity(e.target.value)} />
+                    </label>
+                    <label>
+                        State
+                        <select
+                            onChange={e => setState(e.target.value)}
+                            value={state}
+                        >
+                            {stateArray.map(usState => {
+                                return <option value={usState}>{usState}</option>
+                            }
+                            )}
+                        </select>
+                    </label>
+                    <label>
+                        Zip or Postal Code
+                        <input
+                            type="text"
+                            name="zipCode"
+                            value={zipCode}
+                            onChange={e => setZipCode(e.target.value)}
+                        />
+                    </label>
+                <button
+                    type="submit"
+                    onChange = {handleSubmit}>
+                        Update order
+                </button>
             </form>
             <button>Cancel order</button>
             <div>Subtotal</div>

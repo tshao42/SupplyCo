@@ -67,7 +67,6 @@ function CheckoutPage(){
     const handleSubmit = async e => {
         e.preventDefault();
         const name=`${firstName} ${lastName}`;
-        const address=`${addressLine1} ${addressLine2}, ${city}, ${state} ${zipCode}`
         const orderArr = Object.values(cartItems).slice(0,-1);
         const payload = {
             userId: currentUserId,
