@@ -22,6 +22,10 @@ router.get('/products/:productId', asyncHandler(async function (req, res) {
     const reviews = await db.Review.findAll({
         where : {
             productId: productId
+        },
+        include: {
+            model: db.User,
+            required: true
         }
     });
     return res.json(reviews);
@@ -33,6 +37,10 @@ router.get('/users/:userId', asyncHandler(async function (req, res) {
     const reviews = await db.Review.findAll({
         where: {
             userId: userId
+        },
+        include: {
+            model: db.User,
+            required: true
         }
     });
     return res.json(reviews);
@@ -44,7 +52,12 @@ router.put('/:reviewId', asyncHandler(async function (req, res) {
     const reviewId = req.params.reviewId
     const review = await db.Review.findByPk(reviewId);
     await review.update(req.body);
-    const updatedReview = await db.Review.findByPk(reviewId);
+    const updatedReview = await db.Review.findByPk(reviewId,{
+        include: {
+            model: db.User,
+            required: true
+        }
+    });
     return res.json(updatedReview);
 }));
 //DELETE

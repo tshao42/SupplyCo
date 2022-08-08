@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { editOrder, loadAllUserOrders, loadSingleOrder } from '../../store/order';
+import { deleteOrder, editOrder, loadAllUserOrders, loadSingleOrder } from '../../store/order';
 import { loadAllProducts } from '../../store/product';
 
 function EditOrder(){
@@ -69,6 +69,11 @@ function EditOrder(){
 
     }
 
+    const handleDelete = async e => {
+        e.preventDefault();
+        await dispatch(deleteOrder(orderId))
+        .then(()=>history.push(`/myorders`))
+    }
 
     const stateArray = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
     useEffect(() => {
@@ -205,7 +210,7 @@ function EditOrder(){
                     </label>
                 <button type="submit">Update order</button>
             </form>
-            <button>Cancel order</button>
+            <button onClick={handleDelete}>Cancel order</button>
             <div>Subtotal</div>
             <div>$ {parseFloat(order.total).toFixed(2)}</div>
         </div>
