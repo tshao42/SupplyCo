@@ -49,7 +49,7 @@ export const addReviewForProduct = (payload) => async dispatch => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON. stringify ({
+        body: JSON.stringify ({
             productId,
             userId,
             title,
@@ -97,7 +97,7 @@ const initialState = {};
 const reviewReducer = (state = initialState, action)=>{
     switch (action.type){
         case LOAD_REVIEWS_FOR_PRODUCT:
-            const allReviews = { ...state };
+            const allReviews = {};
             action.reviews.forEach(
                 review => (allReviews[review.userId] = review)
             )

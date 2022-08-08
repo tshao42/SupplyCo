@@ -48,7 +48,7 @@ function SingleProductPage(){
             {isInCart &&
                 <button>In Cart</button>
             }
-            <ReviewDisplay reviews={reviews}/>
+            <ReviewDisplay reviews={reviews} loaded={loaded}/>
         </div>
     )
 

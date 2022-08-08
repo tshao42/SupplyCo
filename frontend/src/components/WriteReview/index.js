@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { addReviewForProduct } from '../../store/review';
 import './WriteReview.css'
 
 const WriteReview = ( {productId, currentUserId}) => {
 
     const dispatch = useDispatch();
-    const [errors, setErrors] = [];
+    const history = useHistory();
+    const [errors, setErrors] = useState([]);
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
     const handleSubmit = async e => {
-        e.preventdefault();
+        e.preventDefault();
+        console.log(`line 19`)
         const payload = {
             productId: productId,
             userId: currentUserId,
@@ -23,16 +26,33 @@ const WriteReview = ( {productId, currentUserId}) => {
         }
 
         if (!errors.length){
-            console.log(`line`)
-            await dispatch(addReviewForProduct(productId, payload));
+            console.log(`line 26`)
+            await dispatch(addReviewForProduct(payload))
+            .then(()=>history.push(`/products/${productId}`))
         }
     }
 
+    useEffect(()=>{
+        let errors = [];
+        if (content.length < 10){
+            errors.push("Please enter at least 10 characters for review content!")
+        }
+        if (title.length < 4) {
+            errors.push("Please enter a title with at least 4 characters!")
+        }
+        if (rating < 1) {
+            errors.push("Please provide a rating!");
+        }
+        setErrors(errors);
+    }, [content, title, rating]);
 
 
     
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={e=>handleSubmit(e)}>
+            <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
             <input 
                 type="textarea"
                 placeholder='Leave a title'
@@ -52,6 +72,7 @@ const WriteReview = ( {productId, currentUserId}) => {
                         <button
                             type="button"
                             key={index}
+                            id = "star-rating"
                             className={index <= (hover || rating) ? "on" : "off"}
                             onClick={() => setRating(index)}
                             onMouseEnter={() => setHover(index)}
@@ -62,7 +83,8 @@ const WriteReview = ( {productId, currentUserId}) => {
                     );
                 })}
             </div>
-            <input type="submit" />
+            {console.log(`${title}, ${content}, ${rating}`)}
+            <button type="submit">Submit Review</button>
         </form>
     );
 };
