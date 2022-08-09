@@ -1,38 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { addReviewForProduct } from '../../store/review';
-import './WriteReview.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { addReviewForProduct, editReview } from '../../store/review';
+import './EditReview.css'
 
-const WriteReview = ( {productId, currentUserId}) => {
+const EditReview = ({userId, setEditReviewOpen}) => {
+
+    const review = useSelector(state=>state.reviews)[userId];
+    const reviewId = review.id;
+
+
+    const { productId } = useParams();
 
     const dispatch = useDispatch();
     const history = useHistory();
     const [errors, setErrors] = useState([]);
-    const [rating, setRating] = useState(0);
-    const [hover, setHover] = useState(0);
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
+    const [rating, setRating] = useState(review.rating);
+    const [hover, setHover] = useState(review.rating);
+    const [title, setTitle] = useState(review.title);
+    const [content, setContent] = useState(review.content);
 
     const handleSubmit = async e => {
         e.preventDefault();
         const payload = {
-            productId: productId,
-            userId: currentUserId,
             title: title,
             content: content,
             rating: rating
         }
 
-        if (!errors.length){
-            await dispatch(addReviewForProduct(payload))
-            .then(()=>history.push(`/products/${productId}`))
+        if (!errors.length) {
+            await dispatch(editReview(reviewId, payload))
         }
+        setEditReviewOpen();
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         let errors = [];
-        if (content.length < 10){
+        if (content.length < 10) {
             errors.push("Please enter at least 10 characters for review content!")
         }
         if (title.length < 4) {
@@ -45,23 +49,23 @@ const WriteReview = ( {productId, currentUserId}) => {
     }, [content, title, rating]);
 
 
-    
+
     return (
-        <form onSubmit={e=>handleSubmit(e)}>
+        <form onSubmit={e => handleSubmit(e)}>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <input 
+            <input
                 type="textarea"
                 placeholder='Leave a title'
                 value={title}
-                onChange={e=>setTitle(e.target.value)}
+                onChange={e => setTitle(e.target.value)}
             />
-            <input 
+            <input
                 type="textarea"
                 placeholder='Leave your review here'
                 value={content}
-                onChange={e=>setContent(e.target.value)}
+                onChange={e => setContent(e.target.value)}
             />
             <div className="star-rating">
                 {[...Array(5)].map((star, index) => {
@@ -70,7 +74,7 @@ const WriteReview = ( {productId, currentUserId}) => {
                         <button
                             type="button"
                             key={index}
-                            id = "star-rating"
+                            id="star-rating"
                             className={index <= (hover || rating) ? "on" : "off"}
                             onClick={() => setRating(index)}
                             onMouseEnter={() => setHover(index)}
@@ -81,9 +85,9 @@ const WriteReview = ( {productId, currentUserId}) => {
                     );
                 })}
             </div>
-            <button type="submit">Submit Review</button>
+            <button type="submit">Submit Changes</button>
         </form>
     );
 };
 
-export default WriteReview;
+export default EditReview;

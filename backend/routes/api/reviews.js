@@ -72,10 +72,12 @@ router.put('/:reviewId', asyncHandler(async function (req, res) {
 //DELETE
 router.delete('/:reviewId', asyncHandler(async function (req, res) {
 const reviewId = req.params.reviewId;
+    const temp = await db.Review.findByPk(reviewId);
+    const userId = temp.userId;
     await db.Review.destroy({
         where: { id: reviewId },
     });
-    return res.json(reviewId);
+    return res.json(userId);
 }));
 
 module.exports = router;

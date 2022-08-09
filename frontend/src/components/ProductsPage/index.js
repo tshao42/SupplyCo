@@ -22,7 +22,6 @@ function ProductsPage() {
         loaded &&
         <div>
             <h1> Product List </h1>
-            {/* {console.log('hit line 23')} */}
             <div>
             {Object.values(products).map(({id, name, price})=>{return(
                 <div key={id}>

@@ -56,15 +56,9 @@ function EditOrder(){
             Orderitems: quantityChanges
         }
 
-        console.log(`line 51`)
-        console.dir(payload);
-        console.log(typeof payload);
-        console.log (Array.isArray(payload));
         if (!errors.length){
             await dispatch(editOrder(orderId, payload))
-            .then(()=>console.log(`line 55 edit dispatched`))
-            .then(()=>history.push(`/orders/${orderId}`))
-            .then(()=>console.log(`history.push dispatched`))
+            .then(()=>history.push(`/orders/${orderId}`));
         }
 
     }
@@ -98,8 +92,7 @@ function EditOrder(){
         }
 
         const prevState = quantityChanges;
-
-        // console.log(`line 82 ${totalPrice}`)
+        
         setQuantityChanges({ ...quantityChanges, [id]: {
              ...quantityChanges[id], 
              ["quantity"]: newQuantity
@@ -109,7 +102,6 @@ function EditOrder(){
     
     
     useEffect(()=>{
-        console.log(`triggered line 88`)
         setAddressLine1(order?.addressLine1);
         setAddressLine2(order?.addressLine2);
         setCity(order?.city);

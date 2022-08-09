@@ -13,7 +13,6 @@ const e = require('express');
 //CREATE
 router.post('/', asyncHandler(async function (req, res) {
     const temp = await req.body;
-    // console.log(`line 15`)
     // console.dir(temp)
     //breaking down:
     const tempDetail = {
@@ -70,10 +69,8 @@ router.get('/:orderId', asyncHandler(async function (req, res) {
     const orderId = req.params.orderId;
     //if empty, need to delete
     const emptyCheck = await db.Orderitem.findAll({ where: { orderId: orderId } });
-    // console.log(`line 136, ${emptyCheck}`)
     // if everything gets deleted from the order...
     if (emptyCheck.length == 0) {
-        // console.log('hit line 137')
         await db.Order.destroy({ where: { id: orderId } })
         return res.json('empty order...');
     }
@@ -181,7 +178,6 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
 
     //empty check?
     if (updatedOrder.length == 0) {
-        // console.log('hit line 137')
         await db.Order.destroy({ where: { id: orderId } })
         return res.json('empty order...');
     }

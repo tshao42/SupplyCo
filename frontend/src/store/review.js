@@ -21,9 +21,9 @@ const edit_review = (reviewId, review) => ({
     review
 });
 
-const delete_review = (reviewId) => ({
+const delete_review = (userId) => ({
     type: DELETE_REVIEW,
-    reviewId
+    userId
 });
 
 export const loadAllReviewsForProduct = (productId) => async dispatch => {
@@ -87,8 +87,8 @@ export const deleteReview = (reviewId) => async dispatch => {
     });
 
     if (response.ok){
-        const deletedReviewId = await response.json();
-        dispatch(delete_review(deletedReviewId));
+        const stateUpdateDeleteUserId = await response.json();
+        dispatch(delete_review(stateUpdateDeleteUserId));
     }
 }
 
@@ -110,7 +110,7 @@ const reviewReducer = (state = initialState, action)=>{
             return deletetemp;
         case EDIT_REVIEW:
             const updatetemp = { ...state };
-            updatetemp[action.userId] = action.review;
+            updatetemp[action.review.userId] = action.review;
             return updatetemp;
         default:
             return state;
