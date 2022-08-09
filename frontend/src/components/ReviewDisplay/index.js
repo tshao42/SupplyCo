@@ -10,7 +10,7 @@ import WriteReview from '../WriteReview';
 
 function ReviewDisplay({reviews}){
 
-    const currentUserId = useSelector(state=>state.session.user.id);
+    const currentUserId = useSelector(state=>state.session.user?.id);
     const dispatch = useDispatch();
 
     const {productId} = useParams();
