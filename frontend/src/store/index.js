@@ -6,6 +6,7 @@ import orderReducer from "./order"
 import cartReducer from "./cart";
 import mapsReducer from "./map";
 import reviewReducer from "./review";
+import productimageReducer from "./productimage";
 //reducer
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   orders: orderReducer,
   cart: cartReducer,
   reviews: reviewReducer,
+  productImages: productimageReducer,
   map: mapsReducer
 });
 

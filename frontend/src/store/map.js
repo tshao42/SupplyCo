@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const LOAD_API_KEY = 'maps/LOAD_API_KEY';
 
 const loadApiKey = (key) => ({
@@ -6,7 +8,7 @@ const loadApiKey = (key) => ({
 });
 
 export const getKey = () => async (dispatch) => {
-    const res = await fetch('/api/map', {
+    const res = await csrfFetch('/api/map', {
         method: 'GET',
     });
     const data = await res.json();

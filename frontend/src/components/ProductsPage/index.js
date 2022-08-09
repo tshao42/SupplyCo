@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadAllProducts } from '../../store/product';
 import { Link } from 'react-router-dom';
+import { loadAllProductsImages } from '../../store/productimage';
 
 function ProductsPage() {
     const dispatch = useDispatch();
@@ -13,6 +14,7 @@ function ProductsPage() {
     useEffect(()=>{
         async function hydrate() {
             await dispatch(loadAllProducts())
+            .then(()=>dispatch(loadAllProductsImages()))
             .then(() => setLoaded(true));
         }
         hydrate();

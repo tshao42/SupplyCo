@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {  useParams, Link } from 'react-router-dom';
 import { add_cart_item_function } from '../../store/cart';
 import { loadSingleProduct } from '../../store/product';
+import { loadSingleProductImages } from '../../store/productimage';
 import { loadAllReviewsForProduct } from '../../store/review';
 import ReviewDisplay from '../ReviewDisplay';
 
@@ -23,6 +24,7 @@ function SingleProductPage(){
     useEffect(()=>{
         async function hydrate(){
             await dispatch(loadSingleProduct(productIdInt))
+            .then(()=>dispatch(loadSingleProductImages(productIdInt)))
             .then(()=>dispatch(loadAllReviewsForProduct(productIdInt)))
             .then(() => setLoaded(true));
         }
