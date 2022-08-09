@@ -3,29 +3,104 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Products', [{
-      name: "Leica M10-R Rangefinder Camera (Black Chrome)",
-      price: 8995.00,
-      info: "40MP Full-Frame CMOS Sensor \nLeica Maestro II Image Processor \nOptical 0.73x - Magnification Viewfinder \n3.0\" 1.04m-Dot Touchscreen LCD"
+      name: "FUJIFILM INSTAX Mini 90 Neo Classic Instant Camera (Brown)",
+      price: 169.95,
+      info: ""
     },
     {
-      name: "Leica M10 Monochrom Rangefinder Camera",
-      price: 8995.00,
-      info: "40MP Full-Frame CMOS Sensor \nLeica Maestro II Image Processor \nOptical 0.73x - Magnification Viewfinder \n3.0\" 1.04m-Dot Touchscreen LCD \nISO 100-50000, Up to 4.5-fps Shooting \nLong Exposure Times to 16 Min \nStills- Only Operation \nBuilt - In Wi - Fi, for Use with FOTOS App \nWeather - Resistant Brass Construction"
+      name: "FUJIFILM INSTAX MINI 40 Instant Film Camera",
+      price: 99.95,
+      info: ""
     },
     {
-      name: "Leica D-Lux 7 Digital Camera (Black)",
-      price: 1395.00,
-        info: "17MP Four Thirds MOS Sensor \nDC Vario- Summilux 3.1x Zoom Lens \n24 - 75mm(35mm Equivalent) \n2.76m - Dot Electronic Viewfinder \n3.0\" 1.24m-Dot Touchscreen LCD Monitor \nUHD 4K30p Video Recording \n11 - fps Shooting, Extended ISO 100 - 25600 \n4K Photo Modes, Post Focus \nBuilt - In Bluetooth and Wi - Fi \nIncluded CF D Flash Unit"
+      name: "FUJIFILM INSTAX MINI 11 Instant Film Camera (Ice White)",
+      price: 76.95,
+        info: ""
     },
     {
-      name: "Leica Q2 Monochrom Digital Camera",
-      price: 6195.00,
-      info: '47.3MP Full-Frame B&W CMOS Sensor \nNo Color Array or Low Pass Filter \nMaestro II Image Processor \nSummilux 28mm f/ 1.7 ASPH.Lens \n3.68MP OLED Electronic Viewfinder \n3.0\" 1.04m-Dot Touchscreen LCD \nDCI 4K24p, UHD 4K30p, Full HD 120p Video \nISO 100 - 100, 000, up to 10 - fps Shooting \n35mm, 50mm, and 75mm Crop Modes \nBluetooth LE and Wi - Fi'
+      name: "Polaroid Now Instant Film Camera Everything Box (Black)",
+      price: 146.95,
+      info: ""
     },
     {
-      name: "Leica TL2 Mirrorless Camera (Silver)",
-      price: 2495.00,
-        info: "24.2MP APS-C CMOS Sensor \nLeica Maestro II Image Processor \nUHD 4K30 and Full HD 1080p60 Video \nUp to 20 fps Shooting and ISO 50000 \n3.7\" 1.3m-Dot Touchscreen LCD Monitor \n49 - Point Contrast- Detect AF System \nElectronic Shutter Function: 1 / 40000 Sec \nMyCamera Menu; Faster Touch Controls \n32GB Memory and UHS - II SD Card Slot \nIntegrated Wi - Fi and USB 3.0 Type - C Port"
+      name: "Lomography Lomo'Instant Wide Black Camera and Lenses",
+      price: 199.00,
+        info: ""
+    },
+    {
+      name: "Mint Camera InstantFlex TL70 2.0 Instant Film Camera",
+      price: 399.00,
+      info: ""
+    },
+    {
+      name: "Kodak PRINTOMATIC 5MP Instant Digital Camera (Gray)",
+      price: 49.99,
+      info: ""
+    },
+    {
+      name: "Polaroid GO Instant Film Camera (White)",
+      price: 86.42,
+      info: ""
+    },
+    {
+      name: "Polaroid Now Instant Film Camera (Yellow)",
+      price: 102.30,
+      info: ""
+    },
+    {
+      name: "FUJIFILM INSTAX SQUARE SQ1 Instant Film Camera (Glacier Blue)",
+      price: 119.95,
+      info: ""
+    },
+    {
+      name: "Mint Camera SLR670-X ZERO Instant Camera",
+      price: 999.00,
+      info: ""
+    },
+    {
+      name: "FUJIFILM INSTAX MINI Instant Film (100 Exposures)",
+      price: 69.90,
+      info: ""
+    },
+    {
+      name: "FUJIFILM INSTAX SQUARE Instant Film (20 Exposures)",
+      price: 18.83,
+      info: ""
+    },
+    {
+      name: "Polaroid Color 600 Instant Film (8 Exposures)",
+      price: 19.99,
+      info: ""
+    },
+    {
+      name: "Polaroid Black & White 600 Instant Film (8 Exposures)",
+      price: 19.99,
+      info: ""
+    },
+    {
+      name: "Polaroid Black & White i-Type Instant Film (8 Exposures)",
+      price: 16.99,
+      info: ""
+    },
+    {
+      name: "Polaroid Color i-Type Instant Film (8 Exposures)",
+      price: 16.98,
+      info: ""
+    },
+    {
+      name: "FUJIFILM INSTAX Wide Instant Film (20 Exposures)",
+      price: 18.65,
+      info: ""
+    },
+    {
+      name: "OP/TECH USA Cam Strap-QD (Red)",
+      price: 11.35,
+      info: ""
+    },
+    {
+      name: "Moment MTW Fanny Sling 2020 (Black, Ripstop Nylon)",
+      price: 69.99,
+      info: ""
     }
   ], {});
     },
