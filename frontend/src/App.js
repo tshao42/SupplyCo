@@ -19,6 +19,7 @@ import OrderSuccess from "./components/OrderSuccess";
 import EditOrder from "./components/EditOrder";
 import MyOrders from "./components/MyOrders";
 import { loadAllUserOrders } from "./store/order";
+import About from "./components/About";
 
 function App() {
   const dispatch = useDispatch();
@@ -76,6 +77,9 @@ function App() {
           </Route>
           <Route exact path='/myorders'>
             <MyOrders />
+          </Route>
+          <Route exact path='/about'>
+            <About />
           </Route>
         </Switch>
       )}

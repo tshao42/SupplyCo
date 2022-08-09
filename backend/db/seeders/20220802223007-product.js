@@ -101,6 +101,11 @@ module.exports = {
       name: "Moment MTW Fanny Sling 2020 (Black, Ripstop Nylon)",
       price: 69.99,
       info: ""
+    },
+    {
+      name: "Polaroid OneStep 2 i‑Type Instant Camera",
+      price: 89.99,
+      info: ""
     }
   ], {});
     },

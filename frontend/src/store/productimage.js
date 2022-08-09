@@ -33,9 +33,11 @@ const productimageReducer = (state = initialState, action) => {
             action.images.forEach(
                 image => {
                     if (!temp[image.productId]){
-                        temp[image.productId] = {}
+                        temp[image.productId] = {};
+                        temp[image.productId][image.id] = image;
+                    } else {
+                        return;
                     }
-                    temp[image.productId][image.id] = image
                 }
             )
         return temp;

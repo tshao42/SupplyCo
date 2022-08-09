@@ -161,6 +161,14 @@ module.exports = {
       {
         productId: 20,
         siteUrl: 'https://www.adorama.com/images/XLarge/mo106150_2.jpg'
+      },
+      {
+        productId: 21,
+        siteUrl: 'https://images.squarespace-cdn.com/content/v1/55396962e4b053ce148cb1e1/1552064765955-MJH5TKYRM6CFO0GHCYCA/180623%2BProduct-1.jpg'
+      },
+      {
+        productId: 21,
+        siteUrl: 'https://helios-i.mashable.com/imagery/articles/05qF19O77B2w2RJV78zJxnN/hero-image.fill.size_1200x1200.v1623365665.jpg'
       }], {});
   },
 

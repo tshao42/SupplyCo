@@ -1,0 +1,35 @@
+#home-page-splash-block{
+    background-color: #A68C6d;
+    color: lightgray;
+    height: 78%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#home-page-splash-slogan-container{
+    margin-left: 8%;
+    padding-top: 15%;
+    font-size: 16pt;
+    font-family: futura-pt, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+#home-page-splash-shop-button{
+    margin-top: 7%;
+    height: 25px;
+    width: 130px;
+    border: 0;
+    font-size: 12pt;
+    color: #404040;
+    background-color: lightgray;
+    font-family: futura-pt, sans-serif;
+
+}
+
+#homepage-image{
+    display:inline;
+    margin-right: 0;
+}

@@ -24,23 +24,6 @@ router.get('/:productId', asyncHandler(async function (req, res) {
 }));
 
 
-//READ IMAGES
-router.get('/images', asyncHandler(async function (req, res) {
-    const images = await db.ProductImage.findAll();
-    return res.json(images);
-}));
-
-
-router.get(`/images/:productId`, asyncHandler(async function (req, res) {
-    const productId = req.params.productId;
-    const images = await db.ProductImage.findAll({
-        where: {
-            productId: productId
-        }
-    });
-    return res.json(images);
-}));
-
 
 
 module.exports=router;
