@@ -18,8 +18,9 @@ import OrderStatusPage from "./components/OrderStatusPage";
 import OrderSuccess from "./components/OrderSuccess";
 import EditOrder from "./components/EditOrder";
 import MyOrders from "./components/MyOrders";
+import About from "./components/About"
+import Footer from "./components/Footer"
 import { loadAllUserOrders } from "./store/order";
-import About from "./components/About";
 
 function App() {
   const dispatch = useDispatch();
@@ -83,6 +84,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }

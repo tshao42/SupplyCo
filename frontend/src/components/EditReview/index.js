@@ -28,13 +28,6 @@ const EditReview = ({userId, setEditReviewOpen}) => {
             rating: rating
         }
 
-        if (!errors.length) {
-            await dispatch(editReview(reviewId, payload))
-        }
-        setEditReviewOpen();
-    }
-
-    useEffect(() => {
         let errors = [];
         if (content.length < 10) {
             errors.push("Please enter at least 10 characters for review content!")
@@ -46,7 +39,12 @@ const EditReview = ({userId, setEditReviewOpen}) => {
             errors.push("Please provide a rating!");
         }
         setErrors(errors);
-    }, [content, title, rating]);
+
+        if (!errors.length) {
+            await dispatch(editReview(reviewId, payload))
+                .then(() => setEditReviewOpen());
+        }
+    }
 
 
 

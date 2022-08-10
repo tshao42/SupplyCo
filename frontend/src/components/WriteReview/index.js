@@ -24,16 +24,9 @@ const WriteReview = ( {productId, currentUserId, setWriteReviewOpen}) => {
             rating: rating
         }
 
-        if (!errors.length){
-            await dispatch(addReviewForProduct(payload))
-            .then(()=>setWriteReviewOpen())
-            .then(()=>history.push(`/products/${productId}`))
-        }
-    }
 
-    useEffect(()=>{
         let errors = [];
-        if (content.length < 10){
+        if (content.length < 10) {
             errors.push("Please enter at least 10 characters for review content!")
         }
         if (title.length < 4) {
@@ -43,9 +36,15 @@ const WriteReview = ( {productId, currentUserId, setWriteReviewOpen}) => {
             errors.push("Please provide a rating!");
         }
         setErrors(errors);
-    }, [content, title, rating]);
 
 
+
+        if (!errors.length){
+            await dispatch(addReviewForProduct(payload))
+            .then(()=>setWriteReviewOpen())
+            .then(()=>history.push(`/products/${productId}`))
+        }
+    }
     
     return (
         <form onSubmit={e=>handleSubmit(e)}>

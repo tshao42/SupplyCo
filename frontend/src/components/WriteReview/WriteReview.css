@@ -15,7 +15,7 @@
     color: #ccc;
 }
 
-#review-writing-area-title{
+.review-writing-area-title{
     width: 100%;
     margin-top: 10px;
     height: 30px;
@@ -29,7 +29,7 @@
     font-family: futura-pt, sans-serif;
     margin-bottom: 15px;
 }
-#review-writing-area-content {
+.review-writing-area-content {
     margin-top: 10px;
     margin-bottom: 15px;
     padding-top: 10px;

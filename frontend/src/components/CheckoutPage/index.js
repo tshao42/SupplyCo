@@ -7,6 +7,8 @@ import CartItemModuleCore from '../CartItemModuleCore/index';
 import { Redirect, useHistory } from 'react-router-dom';
 import { createOrder, loadAllUserOrders } from '../../store/order';
 import { empty_entire_cart_function, load_cart_items_function } from '../../store/cart';
+import "./checkout.css"
+import { loadAllProductsImages } from '../../store/productimage';
 
 
 
@@ -19,9 +21,11 @@ function CheckoutPage(){
     const history = useHistory();
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart);
+    const images = useSelector(state=>state.productImages)
     const currentUserId = useSelector(state=>state.session.user?.id)
 
     const [errors, setErrors] = useState([]);
+    const [mainLoaded, setMainLoaded] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [addressLine1, setAddressLine1] = useState("");
@@ -29,6 +33,16 @@ function CheckoutPage(){
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipCode, setZipCode] = useState("");
+
+    useEffect(()=>{
+        async function hydrate(){
+            await dispatch(loadAllProductsImages())
+            .then(()=>setMainLoaded(true));
+        }
+        hydrate();
+    }, [dispatch])
+
+
 
     const reset = () =>{
         setFirstName("");
@@ -39,30 +53,6 @@ function CheckoutPage(){
         setZipCode("");
         setCity("");
     }
-
-    //criteria:
-    //firstName.length > 0, only contains alphabetic
-    //lastName.length > 0, only contains alphabetic
-    //firstName + lastName=46 at most
-    //addressLine1.length <46
-    //addressLine2: none
-    //state: dropdown; self-explanatory
-    //zipCode: must be 5 digits integer
-    //city: required; <50
-
-    useEffect (()=>{
-        let errors = [];
-        //error criteria
-        if (!firstName.length) errors.push("Please enter a valid first name! ");
-        if (!lastName.length) errors.push("Please enter a valid first name!");
-        if (firstName.length + lastName.length > 46) errors.push("Name exceeding USPS limit; please shorten!");
-        if (!addressLine1.length) errors.push("Please enter an address");
-        if (!addressLine1.length && addressLine2.length) errors.push("Please enter Line 1 first!")
-        if (addressLine1.length > 46) errors.push("Address exceeding USPS limit; please shorten!");
-        if (!/^\d+$/.test(zipCode) || zipCode.length !== 5) errors.push("Please enter a valid five-digit zipcode!");
-        if (!city.length) errors.push("Please enter a valid city!")
-        setErrors(errors);
-    }, [firstName, lastName, addressLine1, addressLine2, state, zipCode, city])
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -79,6 +69,20 @@ function CheckoutPage(){
             total: cartItems.total,
             Orderitems: orderArr
         }
+
+        let errors = [];
+        //error criteria
+        if (!firstName.length) errors.push("Please enter a valid first name! ");
+        if (!lastName.length) errors.push("Please enter a valid first name!");
+        if (firstName.length + lastName.length > 46) errors.push("Name exceeding USPS limit; please shorten!");
+        if (!addressLine1.length) errors.push("Please enter an address");
+        if (!addressLine1.length && addressLine2.length) errors.push("Please enter Line 1 first!")
+        if (addressLine1.length > 46) errors.push("Address exceeding USPS limit; please shorten!");
+        if (!/^\d+$/.test(zipCode) || zipCode.length !== 5) errors.push("Please enter a valid five-digit zipcode!");
+        if (!city.length) errors.push("Please enter a valid city!")
+        setErrors(errors);
+
+
         if (!errors.length){
             await dispatch(createOrder(payload))
             .then(()=>reset())
@@ -98,88 +102,119 @@ function CheckoutPage(){
     */
 
     return(
-        <div>
+        <div className="checkout-summary-container">
             {currentUserId &&
             <div>
-                <div>Order Summary</div>
-                {cartItems.total !== 0
+                {cartItems.total > 1
                 ?
                 <div>
-                    <form>
-                        <ul>
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                        </ul>
-                        <label>
-                            First Name
-                            <input 
-                            type="text" 
-                            name="firstName" 
-                            value = {firstName}
-                            onChange = {e=>setFirstName(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Last Name
-                            <input 
-                            type="text" 
-                            name="lastName" 
-                            value= {lastName}
-                            onChange = {e=>setLastName(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Address
-                            <input 
-                            type="text" 
-                            name="addressLine1" 
-                            value={addressLine1}
-                            onChange = {e=>setAddressLine1(e.target.value)}
-                            />
-                        </label>
-                        <label>
-                            Address (cont.)
-                            <input 
-                            type="text" 
-                            name="addressLine2"
-                            value={addressLine2}
-                            onChange = {e=>setAddressLine2(e.target.value)} 
-                            />
-                        </label>
-                        <label>
-                            City
-                            <input
-                                type="text"
-                                name="city"
-                                value={city}
-                                onChange={e => setCity(e.target.value)} />
-                        </label>
-                        <label>
-                            State
-                            <select 
-                            onChange={e=>setState(e.target.value)}
-                            value={state}
-                            >
-                                {stateArray.map(usState=>{
-                                return<option value={usState}>{usState}</option>
-                                }
-                                )}
-                            </select>
-                        </label>
-                        <label>
-                            Zip or Postal Code
-                            <input 
-                            type="text" 
-                            name="zipCode"
-                            value={zipCode}
-                            onChange={e=>setZipCode(e.target.value)}
-                            />
-                        </label>
-                    </form>
-                        <div>Your order</div>
-                        <CartItemModuleCore />
+                    <div id="checkout-summary-container">
+                        <form>
+                            <ul>
+                                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            </ul>
+                            <div id="form-header">Shipping Information</div>
+                            <div id="checkout-page-line-one">
+                                <span id="checkout-page-first-name">
+                                    <label>
+                                        First Name: 
+                                        <input 
+                                        className="input-field-universal"
+                                        id="input-field-first-name"
+                                        type="text" 
+                                        name="firstName" 
+                                        value = {firstName}
+                                        onChange = {e=>setFirstName(e.target.value)}
+                                        />
+                                    </label>
+                                </span>
+                                <span id="checkout-page-last-name">
+                                    <label>
+                                        Last Name:
+                                        <input 
+                                        className = "input-field-universal"
+                                        id="input-field-last-name"
+                                        type="text" 
+                                        name="lastName" 
+                                        value= {lastName}
+                                        onChange = {e=>setLastName(e.target.value)}
+                                        />
+                                    </label>
+                                </span>
+                            </div>
+                            <div id="checkout-page-line-two">
+                                <label>
+                                    Address:
+                                    <input 
+                                    id="input-field-address-line-one"
+                                    className="input-field-universal"
+                                    type="text" 
+                                    name="addressLine1" 
+                                    value={addressLine1}
+                                    onChange = {e=>setAddressLine1(e.target.value)}
+                                    />
+                                </label>
+                                <label>
+                                    Address (cont.):
+                                    <input 
+                                    id="input-field-address-line-two"
+                                    className="input-field-universal"
+                                    type="text" 
+                                    name="addressLine2"
+                                    value={addressLine2}
+                                    onChange = {e=>setAddressLine2(e.target.value)} 
+                                    />
+                                </label>
+                            </div>
+                            <div id="checkout-page-line-three">
+                                <label>
+                                    City:
+                                    <input
+                                    className="input-field-universal"
+                                    id="input-field-city"
+                                        type="text"
+                                        name="city"
+                                        value={city}
+                                        onChange={e => setCity(e.target.value)} />
+                                </label>
+                                <label>
+                                    State:
+                                    <select 
+                                    className="input-select-menu"
+                                    id="input-select-menu-container"
+                                    onChange={e=>setState(e.target.value)}
+                                    value={state}
+                                    >
+                                        {stateArray.map(usState=>{
+                                        return<option 
+                                        value={usState}
+                                        className="input-select-menu"
+                                        >{usState}</option>
+                                        }
+                                        )}
+                                    </select>
+                                </label>
+                                <label>
+                                    Zip Code:
+                                    <input 
+                                    className="input-field-universal"
+                                    id="input-field-zipcode"
+                                    type="text" 
+                                    name="zipCode"
+                                    value={zipCode}
+                                    onChange={e=>setZipCode(e.target.value)}
+                                    />
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                        <div id="your-order">Your order</div>
+                        <div id="cart-item-preview">
+                            <CartItemModuleCore mainLoaded={mainLoaded} images={images}/>
+                        </div>
                         <div>Subtotal</div>
                         <div>${parseFloat(cartItems.total).toFixed(2)}</div>
-                        <div>We don't have a formal payment system yet because we'll send you Paypal Invoice for now; more payment features are coming soon!</div>
+                        <div>...</div>
                         <button onClick={e=>handleSubmit(e)}>Submit Order</button>
                 </div>
                 :

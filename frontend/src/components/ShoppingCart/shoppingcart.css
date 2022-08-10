@@ -1,7 +1,7 @@
 .shopping-cart-container{
     margin-top: 5%;
     font-family: futura-pt, sans-serif;
-    margin-bottom: 10%;
+    min-height: 70%;
 }
 #shopping-cart-title{
     margin-left: 16%;
