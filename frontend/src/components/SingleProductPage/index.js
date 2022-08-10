@@ -6,6 +6,7 @@ import { loadSingleProduct } from '../../store/product';
 import { loadSingleProductImages } from '../../store/productimage';
 import { loadAllReviewsForProduct } from '../../store/review';
 import ReviewDisplay from '../ReviewDisplay';
+import "./singleproductpage.css"
 
 
 function SingleProductPage(){
@@ -17,8 +18,10 @@ function SingleProductPage(){
     const product = useSelector(state => state.products)[productIdInt];
     const cart = useSelector (state => state.cart)[productIdInt];
     const reviews = useSelector(state => state.reviews);
+    const images = useSelector(state=>state.productImages)[productIdInt];
     const [loaded, setLoaded] = useState(false);
     const [isInCart, setIsInCart] = useState(cart);
+
 
 
     useEffect(()=>{
@@ -39,18 +42,34 @@ function SingleProductPage(){
 
     return(
         loaded&&
-        <div>
-            <Link to='/products'> {`<--`}Back to products</Link>
-            <h1>{product.name}</h1>
-            <div>$ {parseFloat(product.price).toFixed(2)}</div>
-            <div>{product.info}</div>
-            {!isInCart &&
-                <button onClick={addToCart}>Add to cart</button>
-            }
-            {isInCart &&
-                <button>In Cart</button>
-            }
-            <ReviewDisplay reviews={reviews} loaded={loaded}/>
+        <div id="single-product-page-container">
+            <Link to='/products' id="single-product-navigate-back">{"< "}Back to products</Link>
+            <div id="single-product-middle-container">
+                <div id="single-product-image-container">
+                    {Object.values(images).map(({siteUrl})=>{
+                        return <img src={siteUrl} className="single-product-page-picture"/>
+                    })}
+                </div>
+                <div id="single-product-information-container">
+                    <div id="single-product-information-block-1">
+                        <h1>{product.name}</h1>
+                        <div>$ {parseFloat(product.price).toFixed(2)}</div>
+                    </div>
+                    <div id="single-product-information-block-2">
+                        <div id="single-product-item-description">Description: </div>
+                        <div>{product.info}</div>
+                    </div>
+                    {!isInCart &&
+                        <button onClick={addToCart} className="single-product-information-cart-button">Add to cart</button>
+                    }
+                    {isInCart &&
+                            <button className="single-product-information-cart-button">In Cart</button>
+                    }
+                </div>
+            </div>
+            <div id="single-product-page-review-container">
+                <ReviewDisplay reviews={reviews} loaded={loaded}/>
+            </div>
         </div>
     )
 

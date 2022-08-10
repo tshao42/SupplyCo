@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 // import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import ShoppingCart from '../ShoppingCart';
-import CartItemModuleCore from '../CartItemModuleCore/CoreItemModuleCore';
-import { useHistory } from 'react-router-dom';
+import CartItemModuleCore from '../CartItemModuleCore/index';
+import { Redirect, useHistory } from 'react-router-dom';
 import { createOrder, loadAllUserOrders } from '../../store/order';
 import { empty_entire_cart_function, load_cart_items_function } from '../../store/cart';
 
@@ -19,7 +19,7 @@ function CheckoutPage(){
     const history = useHistory();
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart);
-    const currentUserId = useSelector(state=>state.session.user.id)
+    const currentUserId = useSelector(state=>state.session.user?.id)
 
     const [errors, setErrors] = useState([]);
     const [firstName, setFirstName] = useState("");
@@ -99,96 +99,103 @@ function CheckoutPage(){
 
     return(
         <div>
-            <div>Order Summary</div>
-            {cartItems.total !== 0
-            ?
+            {currentUserId &&
             <div>
-                <form>
-                    <ul>
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                    </ul>
-                    <label>
-                        First Name
-                        <input 
-                        type="text" 
-                        name="firstName" 
-                        value = {firstName}
-                        onChange = {e=>setFirstName(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Last Name
-                        <input 
-                        type="text" 
-                        name="lastName" 
-                        value= {lastName}
-                        onChange = {e=>setLastName(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Address
-                        <input 
-                        type="text" 
-                        name="addressLine1" 
-                        value={addressLine1}
-                        onChange = {e=>setAddressLine1(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Address (cont.)
-                        <input 
-                        type="text" 
-                        name="addressLine2"
-                        value={addressLine2}
-                        onChange = {e=>setAddressLine2(e.target.value)} 
-                        />
-                    </label>
-                    <label>
-                        City
-                        <input
-                            type="text"
-                            name="city"
-                            value={city}
-                            onChange={e => setCity(e.target.value)} />
-                    </label>
-                    <label>
-                        State
-                        <select 
-                        onChange={e=>setState(e.target.value)}
-                        value={state}
-                        >
-                            {stateArray.map(usState=>{
-                            return<option value={usState}>{usState}</option>
-                            }
-                            )}
-                        </select>
-                    </label>
-                    <label>
-                        Zip or Postal Code
-                        <input 
-                        type="text" 
-                        name="zipCode"
-                        value={zipCode}
-                        onChange={e=>setZipCode(e.target.value)}
-                        />
-                    </label>
-                </form>
-                    <div>Your order</div>
-                    <CartItemModuleCore />
-                    <div>Subtotal</div>
-                    <div>${parseFloat(cartItems.total).toFixed(2)}</div>
-                    <div>We don't have a formal payment system yet because we'll send you Paypal Invoice for now; more payment features are coming soon!</div>
-                    <button onClick={e=>handleSubmit(e)}>Submit Order</button>
+                <div>Order Summary</div>
+                {cartItems.total !== 0
+                ?
+                <div>
+                    <form>
+                        <ul>
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
+                        <label>
+                            First Name
+                            <input 
+                            type="text" 
+                            name="firstName" 
+                            value = {firstName}
+                            onChange = {e=>setFirstName(e.target.value)}
+                            />
+                        </label>
+                        <label>
+                            Last Name
+                            <input 
+                            type="text" 
+                            name="lastName" 
+                            value= {lastName}
+                            onChange = {e=>setLastName(e.target.value)}
+                            />
+                        </label>
+                        <label>
+                            Address
+                            <input 
+                            type="text" 
+                            name="addressLine1" 
+                            value={addressLine1}
+                            onChange = {e=>setAddressLine1(e.target.value)}
+                            />
+                        </label>
+                        <label>
+                            Address (cont.)
+                            <input 
+                            type="text" 
+                            name="addressLine2"
+                            value={addressLine2}
+                            onChange = {e=>setAddressLine2(e.target.value)} 
+                            />
+                        </label>
+                        <label>
+                            City
+                            <input
+                                type="text"
+                                name="city"
+                                value={city}
+                                onChange={e => setCity(e.target.value)} />
+                        </label>
+                        <label>
+                            State
+                            <select 
+                            onChange={e=>setState(e.target.value)}
+                            value={state}
+                            >
+                                {stateArray.map(usState=>{
+                                return<option value={usState}>{usState}</option>
+                                }
+                                )}
+                            </select>
+                        </label>
+                        <label>
+                            Zip or Postal Code
+                            <input 
+                            type="text" 
+                            name="zipCode"
+                            value={zipCode}
+                            onChange={e=>setZipCode(e.target.value)}
+                            />
+                        </label>
+                    </form>
+                        <div>Your order</div>
+                        <CartItemModuleCore />
+                        <div>Subtotal</div>
+                        <div>${parseFloat(cartItems.total).toFixed(2)}</div>
+                        <div>We don't have a formal payment system yet because we'll send you Paypal Invoice for now; more payment features are coming soon!</div>
+                        <button onClick={e=>handleSubmit(e)}>Submit Order</button>
+                </div>
+                :
+                <div>
+                    <div>Oops, looks like you've got an empty cart...</div>
+                    <button
+                        onClick={() => history.push('/products')}
+                    >
+                        Browse More
+                    </button>
+                </div>
+                }
             </div>
-            :
-            <div>
-                <div>Oops, looks like you've got an empty cart...</div>
-                <button
-                    onClick={() => history.push('/products')}
-                >
-                    Browse More
-                </button>
-            </div>
+            }
+            {!currentUserId &&
+                <Redirect to="/login" />
             }
         </div>
     )

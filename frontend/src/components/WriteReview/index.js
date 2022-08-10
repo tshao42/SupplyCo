@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { addReviewForProduct } from '../../store/review';
 import './WriteReview.css'
 
-const WriteReview = ( {productId, currentUserId}) => {
+const WriteReview = ( {productId, currentUserId, setWriteReviewOpen}) => {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -26,6 +26,7 @@ const WriteReview = ( {productId, currentUserId}) => {
 
         if (!errors.length){
             await dispatch(addReviewForProduct(payload))
+            .then(()=>setWriteReviewOpen())
             .then(()=>history.push(`/products/${productId}`))
         }
     }
@@ -51,18 +52,24 @@ const WriteReview = ( {productId, currentUserId}) => {
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
+            <label>Title:
             <input 
-                type="textarea"
+                type="text"
                 placeholder='Leave a title'
                 value={title}
                 onChange={e=>setTitle(e.target.value)}
+                className="review-writing-area-title"
             />
-            <input 
-                type="textarea"
+            </label>
+            <label>Content:
+            <textarea 
                 placeholder='Leave your review here'
+                className="review-writing-area-content"
                 value={content}
                 onChange={e=>setContent(e.target.value)}
             />
+            </label>
+            <label>Rating:
             <div className="star-rating">
                 {[...Array(5)].map((star, index) => {
                     index += 1;
@@ -81,7 +88,8 @@ const WriteReview = ( {productId, currentUserId}) => {
                     );
                 })}
             </div>
-            <button type="submit">Submit Review</button>
+            </label>
+            <button type="submit" id="write-review-submit">Submit Review</button>
         </form>
     );
 };

@@ -56,13 +56,14 @@ const EditReview = ({userId, setEditReviewOpen}) => {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <input
-                type="textarea"
+                type="text"
+                className="review-writing-area-title"
                 placeholder='Leave a title'
                 value={title}
                 onChange={e => setTitle(e.target.value)}
             />
-            <input
-                type="textarea"
+            <textarea
+                className="review-writing-area-content"
                 placeholder='Leave your review here'
                 value={content}
                 onChange={e => setContent(e.target.value)}

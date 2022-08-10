@@ -7,6 +7,7 @@
     padding-bottom: 1%;
     margin-left: 6%;
     font-size: 12pt;
+    max-height:1%;
     font-family: essonnes-display,serif;    
 }
 
@@ -28,4 +29,10 @@
     display: flex;
     width: 20%;
     justify-content: space-evenly; 
+}
+#nav-bar-logo{
+    width: 70%
+}
+#nav-bar-logo:hover{
+    cursor: pointer;
 }

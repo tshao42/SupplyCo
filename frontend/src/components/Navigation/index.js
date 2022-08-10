@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
+  const history=useHistory();
   const sessionUser = useSelector(state => state.session.user);
   let sessionLinks;
   if (sessionUser) {
@@ -23,7 +24,10 @@ function Navigation({ isLoaded }){
   return (
     <ul id="nav-bar-holder">
       <div id="nav-bar-logo-holder">
-        Icon placeholder
+        <img src="https://i.imgur.com/gaHlmns.png" id="nav-bar-logo" onClick={e=>{
+          e.preventDefault();
+          history.push('/');
+        }}/>
       </div>
       <ul id="nav-bar-options">
         <li>

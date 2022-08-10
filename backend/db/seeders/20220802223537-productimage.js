@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('ProductImages', [{
       productId: 1,
-      siteUrl: 'https://www.japantrendshop.com/img/products/4996/4996-fujifilm-instax-90-mini-neo-classic-camera-1.jpg'
+      siteUrl: 'https://i.imgur.com/Q5EOsD8.png'
     },
       {
         productId: 1,
@@ -12,11 +12,11 @@ module.exports = {
       },
       {
         productId: 2,
-        siteUrl: 'https://cdn.vox-cdn.com/thumbor/YvKkGi6JR9eTBriZ1N9ndcuELN0=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22425060/bfarsace_20210405_4506_0003.jpg'
+        siteUrl: 'https://m.media-amazon.com/images/I/A1cz3zVsMML._AC_SL1500_.jpg'
       },
       {
         productId: 2,
-        siteUrl: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6461/6461306cv11d.jpg;maxHeight=640;maxWidth=550'
+        siteUrl: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6461/6461306cv11d.jpg'
       },
       {
         productId: 3,
@@ -68,7 +68,7 @@ module.exports = {
       },
       {
         productId: 9,
-        siteUrl: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6409/6409329cv15d.jpg'
+        siteUrl: 'https://static.bhphoto.com/images/images500x500/1585667580_1555723.jpg'
       },
       {
         productId: 9,
