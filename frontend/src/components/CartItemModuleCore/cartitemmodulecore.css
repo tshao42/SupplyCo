@@ -18,6 +18,7 @@
 }
 .edit-quantity{
     border:none;
+    height: 22px;
     background-color: white;
     color: #565656;
     border: 1px lightgray solid;
@@ -30,10 +31,12 @@
 #cart-quantity-box{
     text-align: center;
     width: 30px;
+    height: 22px;
     border: none;
     background-color: white;
     border-top: 1px lightgray solid;
     border-bottom: 1px lightgray solid;
+    font-family: futura-pt, sans-serif;
 }
 #cart-item-delete{
     width: 3%;
