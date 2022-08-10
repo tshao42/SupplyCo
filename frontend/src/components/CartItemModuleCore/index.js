@@ -44,6 +44,20 @@ function CartItemModuleCore({images, mainLoaded}) {
         }
     }
 
+
+    const handleItemDeleteFromCart= async (e, productId, quantity) => {
+        e.preventDefault();
+        let temp = initialQuantity[productId].quantity;
+        const dprice = (quantity - temp) * parseInt(products[productId].price);
+        if (quantity === 0) {
+            await dispatch(delete_cart_itemfunction(productId, dprice))
+                .then(() => dispatch(load_cart_items_function()));
+        } else {
+            await dispatch(update_quantity_function(productId, quantity, dprice))
+                .then(() => dispatch(load_cart_items_function()));
+        }
+    }
+
     const handleSimplePlusMinus = async (e, productId, quantity) => {
         e.preventDefault();
         if (quantity >= 1) {
@@ -67,7 +81,7 @@ function CartItemModuleCore({images, mainLoaded}) {
                             <form id="cart-form">
                                 <div id="cart-single-item-line">
                                     <div id="cart-item-delete">
-                                        <button onClick={e => handleItemEdit(e, productId, 0)} className="edit-quantity" id="edit-quantity-delete">×</button>
+                                        <button onClick={e => handleItemDeleteFromCart(e, productId, 0)} className="edit-quantity" id="edit-quantity-delete">×</button>
                                     </div>
                                     <div id="item-image">
                                         {Object.values(images[productId]).length!==0 &&
