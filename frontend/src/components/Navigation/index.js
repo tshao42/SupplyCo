@@ -1,25 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import * as sessionActions from '../../store/session';
+
 
 function Navigation({ isLoaded }){
+  const dispatch = useDispatch();
   const history=useHistory();
   const sessionUser = useSelector(state => state.session.user);
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <ProfileButton user={sessionUser} />
-    );
-  } else {
-    sessionLinks = (
-      <>
-        <Link to="/login">Log In</Link>
-        <Link to="/signup">Sign Up</Link>
-      </>
-    );
-  }
+  const cart = useSelector(state=>state.cart);
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+  };
 
   return (
     <ul id="nav-bar-holder">
@@ -42,12 +37,26 @@ function Navigation({ isLoaded }){
       </ul>
       <ul id="nav-bar-top-right-account-options">
         <li>
-          <Link exact to="/cart">Cart</Link>
+          <Link exact to="/cart">Cart{`(${Object.values(cart).length-1})`}</Link>
         </li>
         <li>
           <Link exact to="/myorders">My orders</Link>
         </li>
-        {isLoaded && sessionLinks}
+        {isLoaded && sessionUser &&
+        <li>
+          <div className="nav-top-right-adjust" id="log-out-nav" onClick={logout}>Log Out</div>
+        </li>
+        }
+        {isLoaded && !sessionUser && 
+        <li>
+            <Link className="nav-top-right-adjust" to="/login">Log In</Link>
+        </li>
+        }
+        {isLoaded && !sessionUser && 
+        <li>
+            <Link className="nav-top-right-adjust" to="/signup">Sign Up</Link>
+        </li>
+        }
       </ul>
     </ul>
   );
