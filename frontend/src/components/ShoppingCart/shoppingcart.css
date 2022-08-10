@@ -37,3 +37,14 @@
 #shopping-cart-subtotal-amount{
     text-align: right;
 }
+#shopping-cart-empty-message{
+    margin-left: 16%;
+    margin-top: 10%;
+}
+#shopping-cart-empty-redirect{
+    font-style: oblique;
+}
+#shopping-cart-empty-hint{
+    font-weight: 700;
+    font-size: 15pt;
+}

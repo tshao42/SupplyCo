@@ -30,7 +30,7 @@ function ShoppingCart() {
                 </div>
                     <div>
                     <div id="shopping-cart-subtotal-amount">${parseFloat(cartItems.total).toFixed(2)}</div>
-                    {cartItems.total !== 0 &&
+                    {cartItems.total > 1 &&
                         <button onClick={e => {
                             e.preventDefault();
                             history.push(`/checkout`)
@@ -40,10 +40,10 @@ function ShoppingCart() {
                 </div>
             </div>
         <div>
-            {cartItems.total===0 &&
-                    <div>
-                        <div>Your cart is empty...</div>
-                        <Link to='/products'>Browse our offerings</Link>
+            {cartItems.total < 1 &&
+                    <div id="shopping-cart-empty-message">
+                        <div id="shopping-cart-empty-hint">Nothing here yet {`:(`}</div>
+                        <Link to='/products' id="shopping-cart-empty-redirect">{`< Browse all products`}</Link>
                     </div>
             }
             </div>
