@@ -9,14 +9,16 @@ import configureStore from './store';
 import * as sessionActions from './store/session';
 
 
-const persistedState = localStorage.getItem('reduxState')
-  ? JSON.parse(localStorage.getItem('reduxState'))
+const cartState = localStorage.getItem('cartState')
+  ? JSON.parse(localStorage.getItem('cartState'))
   : {}
 
-const store = configureStore(persistedState);
+const store = configureStore({cart: cartState});
 store.subscribe(() => {
-  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+  localStorage.setItem('cartState', JSON.stringify(store.getState().cart))
 })
+
+
 if (process.env.NODE_ENV !== 'production') {
   restoreCSRF();
 

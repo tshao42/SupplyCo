@@ -34,7 +34,7 @@ function CartItemModuleCore({images, mainLoaded}) {
         }
         if(!quantity.length) quantity=1;
         let temp = initialQuantity[productId].quantity;
-        const dprice = (quantity - temp) * parseInt(products[productId].price);
+        const dprice = (quantity - temp) * parseFloat(products[productId].price);
         if (quantity === 0) {
             await dispatch(delete_cart_itemfunction(productId, dprice))
                 .then(() => dispatch(load_cart_items_function()));
@@ -48,7 +48,7 @@ function CartItemModuleCore({images, mainLoaded}) {
     const handleItemDeleteFromCart= async (e, productId, quantity) => {
         e.preventDefault();
         let temp = initialQuantity[productId].quantity;
-        const dprice = (quantity - temp) * parseInt(products[productId].price);
+        const dprice = (quantity - temp) * parseFloat(products[productId].price);
         if (quantity === 0) {
             await dispatch(delete_cart_itemfunction(productId, dprice))
                 .then(() => dispatch(load_cart_items_function()));

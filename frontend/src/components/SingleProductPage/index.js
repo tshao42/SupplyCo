@@ -36,7 +36,7 @@ function SingleProductPage(){
 
     const addToCart = async e => {
         e.preventDefault();
-        dispatch(add_cart_item_function(productIdInt, parseInt(product.price)))
+        dispatch(add_cart_item_function(productIdInt, parseFloat(product.price)))
         .then(()=>setIsInCart(true));
     }
 
