@@ -11,7 +11,7 @@ import * as sessionActions from './store/session';
 
 const cartState = localStorage.getItem('cartState')
   ? JSON.parse(localStorage.getItem('cartState'))
-  : {}
+  : {total: 0}
 
 const store = configureStore({cart: cartState});
 store.subscribe(() => {
