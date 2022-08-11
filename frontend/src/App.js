@@ -21,6 +21,7 @@ import MyOrders from "./components/MyOrders";
 import About from "./components/About"
 import Footer from "./components/Footer"
 import { loadAllUserOrders } from "./store/order";
+import NotFound from "./components/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -81,6 +82,9 @@ function App() {
           </Route>
           <Route exact path='/about'>
             <About />
+          </Route>
+          <Route default>
+            <NotFound />
           </Route>
         </Switch>
       )}
