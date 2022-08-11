@@ -117,7 +117,7 @@ function CheckoutPage(){
                             <div id="checkout-page-line-one">
                                 <span id="checkout-page-first-name">
                                     <label>
-                                        First Name: 
+                                        First Name:* 
                                         <input 
                                         className="input-field-universal"
                                         id="input-field-first-name"
@@ -130,7 +130,7 @@ function CheckoutPage(){
                                 </span>
                                 <span id="checkout-page-last-name">
                                     <label>
-                                        Last Name:
+                                        Last Name:*
                                         <input 
                                         className = "input-field-universal"
                                         id="input-field-last-name"
@@ -144,7 +144,7 @@ function CheckoutPage(){
                             </div>
                             <div id="checkout-page-line-two">
                                 <label>
-                                    Address:
+                                    Address:*
                                     <input 
                                     id="input-field-address-line-one"
                                     className="input-field-universal"
@@ -168,7 +168,7 @@ function CheckoutPage(){
                             </div>
                             <div id="checkout-page-line-three">
                                 <label>
-                                    City:
+                                    City:*
                                     <input
                                     className="input-field-universal"
                                     id="input-field-city"
@@ -178,7 +178,7 @@ function CheckoutPage(){
                                         onChange={e => setCity(e.target.value)} />
                                 </label>
                                 <label>
-                                    State:
+                                    State:*
                                     <select 
                                     className="input-select-menu"
                                     id="input-select-menu-container"
@@ -195,7 +195,7 @@ function CheckoutPage(){
                                     </select>
                                 </label>
                                 <label>
-                                    Zip Code:
+                                    Zip Code:*
                                     <input 
                                     className="input-field-universal"
                                     id="input-field-zipcode"
@@ -206,6 +206,7 @@ function CheckoutPage(){
                                     />
                                 </label>
                             </div>
+                            <div id="required-message">* Required fields</div>
                         </form>
                     </div>
                         <div id="your-order">Your order</div>
