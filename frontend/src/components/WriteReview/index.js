@@ -51,7 +51,7 @@ const WriteReview = ( {productId, currentUserId, setWriteReviewOpen}) => {
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <label>Title:
+            <label>Title:*
             <input 
                 type="text"
                 placeholder='Leave a title'
@@ -60,7 +60,7 @@ const WriteReview = ( {productId, currentUserId, setWriteReviewOpen}) => {
                 className="review-writing-area-title"
             />
             </label>
-            <label>Content:
+            <label>Content:*
             <textarea 
                 placeholder='Leave your review here'
                 className="review-writing-area-content"
@@ -68,7 +68,7 @@ const WriteReview = ( {productId, currentUserId, setWriteReviewOpen}) => {
                 onChange={e=>setContent(e.target.value)}
             />
             </label>
-            <label>Rating:
+            <label>Rating:*
             <div className="star-rating">
                 {[...Array(5)].map((star, index) => {
                     index += 1;
@@ -87,6 +87,8 @@ const WriteReview = ( {productId, currentUserId, setWriteReviewOpen}) => {
                     );
                 })}
             </div>
+            <div id="required-message">* Required fields</div> 
+            <br/>
             </label>
             <button type="submit" id="write-review-submit">Submit Review</button>
         </form>

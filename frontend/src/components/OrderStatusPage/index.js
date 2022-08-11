@@ -73,7 +73,7 @@ function OrderStatusPage(){
                         }
                     </div>
                     <div id="subtotal">
-                    <div>Subtotal: ${parseInt(order.total).toFixed(2)}</div>
+                    <div>Subtotal: ${parseFloat(order.total).toFixed(2)}</div>
                     <div id="edit-order-order-detail">
                         <Link to={`/orders/${orderId}/edit`}>Edit order</Link>
                     </div>

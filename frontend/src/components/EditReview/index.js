@@ -53,19 +53,28 @@ const EditReview = ({userId, setEditReviewOpen}) => {
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
-            <input
-                type="text"
-                className="review-writing-area-title"
-                placeholder='Leave a title'
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-            />
-            <textarea
-                className="review-writing-area-content"
-                placeholder='Leave your review here'
-                value={content}
-                onChange={e => setContent(e.target.value)}
-            />
+            <div>
+                <label> Title:*
+                <input
+                    type="text"
+                    className="review-writing-area-title"
+                    placeholder='Leave a title'
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
+                />
+                </label>
+            </div>
+            <div>
+                <label>Content:*
+                    <textarea
+                        className="review-writing-area-content"
+                        placeholder='Leave your review here'
+                        value={content}
+                        onChange={e => setContent(e.target.value)}
+                    />
+                </label>
+            </div>
+            <div>Rating:*</div>
             <div className="star-rating">
                 {[...Array(5)].map((star, index) => {
                     index += 1;
@@ -84,7 +93,9 @@ const EditReview = ({userId, setEditReviewOpen}) => {
                     );
                 })}
             </div>
-            <button type="submit">Submit Changes</button>
+            <div id="required-message">* Required fields</div> 
+            <br />
+            <button type="submit" id="write-review-submit">Submit</button>
         </form>
     );
 };

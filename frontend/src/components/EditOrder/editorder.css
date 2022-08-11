@@ -27,12 +27,12 @@
     
 }
 #order-input-field-address-line{
-    margin-left: 60px;
+    margin-left: 59px;
     margin-top: 10px;
     margin-bottom: 4px;
 }
 #order-input-field-address-line-two{
-    margin-left: 16px;
+    margin-left: 25px;
     margin-top: 4px;
     margin-bottom: 4px;
 }
@@ -69,4 +69,12 @@
     color: #565656;
     background-color: lightgray;
     cursor: pointer;
+}
+input[type="number"]:not([step="any"])::-webkit-inner-spin-button,
+input[type="number"]:not([step="any"])::-webkit-outer-spin-button {
+    opacity: 1;
+}
+#edit-address-title, #edit-order-id{
+    font-style: oblique;
+    font-weight: 700;
 }

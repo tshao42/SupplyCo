@@ -60,6 +60,7 @@
     margin-left: 2.4%;
 }
 #input-field-address-line-two{
+    margin-left: 1.6%;
     width: 30%;
 }
 #input-field-city{
@@ -69,7 +70,7 @@
 }
 #input-field-zipcode{
     margin-left: 1%;
-    width: 22.6%;
+    width: 21.7%;
 }
 .input-select-menu{
     font-family: futura-pt, sans-serif;

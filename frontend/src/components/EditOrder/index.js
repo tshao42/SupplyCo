@@ -58,6 +58,13 @@ function EditOrder(){
             total: parseFloat(totalPrice),
             Orderitems: quantityChanges
         }
+        let errors = [];
+        if (!addressLine1.length) errors.push("Please enter an address");
+        if (!addressLine1.length && addressLine2.length) errors.push("Please enter Line 1 first!")
+        if (addressLine1.length > 46) errors.push("Address exceeding USPS limit; please shorten!");
+        if (!/^\d+$/.test(zipCode) || zipCode.length !== 5) errors.push("Please enter a valid five-digit zipcode!");
+        if (!city.length) errors.push("Please enter a valid city!");
+        setErrors(errors);
 
         if (!errors.length){
             await dispatch(editOrder(orderId, payload))
@@ -73,22 +80,11 @@ function EditOrder(){
     }
 
     const stateArray = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
-    useEffect(() => {
-        if (order){
-            let errors = [];
-            if (!addressLine1.length) errors.push("Please enter an address");
-            if (!addressLine1.length && addressLine2.length) errors.push("Please enter Line 1 first!")
-            if (addressLine1.length > 46) errors.push("Address exceeding USPS limit; please shorten!");
-            if (!/^\d+$/.test(zipCode) || zipCode.length !== 5) errors.push("Please enter a valid five-digit zipcode!");
-            if (!city.length) errors.push("Please enter a valid city!");
-            setErrors(errors);
-        }
-    }, [addressLine1, addressLine2, state, zipCode, city])
 
     const handleQuantityUpdate = async (e, id, newQuantity, productId) => {
         e.preventDefault();
         if (newQuantity.length > 0 && "0123456789".includes(newQuantity[0]))
-            newQuantity = parseInt(newQuantity);
+            newQuantity = parseFloat(newQuantity);
         if(newQuantity<0) newQuantity=0;
         if ((newQuantity.length > 0 && !"0123456789".includes(newQuantity[0]))) {
             newQuantity= 1;
@@ -121,7 +117,7 @@ function EditOrder(){
         loaded && order && currentUserId===order?.userId
         ?<div id="edit-order-container">
             <h1>Edit order</h1>
-            <div>Order #{order.id}</div>
+            <div id="edit-order-id">Order #{order.id}</div>
             <div>Items in your order</div>
             {/* {console.dir(order)}
             {console.dir(orderItem)} */}
@@ -153,9 +149,9 @@ function EditOrder(){
                 }
                 {/* {console.dir(itemsInOrder)} */}
                 <div id="address-edit-container">
-                <div>Edit address</div>
+                <div id="edit-address-title">Edit address</div>
                     <label>
-                        Address:
+                        Address:*
                         <input
                             id="order-input-field-address-line"
                             className="input-field-universal"
@@ -177,7 +173,7 @@ function EditOrder(){
                         />
                     </label>
                     <label>
-                        City:
+                        City:*
                         <input
                             className="input-field-universal"
                             id="order-input-field-city"
@@ -187,7 +183,7 @@ function EditOrder(){
                             onChange={e => setCity(e.target.value)} />
                     </label>
                     <label>
-                        State:
+                        State:*
                         <select
                             className="order-input-select-menu"
                             id="order-input-select-menu-container"
@@ -201,7 +197,7 @@ function EditOrder(){
                         </select>
                     </label>
                     <label>
-                        Zip Cide:
+                        Zip Cide:*
                         <input
                             className="input-field-universal"
                             id="order-input-field-zipcode"
@@ -212,6 +208,9 @@ function EditOrder(){
                         />
                     </label>
                     </div>
+                    <br />
+                    <div id="required-message">*Required field</div>
+                    <br />
                 <button className="order-edit-page-button" type="submit" id="order-edit-update">Update order</button>
             </form>
             <button className="order-edit-page-button" onClick={handleDelete}>Cancel order</button>
