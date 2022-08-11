@@ -1,0 +1,54 @@
+#order-details-basic-container{
+    margin-left: 15%;
+    margin-top: 5%;
+    font-family: futura-pt, sans-serif;
+    min-height: 70%;
+}
+#items-container{
+    display: flex;
+    flex-direction: column;
+}
+.items-per-line{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3%;
+    margin-top: 1%;
+}
+
+#subtotal{
+    text-align: right;
+    margin-right: 15%;
+}
+#order-detail-title{
+    font-style: oblique;
+    margin-top: 10px;
+}
+#item-image{
+    margin-right: 15px;
+}
+#order-detail-link{
+    width: 40%;
+    margin-left: 5%;
+}
+#order-detail-single-item-price{
+    width: 10%;
+}
+#order-detail-quantity{
+    width: 10%;
+    color: #565656;
+}
+#order-quantity-price-total{
+    text-align: right;
+    width: 9%;
+}
+#edit-order-order-detail{
+    margin-top: 30px;
+}
+#edit-order-order-detail, #cancel-order {
+    color: #565656;
+}
+#edit-order-order-detail:hover,
+#cancel-order:hover {
+    color: darkgray;
+    cursor: pointer;
+}

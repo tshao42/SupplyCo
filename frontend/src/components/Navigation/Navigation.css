@@ -49,3 +49,12 @@
 .nav-top-right-adjust{
     margin-top:2px;
 }
+#try-demo{
+    text-decoration: none;
+    color: black;
+    font-family: futura-pt, sans-serif;
+}
+#try-demo:hover {
+    color: #8C8C8C;
+    cursor: pointer;
+}

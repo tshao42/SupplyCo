@@ -9,7 +9,7 @@ module.exports = {
         state: "CA",
         zipCode: "90012",
         orderFor: 'Demo User',
-        total: 8995.00 
+        total: 269.90
       }], {});
   },
 

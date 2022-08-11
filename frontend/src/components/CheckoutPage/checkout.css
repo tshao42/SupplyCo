@@ -89,3 +89,27 @@
     font-size: 16pt;
     margin-bottom: 3%;
 }
+#subtotal-display{
+    text-align: right;
+    margin-right: 16.5%;
+    text-decoration: underline;
+}
+
+#checkout-submit-button{
+        border: none;
+        background-color: #565656;
+        color: lightgray;
+        margin-top: 5%;
+        width: 100px;
+        height: 35px;
+        font-family: futura-pt, sans-serif;
+        font-size: 12pt;
+        float: right;
+        margin-right: 16.5%;
+        margin-bottom: 50px;
+}
+#checkout-submit-button:hover{
+        background-color: lightgray;
+        color: #565656;
+        cursor: pointer;
+}

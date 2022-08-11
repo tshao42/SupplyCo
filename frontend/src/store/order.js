@@ -98,7 +98,7 @@ const orderReducer =  (state = initialState, action) => {
     switch (action.type) {
         case LOAD_ORDERS:
             //init
-            const allOrders = { ...state };
+            const allOrders = {};
             //iterate through all orders
             action.orders.forEach(
                 order => {

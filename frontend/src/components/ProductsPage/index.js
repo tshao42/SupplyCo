@@ -28,33 +28,35 @@ function ProductsPage() {
     return (
         loaded &&
         <div>
-            <div id="products-page-header">
-                    <h1 id="products-page-banner-title">All Products</h1>
-            </div>
-            <div id="products-page-container">
-                <h1 className="products-page-title">All Products</h1>
-                <div className="products-page-item-container">
-                {Object.values(products).map(({id, name, price})=>{return(
-                    <div key={id} className="products-page-individual-item-container">
-                        {
-                            Object.values(productimages[id]).map(({ siteUrl }) => {
-                                return <img 
-                                src={siteUrl} 
-                                className="products-page-thumb-nail"
-                                onClick={
-                                    e=>{
-                                        e.preventDefault();
-                                        history.push(`/products/${id}`)
-                                    }
-                                }/>
-                            })  
+            <div>
+                <div id="products-page-header">
+                        <h1 id="products-page-banner-title">All Products</h1>
+                </div>
+                <div id="products-page-container">
+                    <h1 className="products-page-title">All Products</h1>
+                    <div className="products-page-item-container">
+                    {Object.values(products).map(({id, name, price})=>{return(
+                        <div key={id} className="products-page-individual-item-container">
+                            {
+                                Object.values(productimages[id]).map(({ siteUrl }) => {
+                                    return <img 
+                                    src={siteUrl} 
+                                    className="products-page-thumb-nail"
+                                    onClick={
+                                        e=>{
+                                            e.preventDefault();
+                                            history.push(`/products/${id}`)
+                                        }
+                                    }/>
+                                })  
 
-                        }
-                        <Link to={`/products/${id}`} className="products-page-individual-item-link">{name}</Link>
-                        <div className="products-page-individual-item-price">${parseFloat(price).toFixed(2)}</div>
+                            }
+                            <Link to={`/products/${id}`} className="products-page-individual-item-link">{name}</Link>
+                            <div className="products-page-individual-item-price">${parseFloat(price).toFixed(2)}</div>
+                        </div>
+                    )
+                    })}
                     </div>
-                )
-                })}
                 </div>
             </div>
         </div>

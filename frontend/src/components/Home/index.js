@@ -23,7 +23,6 @@ function HomePage(){
                         Shop
                     </button>
                 </div>
-                {/* <img src="https://i.imgur.com/f0j4cuY.jpg" alt="homepage-impression" id="homepage-image" /> */}
             </div>
         </div>
     )

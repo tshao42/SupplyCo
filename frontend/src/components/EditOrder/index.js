@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { deleteOrder, editOrder, loadAllUserOrders, loadSingleOrder } from '../../store/order';
 import { loadAllProducts } from '../../store/product';
+import NotFound from '../NotFound';
+import "./editorder.css"
 
 function EditOrder(){
     const dispatch = useDispatch();
@@ -13,6 +15,7 @@ function EditOrder(){
 
     //useSelector for orderId
     const order = useSelector(state => state.orders)[orderId];
+    const currentUserId = useSelector(state => state.session.user?.id);
 
     //the useState
     const [errors, setErrors] = useState([]);
@@ -86,11 +89,10 @@ function EditOrder(){
         e.preventDefault();
         if (newQuantity.length > 0 && "0123456789".includes(newQuantity[0]))
             newQuantity = parseInt(newQuantity);
+        if(newQuantity<0) newQuantity=0;
         if ((newQuantity.length > 0 && !"0123456789".includes(newQuantity[0]))) {
             newQuantity= 1;
-            alert('Please only enter numbers!');
         }
-
         const prevState = quantityChanges;
         
         setQuantityChanges({ ...quantityChanges, [id]: {
@@ -116,11 +118,8 @@ function EditOrder(){
     //only accessible when the current user is the buyer
     //TODO: HANDLE UPDATE AMOUNT
     return (
-        loaded && order && 
-        <div>
-            {/* {console.dir(Orderitems)} */}
-            {/* {console.dir(quantityChanges)} */}
-
+        loaded && order && currentUserId===order?.userId
+        ?<div id="edit-order-container">
             <h1>Edit order</h1>
             <div>Order #{order.id}</div>
             <div>Items in your order</div>
@@ -132,14 +131,15 @@ function EditOrder(){
             <form onSubmit={handleSubmit}>
                 {
                     Object.values(order.Orderitems).map(({ id, productId }) => (
-                        <div key={id}>
-                            <div>
+                        <div key={id} id="order-edit-line-container">
+                            <Link to={`/products/${productId}`} id="item-link">
                                 {products[productId].name}
+                            </Link>
+                            <div id="price-now">
+                                ${parseFloat(products[productId].price).toFixed(2)}
                             </div>
-                            <div>
-                                $ {parseFloat(products[productId].price).toFixed(2)}
-                            </div>
-                            <input type="text" 
+                            <input type="number" 
+                            id="order-edit-number-field"
                                 value={quantityChanges[id]?.quantity}
                                 key={id}
                                 onChange = {e=>{
@@ -152,10 +152,13 @@ function EditOrder(){
                     )
                 }
                 {/* {console.dir(itemsInOrder)} */}
+                <div id="address-edit-container">
                 <div>Edit address</div>
                     <label>
-                        Address
+                        Address:
                         <input
+                            id="order-input-field-address-line"
+                            className="input-field-universal"
                             type="text"
                             name="addressLine1"
                             value={addressLine1}
@@ -163,8 +166,10 @@ function EditOrder(){
                         />
                     </label>
                     <label>
-                        Address (cont.)
+                        Address (cont.):
                         <input
+                            id="order-input-field-address-line-two"
+                            className="input-field-universal"
                             type="text"
                             name="addressLine2"
                             value={addressLine2}
@@ -172,16 +177,20 @@ function EditOrder(){
                         />
                     </label>
                     <label>
-                        City
+                        City:
                         <input
+                            className="input-field-universal"
+                            id="order-input-field-city"
                             type="text"
                             name="city"
                             value={city}
                             onChange={e => setCity(e.target.value)} />
                     </label>
                     <label>
-                        State
+                        State:
                         <select
+                            className="order-input-select-menu"
+                            id="order-input-select-menu-container"
                             onChange={e => setState(e.target.value)}
                             value={state}
                         >
@@ -192,19 +201,24 @@ function EditOrder(){
                         </select>
                     </label>
                     <label>
-                        Zip or Postal Code
+                        Zip Cide:
                         <input
+                            className="input-field-universal"
+                            id="order-input-field-zipcode"
                             type="text"
                             name="zipCode"
                             value={zipCode}
                             onChange={e => setZipCode(e.target.value)}
                         />
                     </label>
-                <button type="submit">Update order</button>
+                    </div>
+                <button className="order-edit-page-button" type="submit" id="order-edit-update">Update order</button>
             </form>
-            <button onClick={handleDelete}>Cancel order</button>
-            <div>Subtotal</div>
-            <div>$ {parseFloat(order.total).toFixed(2)}</div>
+            <button className="order-edit-page-button" onClick={handleDelete}>Cancel order</button>
+        </div>
+        :
+        <div>
+            <NotFound />
         </div>
     )
 }

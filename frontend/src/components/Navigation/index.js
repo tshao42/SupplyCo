@@ -16,6 +16,22 @@ function Navigation({ isLoaded }){
     dispatch(sessionActions.logout());
   };
 
+
+
+
+  const setDemo = (e) => {
+    e.preventDefault();
+
+    const payload={
+      credential: "Demo-lition", 
+      password: "password"
+    }
+    return dispatch(sessionActions.login(payload))
+      // .catch(async (res) => {
+      //   await res.json();
+      // });
+  }
+
   return (
     <ul id="nav-bar-holder">
       <div id="nav-bar-logo-holder">
@@ -39,13 +55,20 @@ function Navigation({ isLoaded }){
         <li>
           <Link exact to="/cart">Cart{`(${Object.values(cart).length-1})`}</Link>
         </li>
+        {isLoaded && sessionUser &&
         <li>
           <Link exact to="/myorders">My orders</Link>
         </li>
+        }
         {isLoaded && sessionUser &&
         <li>
           <div className="nav-top-right-adjust" id="log-out-nav" onClick={logout}>Log Out</div>
         </li>
+        }
+        {isLoaded && !sessionUser &&
+          <li>
+            <div className="nav-top-right-adjust"  id="try-demo" onClick={e => setDemo(e)}>Try Demo</div>
+          </li>
         }
         {isLoaded && !sessionUser && 
         <li>

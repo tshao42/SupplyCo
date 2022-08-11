@@ -10,10 +10,10 @@ function Footer(){
             <div>By Tianyi Shao</div>
             <div id="footer-icon-container">
                 <a href="https://github.com/tshao42/SupplyCo">
-                    <i class="devicon-github-original" id="footer-icon-github"></i>
+                    <i className="devicon-github-original" id="footer-icon-github"></i>
                 </a>
                 <a href="https://www.linkedin.com/in/tianyishao42/">
-                    <i class="devicon-linkedin-plain" id="footer-icon-linkedin"></i>
+                    <i className="devicon-linkedin-plain" id="footer-icon-linkedin"></i>
                 </a>
             </div>
         </div>

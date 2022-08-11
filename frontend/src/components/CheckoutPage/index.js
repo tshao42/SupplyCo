@@ -212,10 +212,8 @@ function CheckoutPage(){
                         <div id="cart-item-preview">
                             <CartItemModuleCore mainLoaded={mainLoaded} images={images}/>
                         </div>
-                        <div>Subtotal</div>
-                        <div>${parseFloat(cartItems.total).toFixed(2)}</div>
-                        <div>...</div>
-                        <button onClick={e=>handleSubmit(e)}>Submit Order</button>
+                        <div id="subtotal-display">Subtotal: ${parseFloat(cartItems.total).toFixed(2)}</div>
+                        <button id="checkout-submit-button" onClick={e=>handleSubmit(e)}>Submit Order</button>
                 </div>
                 :
                 <div>
