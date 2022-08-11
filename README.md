@@ -37,7 +37,7 @@ Live on Heroku: https://notionsupplyco.herokuapp.com/
   * if, in any case, there is any problem with the database, run `npx dotenv sequelize db:drop`, and repeat the steps above
   * run `npm start` to start the backend server, api routes are accessible via `http://localhost:5000/api`
 
-## Demo ☑️
+## Demo 
 Homepage
 <img width="1728" alt="Screen Shot 2022-08-11 at 10 50 16 AM" src="https://user-images.githubusercontent.com/75456670/184202687-0fb3d535-ff44-4bab-970f-453cd73feed0.png">
 Products Page
@@ -62,7 +62,7 @@ Write review
 Edit Review
 <img width="1728" alt="Screen Shot 2022-08-11 at 10 52 15 AM" src="https://user-images.githubusercontent.com/75456670/184204683-cbdcf648-9b41-4580-b4ec-bef8f09144d4.png">
 
-## Future features
+## Future features 📓
 * Named Collections
 * Seller-side Management
 * Achived/Cancelled Orders Pages
