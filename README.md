@@ -1,7 +1,7 @@
 # NotionSupplyCo. README
 NotionSupplyCo, a fullstack e-commerce application for a merchant dedicated to sales of instant cameras and related supplies. Users are able to view details for products, read, write, edit, and delete reviews for products, add items they wish cart, and complete orders on the site.
 
-## Live Link
+## Live Link 🔗
 Live on Heroku: https://notionsupplyco.herokuapp.com/
 ## Technologies
 ![68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6a6176617363726970742d2532333332333333302e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d6a617661736372697074266c6f676f436f6c6f723d253233463744463145](https://user-images.githubusercontent.com/75456670/184199939-c0888b78-1134-4944-b506-250dd9a17b0c.svg)
@@ -17,7 +17,7 @@ Live on Heroku: https://notionsupplyco.herokuapp.com/
 
 
 
-## Run on Local Machine
+## Run on Local Machine 💻
 1. Clone the project to your machine: `git clone https://github.com/tshao42/SupplyCo`
 2. There are two directories: `/frontend` and `/backend`
 * Open the terminal and `cd` into both `/frontend` and `/backend`
@@ -37,7 +37,7 @@ Live on Heroku: https://notionsupplyco.herokuapp.com/
   * if, in any case, there is any problem with the database, run `npx dotenv sequelize db:drop`, and repeat the steps above
   * run `npm start` to start the backend server, api routes are accessible via `http://localhost:5000/api`
 
-## Demo
+## Demo ☑️
 Homepage
 <img width="1728" alt="Screen Shot 2022-08-11 at 10 50 16 AM" src="https://user-images.githubusercontent.com/75456670/184202687-0fb3d535-ff44-4bab-970f-453cd73feed0.png">
 Products Page
@@ -47,6 +47,10 @@ Product Information Page
 <img width="1728" alt="Screen Shot 2022-08-11 at 10 50 41 AM" src="https://user-images.githubusercontent.com/75456670/184203136-09fde7e1-fe92-4fad-9f36-41759590d09e.png">
 Cart Page
 <img width="1728" alt="Screen Shot 2022-08-11 at 10 50 57 AM" src="https://user-images.githubusercontent.com/75456670/184203331-734b026d-8f36-4caa-b640-aaba7e6e2a93.png">
+Login Page
+<img width="1728" alt="Screen Shot 2022-08-11 at 11 00 09 AM" src="https://user-images.githubusercontent.com/75456670/184208005-1847fbfa-cee4-4a56-8483-684b39ff9617.png">
+Signup Page
+<img width="1728" alt="Screen Shot 2022-08-11 at 11 00 17 AM" src="https://user-images.githubusercontent.com/75456670/184208019-d912d3a6-b57f-43f3-8e4e-42d022b408a4.png">
 Checkout Page
 <img width="1728" alt="Screen Shot 2022-08-11 at 10 54 41 AM" src="https://user-images.githubusercontent.com/75456670/184203894-f28c2150-ec31-458b-826e-ff65dedc4a70.png">
 Edit Order Page
