@@ -73,7 +73,7 @@ function CheckoutPage(){
         let errors = [];
         //error criteria
         if (!firstName.length) errors.push("Please enter a valid first name! ");
-        if (!lastName.length) errors.push("Please enter a valid first name!");
+        if (!lastName.length) errors.push("Please enter a valid last name!");
         if (firstName.length + lastName.length > 46) errors.push("Name exceeding USPS limit; please shorten!");
         if (!addressLine1.length) errors.push("Please enter an address");
         if (!addressLine1.length && addressLine2.length) errors.push("Please enter Line 1 first!")
