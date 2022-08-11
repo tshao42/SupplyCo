@@ -1,0 +1,60 @@
+#nav-bar-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 1%;
+    margin-right: 6%;
+    padding-bottom: 1%;
+    margin-left: 6%;
+    font-size: 12pt;
+    max-height: 0.5%;
+    font-family: essonnes-display,serif;    
+}
+
+#nav-bar-logo-holder{
+    width: 20%;
+    margin-top: -3px;
+}
+#nav-bar-options{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 60%;
+    list-style: none;
+    text-decoration: none;
+}
+#nav-bar-top-right-account-options{
+    width: 20%;
+    list-style: none;
+    display: flex;
+    width: 20%;
+    justify-content: space-evenly; 
+}
+#nav-bar-logo{
+    width: 70%
+}
+#nav-bar-logo:hover{
+    cursor: pointer;
+}
+#log-out-nav {
+    text-decoration: none;
+    color: black;
+    font-family: futura-pt, sans-serif;
+}
+#log-out-nav:hover{
+    color: #8C8C8C;
+    cursor: pointer;
+}
+.nav-top-right-adjust{
+    margin-top:2px;
+}
+#try-demo{
+    text-decoration: none;
+    color: black;
+    font-family: futura-pt, sans-serif;
+}
+#try-demo:hover {
+    color: #8C8C8C;
+    cursor: pointer;
+}

@@ -9,7 +9,16 @@ import configureStore from './store';
 import * as sessionActions from './store/session';
 
 
-const store = configureStore();
+const cartState = localStorage.getItem('cartState')
+  ? JSON.parse(localStorage.getItem('cartState'))
+  : {total: 0}
+
+const store = configureStore({cart: cartState});
+store.subscribe(() => {
+  localStorage.setItem('cartState', JSON.stringify(store.getState().cart))
+})
+
+
 if (process.env.NODE_ENV !== 'production') {
   restoreCSRF();
 
@@ -34,7 +43,7 @@ function Root() {
   return (
     <ReduxProvider store={store}>
       <BrowserRouter>
-        <App />
+        <App/>
       </BrowserRouter>
     </ReduxProvider>
   );

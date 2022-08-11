@@ -1,4 +1,7 @@
 'use strict';
+
+const { sequelize } = require("../models");
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Orders', {
@@ -13,7 +16,23 @@ module.exports = {
         allowNull: false,
         references: {model: 'Users'}
       },
-      addressPlaceId: {
+      addressLine1: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      addressLine2: {
+        type: Sequelize.STRING,
+        allowNull: true
+      }, 
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      state: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      zipCode: {
         type: Sequelize.STRING,
         allowNull: false
       },

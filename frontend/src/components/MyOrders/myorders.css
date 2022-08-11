@@ -1,0 +1,34 @@
+#past-orders-container{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 3%;
+    font-family: futura-pt, sans-serif;
+    min-height: 70%;
+    line-height: 2.5;
+}
+
+#orders-container{
+    display: flex;
+    flex-direction: column-reverse;
+}
+.past-order-line{
+    display:flex;
+    flex-direction: row;
+}
+#past-order-number{
+    width: 10%;
+}
+#past-order-total{
+    width: 30%;
+}
+#past-order-date{
+    width: 40%;
+}
+#past-order-details{
+    width: 20%;
+    color: #565656;
+    text-align: right;
+}
+#past-order-details:hover{
+    color: darkgray;
+}

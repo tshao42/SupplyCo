@@ -1,0 +1,72 @@
+#edit-order-container{
+    margin-top: 5%;
+    margin-left: 8.5%;
+    font-family: futura-pt, sans-serif;
+    min-height: 70%;
+}
+#address-edit-container{
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+}
+#order-edit-line-container{
+    display: flex;
+    flex-direction: row;
+}
+#item-link{
+    width: 40%;
+}
+#price-now{
+    width: 10%;
+}
+#order-edit-number-field{
+    border: 1px darkgray solid;
+    text-align: center;
+    width: 5%;
+    font-family: futura-pt, sans-serif;
+    
+}
+#order-input-field-address-line{
+    margin-left: 60px;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+#order-input-field-address-line-two{
+    margin-left: 16px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+#order-input-field-city{
+    margin-top: 4px;
+    margin-left: 84px;
+    margin-bottom: 4px;
+}
+#order-input-select-menu-container{
+    margin-top: 4px;
+    margin-left: 77px;
+    border: 1px lightgray solid;
+    margin-right: 15px;
+    font-family: futura-pt, sans-serif;
+    margin-bottom: 4px;
+}
+#order-input-field-zipcode{
+    margin-left: 54px;
+    margin-top: 4px;
+}
+
+#order-edit-update{
+    margin-top: 30px;
+}
+.order-edit-page-button{
+    border: none;
+    color: lightgray;
+    background-color: #565656;
+    width: 100px;
+    height: 30px;
+    font-family: futura-pt, sans-serif;
+}
+.order-edit-page-button:hover {
+    color: #565656;
+    background-color: lightgray;
+    cursor: pointer;
+}

@@ -1,0 +1,46 @@
+#login-form-container{
+    text-align: center;
+    min-height: 60%;
+    margin-top: 10%;
+    font-family: futura-pt, sans-serif;
+    line-height: 2;
+    display: flex;
+    flex-direction: column;
+
+}
+#login-message{
+    font-size: 15pt;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.login-page-universal{
+    border: 1px darkgray solid;
+    font-family: futura-pt, sans-serif;
+    width: 10%;
+
+}
+#prompt-sign-up{
+    color: #565656;
+    font-style: italic;
+}
+#login-page-username{
+    margin-left: 10px;
+}
+#login-page-password{
+    margin-left: 57px;
+}
+#login-page-submit{
+    font-family: futura-pt, sans-serif;
+    border: none;
+    background-color: #565656;
+    color: lightgray;
+    margin-top: 30px;
+    width: 287px;
+    height: 30px;
+}
+#login-page-submit:hover {
+    background-color: lightgray;
+    color: #565656;
+    cursor: pointer;
+}

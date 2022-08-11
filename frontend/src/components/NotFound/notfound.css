@@ -1,0 +1,22 @@
+#not-found-banner{
+    min-height: 100%;
+    margin-top: 25px;
+    background-image: url("https://i.imgur.com/f5SsSon.jpg");
+    width: 100%;
+    background-size: cover;
+    font-family: futura-pt, sans-serif;
+    color: #ECE1DF;
+    text-align: center;
+    font-style: italic;
+}
+
+#not-found-text-msg{
+    padding-top: 10%;
+}
+#redirect-link{
+    color: #947465;
+}
+
+#redirect-link:hover {
+    color: #ece1df;
+}

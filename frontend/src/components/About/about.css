@@ -1,0 +1,27 @@
+.about-container{
+    min-height: 80%;
+    background-image: url("https://i.imgur.com/s3ideuO.jpg");
+    background-size: cover;
+    color: white;
+    padding-left: 25%;
+    padding-top: 10%;
+    line-height: 2;
+    font-family: futura-pt, sans-serif;
+    font-size: 13pt;
+}
+
+.about-container a{
+    color:lightgray;
+}
+
+.about-container a :hover{
+    color: white;
+}
+#italicized-part{
+    font-style: oblique;
+}
+#about-title{
+    font-size: 16pt;
+    font-weight: 700;
+    font-style: oblique;
+}

@@ -13,12 +13,15 @@ const e = require('express');
 //CREATE
 router.post('/', asyncHandler(async function (req, res) {
     const temp = await req.body;
-    // console.log(`line 15`)
     // console.dir(temp)
     //breaking down:
     const tempDetail = {
         userId: temp.userId,
-        addressPlaceId: temp.addressPlaceId,
+        addressLine1: temp.addressLine1,
+        addressLine2: temp.addressLine2,
+        city: temp.city,
+        state: temp.state,
+        zipCode: temp.zipCode,
         orderFor: temp.orderFor,
         total: temp.total
     }
@@ -66,10 +69,8 @@ router.get('/:orderId', asyncHandler(async function (req, res) {
     const orderId = req.params.orderId;
     //if empty, need to delete
     const emptyCheck = await db.Orderitem.findAll({ where: { orderId: orderId } });
-    // console.log(`line 136, ${emptyCheck}`)
     // if everything gets deleted from the order...
     if (emptyCheck.length == 0) {
-        // console.log('hit line 137')
         await db.Order.destroy({ where: { id: orderId } })
         return res.json('empty order...');
     }
@@ -119,7 +120,21 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
 
     //now proceeding with editing...
     //note: if quantity gets to zero, need to delete the listing
-    const tempContentArr = temp.Orderitems;
+    //TODO: CHECK THIS
+    const tempContentArr = Object.values(temp.Orderitems);
+    // await (()=>{for (const item in tempContentArr){
+    //     if (item.quantity === 0) {
+    //         db.Orderitem.destroy({
+    //             where: {
+    //                 id: item.id
+    //             }
+    //         })
+    //     } else {
+    //         const tempval = { quantity: item.quantity };
+    //         const tempcond = { where: { id: item.id } }
+    //         db.Orderitem.update(tempval, tempcond);
+    //     };
+    // }});
     await tempContentArr.forEach((item) => {
         if (item.quantity === 0) {
             db.Orderitem.destroy({
@@ -136,7 +151,11 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
 
     //edit order details
     const tempDetail = {
-        addressPlaceId: temp.addressPlaceId,
+        addressLine1: temp.addressLine1,
+        addressLine2: temp.addressLine2,
+        city: temp.city,
+        state: temp.state,
+        zipCode: temp.zipCode,
         orderFor: temp.orderFor,
         total: temp.total
     }
@@ -159,7 +178,6 @@ router.put('/:orderId', asyncHandler(async function (req, res) {
 
     //empty check?
     if (updatedOrder.length == 0) {
-        // console.log('hit line 137')
         await db.Order.destroy({ where: { id: orderId } })
         return res.json('empty order...');
     }

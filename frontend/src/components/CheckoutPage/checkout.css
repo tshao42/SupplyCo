@@ -1,0 +1,115 @@
+.checkout-summary-container{
+    margin-top: 3%;
+    min-height: 70%;
+    /* margin-left: 8.5%;
+    margin-right: 8.5%; */
+    display: flex;
+    flex-direction: column;
+    font-family: futura-pt, sans-serif;
+}
+
+#checkout-summary-container{
+    margin-left: 8.5%;
+    margin-right: 8.5%;
+    display: flex;
+    flex-direction: column;
+}
+#form-header{
+    font-size: 16pt;
+    margin-bottom: 3%;
+    font-weight: 700;
+    font-style: oblique;
+}
+
+
+#checkout-page-line-one{
+    width: 70%;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+#checkout-page-line-two{
+    width: 70%;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+#checkout-page-line-three{
+    width: 70%;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.input-field-universal{
+    border: 0.5px lightgray solid;
+    font-family: futura-pt, sans-serif;
+    margin-left: 7px;
+}
+
+#input-field-first-name{
+    width: 30%;
+    margin-right: 3.3%;
+}
+#input-field-last-name{
+    width: 30%;
+    margin-left: 3.5%;
+}
+#input-field-address-line-one{
+    width: 30%;
+    margin-right: 3.3%;
+    margin-left: 2.4%;
+}
+#input-field-address-line-two{
+    width: 30%;
+}
+#input-field-city{
+    width: 30%;
+    margin-left: 5%;
+    margin-right: 3.2%;
+}
+#input-field-zipcode{
+    margin-left: 1%;
+    width: 22.6%;
+}
+.input-select-menu{
+    font-family: futura-pt, sans-serif;
+}
+#input-select-menu-container{
+    margin-left: 10px;
+    border: 1px lightgray solid;
+    margin-right: 15px;
+}
+
+
+.input-field-universal:focus{
+    border: 1px darkgray solid;
+}
+#your-order {
+    margin-left: 8.5%;
+    font-size: 16pt;
+    margin-bottom: 3%;
+}
+#subtotal-display{
+    text-align: right;
+    margin-right: 16.5%;
+    text-decoration: underline;
+}
+
+#checkout-submit-button{
+        border: none;
+        background-color: #565656;
+        color: lightgray;
+        margin-top: 5%;
+        width: 100px;
+        height: 35px;
+        font-family: futura-pt, sans-serif;
+        font-size: 12pt;
+        float: right;
+        margin-right: 16.5%;
+        margin-bottom: 50px;
+}
+#checkout-submit-button:hover{
+        background-color: lightgray;
+        color: #565656;
+        cursor: pointer;
+}

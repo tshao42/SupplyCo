@@ -13,7 +13,16 @@ const e = require('express');
 router.post('/', asyncHandler(async function (req, res) {
     const tempReview = await db.Review.create(req.body);
     const completeReview = await tempReview.save();
-    return res.json(completeReview);
+    
+    const newId = completeReview.id;
+
+    const completeVer = await db.Review.findByPk(newId, {
+        include: {
+            model: db.User,
+            required: true
+        }
+    })
+    return res.json(completeVer);
 }
 ));
 //READ all reviews for a product
@@ -22,6 +31,10 @@ router.get('/products/:productId', asyncHandler(async function (req, res) {
     const reviews = await db.Review.findAll({
         where : {
             productId: productId
+        },
+        include: {
+            model: db.User,
+            required: true
         }
     });
     return res.json(reviews);
@@ -33,6 +46,10 @@ router.get('/users/:userId', asyncHandler(async function (req, res) {
     const reviews = await db.Review.findAll({
         where: {
             userId: userId
+        },
+        include: {
+            model: db.User,
+            required: true
         }
     });
     return res.json(reviews);
@@ -44,16 +61,23 @@ router.put('/:reviewId', asyncHandler(async function (req, res) {
     const reviewId = req.params.reviewId
     const review = await db.Review.findByPk(reviewId);
     await review.update(req.body);
-    const updatedReview = await db.Review.findByPk(reviewId);
+    const updatedReview = await db.Review.findByPk(reviewId,{
+        include: {
+            model: db.User,
+            required: true
+        }
+    });
     return res.json(updatedReview);
 }));
 //DELETE
 router.delete('/:reviewId', asyncHandler(async function (req, res) {
 const reviewId = req.params.reviewId;
+    const temp = await db.Review.findByPk(reviewId);
+    const userId = temp.userId;
     await db.Review.destroy({
         where: { id: reviewId },
     });
-    return res.json(reviewId);
+    return res.json(userId);
 }));
 
 module.exports = router;

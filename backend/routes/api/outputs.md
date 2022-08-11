@@ -7,7 +7,7 @@ GET /api/products
         "id": 1,
         "name": "Leica M10-R Rangefinder Camera (Black Chrome)",
         "price": "8995",
-        "info": "40MP Full-Frame CMOS Sensor \n Leica Maestro II Image Processor \n Optical 0.73x - Magnification Viewfinder \n 3.0\" 1.04m-Dot Touchscreen LCD",
+        "info": "40MP Full-Frame CMOS Sensor \nLeica Maestro II Image Processor \nOptical 0.73x - Magnification Viewfinder \n3.0\" 1.04m-Dot Touchscreen LCD",
         "createdAt": "2022-08-02T23:32:02.154Z",
         "updatedAt": "2022-08-02T23:32:02.154Z"
     },
@@ -15,7 +15,7 @@ GET /api/products
         "id": 2,
         "name": "Leica M10 Monochrom Rangefinder Camera",
         "price": "8995",
-        "info": "40MP Full-Frame CMOS Sensor \n Leica Maestro II Image Processor \n Optical 0.73x - Magnification Viewfinder \n 3.0\" 1.04m-Dot Touchscreen LCD \n ISO 100-50000, Up to 4.5-fps Shooting \n Long Exposure Times to 16 Min \n Stills- Only Operation \n Built - In Wi - Fi, for Use with FOTOS App \n Weather - Resistant Brass Construction",
+        "info": "40MP Full-Frame CMOS Sensor \nLeica Maestro II Image Processor \nOptical 0.73x - Magnification Viewfinder \n3.0\" 1.04m-Dot Touchscreen LCD \nISO 100-50000, Up to 4.5-fps Shooting \nLong Exposure Times to 16 Min \nStills- Only Operation \nBuilt - In Wi - Fi, for Use with FOTOS App \nWeather - Resistant Brass Construction",
         "createdAt": "2022-08-02T23:32:02.154Z",
         "updatedAt": "2022-08-02T23:32:02.154Z"
     }
@@ -27,7 +27,7 @@ GET /api/products/1
         "id": 1,
         "name": "Leica M10-R Rangefinder Camera (Black Chrome)",
         "price": "8995",
-        "info": "40MP Full-Frame CMOS Sensor \n Leica Maestro II Image Processor \n Optical 0.73x - Magnification Viewfinder \n 3.0\" 1.04m-Dot Touchscreen LCD",
+        "info": "40MP Full-Frame CMOS Sensor \nLeica Maestro II Image Processor \nOptical 0.73x - Magnification Viewfinder \n3.0\" 1.04m-Dot Touchscreen LCD",
         "createdAt": "2022-08-02T23:32:02.154Z",
         "updatedAt": "2022-08-02T23:32:02.154Z"
     }
@@ -38,7 +38,7 @@ GET /api/orders/1
         {
             "id": 1,
             "userId": 1,
-            "addressPlaceId": "ChIJPwi-Dpne3IARhY3NJXuK8g0",
+            "address": "1214 Synergy, Irvine, CA 92614",
             "orderFor": "Demo User",
             "total": "8995",
             "createdAt": "2022-08-02T23:56:45.265Z",
@@ -69,7 +69,7 @@ GET /api/orders/users/1
     {
         "id": 1,
         "userId": 1,
-        "addressPlaceId": "ChIJPwi-Dpne3IARhY3NJXuK8g0",
+        "address": "1214 Synergy, Irvine, CA 92614",
         "orderFor": "Demo User",
         "total": "8995",
         "createdAt": "2022-08-02T23:56:45.265Z",
@@ -100,7 +100,7 @@ POST /api/orders
 (sample request)
 {
     "userId": 2,
-    "addressPlaceId": "ChIJPwi-Dpne3IARhY3NJXuK8g0",
+    "address": "1214 Synergy, Irvine, CA 92614",
     "orderFor": "Demo User",
     "total": "8995",
     "Orderitems": [
@@ -120,7 +120,7 @@ TODO: figure out what needs to be returned
 
 PUT /api/orders/:orderId
 {
-    "addressPlaceId": "ChIJPwi-Dpne3IARhY3NJXuK8g1",
+    "address": "1100 Synergy, Irvine, CA 92614",
     "orderFor": "TSS",
     "total": "12000",
     "Orderitems": [
