@@ -62,3 +62,10 @@ Write review
 Edit Review
 <img width="1728" alt="Screen Shot 2022-08-11 at 10 52 15 AM" src="https://user-images.githubusercontent.com/75456670/184204683-cbdcf648-9b41-4580-b4ec-bef8f09144d4.png">
 
+## Future features
+* Named Collections
+* Seller-side Management
+* Achived/Cancelled Orders Pages
+* Review Image Upload
+* Multiple Images For Product Information
+* ... More to come.
