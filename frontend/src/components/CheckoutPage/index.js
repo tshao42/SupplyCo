@@ -72,9 +72,9 @@ function CheckoutPage(){
 
         let errors = [];
         //error criteria
-        if (!firstName.length) errors.push("Please enter a valid first name! ");
-        if (!lastName.length) errors.push("Please enter a valid last name!");
-        if (firstName.length + lastName.length > 46) errors.push("Name exceeding USPS limit; please shorten!");
+        if (!firstName.length) errors.push("Please enter a valid first name! (cannot be empty)");
+        if (!lastName.length) errors.push("Please enter a valid last name! (cannot be empty)");
+        if (firstName.length + lastName.length > 46) errors.push("Name is too long, please shorten(keep the sum of fist name and last name lengths under 46 characters please");
         if (!addressLine1.length) errors.push("Please enter an address");
         if (!addressLine1.length && addressLine2.length) errors.push("Please enter Line 1 first!")
         if (addressLine1.length > 46) errors.push("Address exceeding USPS limit; please shorten to less than 46 characters!");
