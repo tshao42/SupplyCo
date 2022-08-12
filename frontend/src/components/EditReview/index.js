@@ -28,14 +28,17 @@ const EditReview = ({userId, setEditReviewOpen}) => {
         }
 
         let errors = [];
+        if (title.length < 4) {
+            errors.push("Please enter a title with at least 4 characters!")
+        }
+        if (title.length > 70) {
+            errors.push("Please enter a title under 70 characters!")
+        }
         if (content.length < 10) {
             errors.push("Please enter at least 10 characters for review content!")
         }
-        if (content.length > 140){
-            errors.push("Please keep the review under 140 characters!")
-        }
-        if (title.length < 4) {
-            errors.push("Please enter a title with at least 4 characters!")
+        if (content.length > 300) {
+            errors.push("Please keep the review under 300 characters!")
         }
         if (rating < 1) {
             errors.push("Please provide a rating!");
@@ -96,7 +99,8 @@ const EditReview = ({userId, setEditReviewOpen}) => {
                 })}
             </div>
             <div id="required-message">* Required fields</div> 
-            <div id="required-message">* Please keep your review under 140 characters</div> 
+            <div id="required-message">* Please keep your review under 300 characters</div>
+            <div id="required-message">* Please keep your title under 70 characters</div>  
             <br />
             <button type="submit" id="write-review-submit">Submit</button>
         </form>

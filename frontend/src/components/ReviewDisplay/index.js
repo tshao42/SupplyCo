@@ -89,7 +89,7 @@ function ReviewDisplay({reviews}){
                                     {User.username} 
                                 </span>
                             </div>
-                            <div>
+                            <div id="content-container">
                               
                                 "...{content}...
                             </div>

@@ -60,4 +60,8 @@
 #review-title{
     font-weight: 700;
     font-style: oblique;
+    word-break:break-all;
+}
+#content-container{
+    word-break: break-all;
 }
