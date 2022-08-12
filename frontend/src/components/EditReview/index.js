@@ -96,6 +96,7 @@ const EditReview = ({userId, setEditReviewOpen}) => {
                 })}
             </div>
             <div id="required-message">* Required fields</div> 
+            <div id="required-message">* Please keep your review under 140 characters</div> 
             <br />
             <button type="submit" id="write-review-submit">Submit</button>
         </form>

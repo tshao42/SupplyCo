@@ -91,6 +91,7 @@ const WriteReview = ( {productId, currentUserId, setWriteReviewOpen}) => {
                 })}
             </div>
             <div id="required-message">* Required fields</div> 
+            <div id="required-message">* Please keep your review under 140 characters</div> 
             <br/>
             </label>
             <button type="submit" id="write-review-submit">Submit Review</button>
