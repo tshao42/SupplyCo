@@ -9,7 +9,6 @@ const EditReview = ({userId, setEditReviewOpen}) => {
     const review = useSelector(state=>state.reviews)[userId];
     const reviewId = review.id;
 
-
     const { productId } = useParams();
 
     const dispatch = useDispatch();
@@ -31,6 +30,9 @@ const EditReview = ({userId, setEditReviewOpen}) => {
         let errors = [];
         if (content.length < 10) {
             errors.push("Please enter at least 10 characters for review content!")
+        }
+        if (content.length > 140){
+            errors.push("Please keep the review under 140 characters!")
         }
         if (title.length < 4) {
             errors.push("Please enter a title with at least 4 characters!")

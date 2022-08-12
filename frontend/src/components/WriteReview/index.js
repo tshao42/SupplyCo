@@ -35,6 +35,9 @@ const WriteReview = ( {productId, currentUserId, setWriteReviewOpen}) => {
         if (rating < 1) {
             errors.push("Please provide a rating!");
         }
+        if (content.length > 140) {
+            errors.push("Please keep the review under 140 characters!")
+        }
         setErrors(errors);
 
 
