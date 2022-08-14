@@ -21,6 +21,10 @@ function OrderStatusPage(){
     const currentUserId = useSelector(state => state.session.user?.id)
 
     const products = useSelector(state=>state.products)
+    const entireAddress = function (address1, address2){
+        if (address2) return `${address1}, ${address2}`
+
+    }
     useEffect(()=>{
         async function hydrate(){
             await dispatch(loadSingleOrder(orderIdInt))
@@ -45,6 +49,11 @@ function OrderStatusPage(){
                 ?<div>
                     <h1>Order detail</h1>
                     <div>Order #{order.id}</div>
+                    <div>Shipping Information:</div>
+                    <div>{`${order.orderFor}`}</div>
+                    <div>{`${order.addressLine1}`}</div>
+                    <div>{`${order?.addressLine2}`}</div>
+                    <div>{`${order.city}, ${order.state} ${order.zipCode}`}</div>
                     <div id="order-detail-title">Items in your order:</div>
                     <div id="items-container">
                         {
