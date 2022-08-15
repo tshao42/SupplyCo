@@ -78,6 +78,7 @@ function CheckoutPage(){
         if (!addressLine1.length) errors.push("Please enter an address");
         if (!addressLine1.length && addressLine2.length) errors.push("Please enter Line 1 first!")
         if (addressLine1.length > 46) errors.push("Address exceeding USPS limit; please shorten to less than 46 characters!");
+        if (addressLine2.length > 46) errors.push("Address exceeding USPS limit; please shorten to less than 46 characters!");
         if (!/^\d+$/.test(zipCode) || zipCode.length !== 5) errors.push("Please enter a valid five-digit zipcode!");
         if (!city.length) errors.push("Please enter a valid city!")
         if (city.length > 20) errors.push("City name is too long; please shorten it to less than 20 characters");
