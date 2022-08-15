@@ -65,7 +65,7 @@ Edit Review
 ## Future features 📓
 * Named Collections
 * Seller-side Management
-* Achived/Cancelled Orders Pages
+* Archived/Cancelled Orders Pages
 * Review Image Upload
 * Multiple Images For Product Information
 * ... More to come.
