@@ -15,6 +15,13 @@ module.exports = {
       title: 'Very great camera, not having reason to not love',
       content: 'Instant cameras are here for a reason and I am seeing very great balance for a machine under $200. Would recommend.',
       rating: 5
+    },
+    {
+      productId: 1,
+      userId: 3,
+      title: 'Love it!',
+      content: 'This is a camera with slight compromises--but it does the job, and I will be giving it proper credit for the pics it has been taking. Great trip companion.',
+      rating: 4
     }], {});
 },
 
