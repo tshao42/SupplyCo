@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
         references: {model: 'Collections'}
       },
-      itemId: {
+      productId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {model: 'Products'}

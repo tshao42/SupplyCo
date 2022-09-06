@@ -4,15 +4,15 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Collectionitems', [{
       collectionId: 1,
-      itemId: 5
+      productId: 5
     },
     {
       collectionId: 1,
-      itemId: 10
+      productId: 10
     },
     {
       collectionId: 2,
-      itemId: 1
+      productId: 1
     }], {})
   },
 

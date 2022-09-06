@@ -46,6 +46,7 @@ const ordersRouter = require('./orders.js')
 const reviewsRouter = require('./reviews.js')
 const mapsRouter = require('./maps.js')
 const productimagesRouter = require('./productimages')
+const collectionRouter = require('./collections.js')
 
 router.use('/session', sessionRouter);
 
@@ -60,6 +61,8 @@ router.use('/reviews', reviewsRouter );
 router.use('/map', mapsRouter)
 
 router.use('/productimages', productimagesRouter )
+
+router.use('/collections', collectionRouter)
 
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
