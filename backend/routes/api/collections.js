@@ -108,10 +108,17 @@ router.post('/items', asyncHandler(async function (req, res){
         }
     };
 
-    console.trace('now posting item')
-    const resultObj = await db.Collectionitem.findOrCreate(selector);
-
-    return res.json(resultObj);
+    // console.trace('now posting item')
+    await db.Collectionitem.findOrCreate(selector);
+    const editedObj = await db.Collection.findByPk(
+        temp.collectionId,
+        {
+            include:{
+            model: db.Collectionitem,
+            required: true
+            }
+        });
+    return res.json(editedObj);
 }))
 
 router.delete('/items/:collectionId/:productId', asyncHandler(async function (req, res) {
@@ -124,7 +131,17 @@ router.delete('/items/:collectionId/:productId', asyncHandler(async function (re
         }
     })
 
-    return res.json({productId, collectionId});
+    const updatedCollection = await db.Collection.findAll({
+        where: {
+            id: collectionId
+        },
+        include: {
+            model: db.Collectionitem,
+            required: true
+        }
+    })
+
+    return res.json(updatedCollection);
 }))
 
 module.exports = router;
