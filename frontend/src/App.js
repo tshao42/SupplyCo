@@ -23,6 +23,7 @@ import Footer from "./components/Footer"
 import { loadAllUserOrders } from "./store/order";
 import NotFound from "./components/NotFound";
 import CollectionInfo from "./components/CollectionInfo";
+import MyCollections from "./components/MyCollections";
 
 function App() {
   const dispatch = useDispatch();
@@ -83,6 +84,9 @@ function App() {
           </Route>
           <Route exact path='/about'>
             <About />
+          </Route>
+          <Route exact path='/mycollections'>
+            <MyCollections />
           </Route>
           <Route exact path='/mycollections/:collectionId'>
             <CollectionInfo />

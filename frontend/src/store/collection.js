@@ -58,7 +58,7 @@ export const loadOneCollection = (collectionId) => async dispatch => {
 }
 
 export const loadAllCollections = (userId) => async dispatch => {
-    const response = await csrfFetch(`/api/users/${userId}`);
+    const response = await csrfFetch(`/api/collections/users/${userId}`);
     if (response.ok) {
         const collections = await response.json();
         dispatch (load_all_collections(collections));
@@ -138,28 +138,31 @@ const collectionReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SINGLE_COLLECTION:
             const loadSingleCollectionTemp = {};
-            console.table(action.collection[0])
+            // console.table(action.collection[0])
             const { Collectionitems, ...collectionProperty } = action.collection[0];
-            console.table(Collectionitems);
-            console.table(collectionProperty);
+            // console.table(Collectionitems);
+            // console.table(collectionProperty);
             loadSingleCollectionTemp[action.collectionId] = collectionProperty;
             loadSingleCollectionTemp[action.collectionId].Collectionitems = {};
             Collectionitems?.forEach(
                 item => {
-                    loadSingleCollectionTemp[action.collectionId].Collectionitems[item.id] = item;
+                    loadSingleCollectionTemp[action.collectionId].Collectionitems[item.productId] = item;
                 }
             )
             return loadSingleCollectionTemp;
         case LOAD_ALL_USER_COLLECTIONS:
             const loadAllUsercollectionsTemp = {};
+            // console.table(action.collections);
             action.collections?.forEach(
                 collection =>{
                     const {Collectionitems, ...collectionProperty} = collection;
-                    loadAllUsercollectionsTemp[collection.id] = collection;
-                    loadAllUsercollectionsTemp[collection.id].Collectionitems = Collectionitems;
+                    // console.table(Collectionitems);
+                    loadAllUsercollectionsTemp[collection.id] = collectionProperty;
+                    loadAllUsercollectionsTemp[collection.id].Collectionitems = {};
                     Collectionitems?.forEach(
                         item => {
-                            loadAllUsercollectionsTemp[collection.id].Collectionitems[item.id] = item;
+                            // console.table(item);
+                            loadAllUsercollectionsTemp[collection.id].Collectionitems[item.productId] = item;
                         }
                     )
                 }
