@@ -7,6 +7,7 @@ import './index.css';
 import App from './App';
 import configureStore from './store';
 import * as sessionActions from './store/session';
+import { ModalProvider } from './context/Modal';
 
 
 const cartState = localStorage.getItem('cartState')
@@ -42,9 +43,11 @@ if (process.env.NODE_ENV !== "production") {
 function Root() {
   return (
     <ReduxProvider store={store}>
-      <BrowserRouter>
-        <App/>
-      </BrowserRouter>
+      <ModalProvider>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
+      </ModalProvider>
     </ReduxProvider>
   );
 }

@@ -47,7 +47,7 @@ router.get('/users/:userId', asyncHandler(async function(req,res){
         },
         include:{
             model: db.Collectionitem,
-            required: true
+            required: false
         }
     });
     return res.json(collection);
@@ -61,10 +61,9 @@ router.post('/', asyncHandler(async function(req,res) {
         collectionName: temp.collectionName
     }
 
-    const detailObj = await db.Collection.build(tempDetail);
-    const newObj = await detailObj.save();
+    const detailObj = await db.Collection.create(tempDetail);
 
-    return res.json(newObj);
+    return res.json(detailObj);
 }))
 
 

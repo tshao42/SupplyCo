@@ -62,6 +62,11 @@ function Navigation({ isLoaded }){
         }
         {isLoaded && sessionUser &&
         <li>
+          <Link exact to="/mycollections">My Collections</Link>
+        </li>
+        }
+        {isLoaded && sessionUser &&
+        <li>
           <div className="nav-top-right-adjust" id="log-out-nav" onClick={logout}>Log Out</div>
         </li>
         }

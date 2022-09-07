@@ -76,6 +76,7 @@ export const createNewCollection = (payload) => async dispatch => {
     });
 
     if (response.ok){
+        console.log('hit line 79')
         const newCollection = await response.json();
         dispatch(create_new_collection(newCollection));
     }
@@ -157,6 +158,7 @@ const collectionReducer = (state = initialState, action) => {
                 collection =>{
                     const {Collectionitems, ...collectionProperty} = collection;
                     // console.table(Collectionitems);
+                    console.log(collection.id);
                     loadAllUsercollectionsTemp[collection.id] = collectionProperty;
                     loadAllUsercollectionsTemp[collection.id].Collectionitems = {};
                     Collectionitems?.forEach(
