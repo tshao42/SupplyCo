@@ -8,7 +8,7 @@ function CollectionModal() {
   return (
     <>
       <button onClick={() => setShowModal(true)}>Create New Collection +</button>
-      {console.log(`hit line 10`)}
+      {/* {console.log(`hit line 10`)} */}
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
             <CreationForm setShowModal={setShowModal}/>

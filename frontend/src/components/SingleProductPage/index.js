@@ -7,6 +7,7 @@ import { loadSingleProductImages } from '../../store/productimage';
 import { loadAllReviewsForProduct } from '../../store/review';
 import NotFound from '../NotFound';
 import ReviewDisplay from '../ReviewDisplay';
+import AddToCollectionModal from './AddToCollectionModal';
 import "./singleproductpage.css"
 
 
@@ -41,6 +42,10 @@ function SingleProductPage(){
         .then(()=>setIsInCart(true));
     }
 
+    const addToCollection = async e => {
+        e.preventDefault();
+
+    }
     return(
         loaded
         ?<div>
@@ -67,6 +72,10 @@ function SingleProductPage(){
                         {isInCart &&
                                 <button className="single-product-information-cart-button">In Cart</button>
                         }
+                        <div>
+                            {/* <button onClick={addToCollection}>Add to collection</button> */}
+                            <AddToCollectionModal />
+                        </div>
                     </div>
                 </div>
                 <div id="single-product-page-review-container">

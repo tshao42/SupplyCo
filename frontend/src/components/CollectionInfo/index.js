@@ -10,7 +10,7 @@ function CollectionInfo(){
     const { collectionId } = useParams();
     
     const [loaded, setLoaded] = useState(false);
-    const collection = useSelector(state => state?.collections)
+    const collection = useSelector(state => state?.collections)[collectionId]
     const collectionItems = useSelector(state => state?.collections)[collectionId]?.Collectionitems;
 
     const products = useSelector (state =>state?.products);
@@ -31,7 +31,7 @@ function CollectionInfo(){
         loaded&&
         <>
         {/* {console.trace(`collectionInfo`)} */}
-            <h1>CollectionInfo! for #{collectionId} </h1>
+            <h1>{collection.collectionName} </h1>
             {Object.values(collectionItems).map(({productId})=>{
             return(
                 <>
