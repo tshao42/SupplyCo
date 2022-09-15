@@ -26,6 +26,7 @@ function SingleProductPage(){
 
     const currentUserId = useSelector (state => state.session.user?.id);
 
+
     const [showAddToCollectionStatus, setShowAddToCollectionStatus] = useState(false);
     const [showAddToCollectionButton, setShowAddToCollectionButton] = useState(true);
 
@@ -57,8 +58,8 @@ function SingleProductPage(){
                 <Link to='/products' id="single-product-navigate-back">{"< "}Back to products</Link>
                 <div id="single-product-middle-container">
                     <div id="single-product-image-container">
-                        {Object.values(images).map(({siteUrl})=>{
-                            return <img src={siteUrl} className="single-product-page-picture"/>
+                        {Object.values(images).map(({siteUrl,id})=>{
+                            return <img key={id} src={siteUrl} className="single-product-page-picture"/>
                         })}
                     </div>
                     <div id="single-product-information-container">
@@ -83,8 +84,8 @@ function SingleProductPage(){
                                 }
                                 {showAddToCollectionStatus &&
                                     <AddProductToCollection 
-                                    setShowAddToCollectionStatus={setShowAddToCollectionStatus}
-                                    setShowAddToCollectionButton={setShowAddToCollectionButton}
+                                        setShowAddToCollectionStatus={setShowAddToCollectionStatus}
+                                        setShowAddToCollectionButton={setShowAddToCollectionButton}
                                     />
                                 }
                             </div>
