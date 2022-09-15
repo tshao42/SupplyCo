@@ -24,8 +24,10 @@ function SingleProductPage(){
     const [loaded, setLoaded] = useState(false);
     const [isInCart, setIsInCart] = useState(cart);
 
-    const [showAddToCollectionStatus, setShowAddToCollectionStatus] = useState(false);
+    const currentUserId = useSelector (state => state.session.user?.id);
 
+    const [showAddToCollectionStatus, setShowAddToCollectionStatus] = useState(false);
+    const [showAddToCollectionButton, setShowAddToCollectionButton] = useState(true);
 
     useEffect(()=>{
         async function hydrate(){
@@ -46,6 +48,7 @@ function SingleProductPage(){
     const collapseCollection = async e => {
         e.preventDefault();
         setShowAddToCollectionStatus(true);
+        setShowAddToCollectionButton(false);
     }
     return(
         loaded
@@ -73,12 +76,19 @@ function SingleProductPage(){
                         {isInCart &&
                                 <button className="single-product-information-cart-button">In Cart</button>
                         }
-                        <div>
-                            <button onClick={collapseCollection}>Add to collection</button>
-                            {showAddToCollectionStatus &&
-                                <AddProductToCollection />
-                            }
-                        </div>
+                        {currentUserId &&
+                            <div>
+                                {showAddToCollectionButton &&
+                                    <button onClick={collapseCollection}>Add to collection</button>
+                                }
+                                {showAddToCollectionStatus &&
+                                    <AddProductToCollection 
+                                    setShowAddToCollectionStatus={setShowAddToCollectionStatus}
+                                    setShowAddToCollectionButton={setShowAddToCollectionButton}
+                                    />
+                                }
+                            </div>
+                        }
                     </div>
                 </div>
                 <div id="single-product-page-review-container">

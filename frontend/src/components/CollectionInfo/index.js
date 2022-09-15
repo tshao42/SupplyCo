@@ -15,7 +15,7 @@ function CollectionInfo(){
 
     const products = useSelector (state =>state?.products);
 
-    console.table(collectionItems);
+    // console.table(collectionItems);
     const dispatch = useDispatch();
 
     useEffect(()=>{

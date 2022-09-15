@@ -158,7 +158,7 @@ const collectionReducer = (state = initialState, action) => {
                 collection =>{
                     const {Collectionitems, ...collectionProperty} = collection;
                     // console.table(Collectionitems);
-                    console.log(collection.id);
+                    // console.log(collection.id);
                     loadAllUsercollectionsTemp[collection.id] = collectionProperty;
                     loadAllUsercollectionsTemp[collection.id].Collectionitems = {};
                     Collectionitems?.forEach(
