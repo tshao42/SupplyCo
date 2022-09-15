@@ -7,7 +7,7 @@ import { loadSingleProductImages } from '../../store/productimage';
 import { loadAllReviewsForProduct } from '../../store/review';
 import NotFound from '../NotFound';
 import ReviewDisplay from '../ReviewDisplay';
-import AddToCollectionModal from './AddToCollectionModal';
+import AddProductToCollection from './AddProductToCollection';
 import "./singleproductpage.css"
 
 
@@ -24,6 +24,7 @@ function SingleProductPage(){
     const [loaded, setLoaded] = useState(false);
     const [isInCart, setIsInCart] = useState(cart);
 
+    const [showAddToCollectionStatus, setShowAddToCollectionStatus] = useState(false);
 
 
     useEffect(()=>{
@@ -42,9 +43,9 @@ function SingleProductPage(){
         .then(()=>setIsInCart(true));
     }
 
-    const addToCollection = async e => {
+    const collapseCollection = async e => {
         e.preventDefault();
-
+        setShowAddToCollectionStatus(true);
     }
     return(
         loaded
@@ -73,8 +74,10 @@ function SingleProductPage(){
                                 <button className="single-product-information-cart-button">In Cart</button>
                         }
                         <div>
-                            {/* <button onClick={addToCollection}>Add to collection</button> */}
-                            <AddToCollectionModal />
+                            <button onClick={collapseCollection}>Add to collection</button>
+                            {showAddToCollectionStatus &&
+                                <AddProductToCollection />
+                            }
                         </div>
                     </div>
                 </div>
