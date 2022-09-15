@@ -48,15 +48,17 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
                     <option value={0}>Add To Existing Collection</option>
                     {Object.values(collections).map(({id, collectionName})=>{
                         {console.log(collections[id])}
+                        //this is for collections that it has been in
                         if (collections[id].Collectionitems[productId]){
                         return(
                             <option 
                                 value={id}
                                 disabled
                             >
-                                {collectionName}
+                                {collectionName} (Added)
                             </option>
                         )
+                        //otherwise there would be options that are not disabled
                         } else{
                             return(
                                 <option 
