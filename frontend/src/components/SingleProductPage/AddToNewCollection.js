@@ -34,11 +34,14 @@ function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionP
 
         if (!errors.length){
             await dispatch(createNewCollection(collectionPayload))
-            // .then(()=>{
-            //     console.log('hitting line 38')
-            //     const collectionId = Object.values(collections)[-1]?.id;
-            //     dispatch(addItemToCollection(collectionId, parseInt(productId)))
-            // });
+            .then(()=>{
+                console.log('hitting line 38')
+                const collectionId = Object.values(collections).at(-1)?.id;
+                console.table(Object.values(collections).at(-1));
+                console.log(`line 40 ${collectionId}`);
+                console.log(`line 42 ${parseInt(productId)}`);
+                dispatch(addItemToCollection(collectionId, parseInt(productId)))
+            });
         }
 
     }
