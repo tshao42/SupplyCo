@@ -13,6 +13,7 @@ function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionP
     const currentUserId = useSelector(state=>state.session.user?.id);
     const [newCollectionName, setNewCollectionName] = useState("");
     const collections = useSelector (state => state?.collections);
+    const product= useSelector(state=>state.products[parseInt(productId)])
 
     const cancelNewCollectionOptions = async e => {
         e.preventDefault();
@@ -27,21 +28,18 @@ function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionP
             userId : currentUserId
         }
 
-        console.log('hitting line 30')
+        // console.log('hitting line 30')
         let errors = [];
         if (!newCollectionName) errors.push ("Please Name Your Collection!");
         if (newCollectionName.length > 30) errors.push ("Please Name It Under 30 Characters!") 
 
         if (!errors.length){
-            await dispatch(createNewCollection(collectionPayload))
-            .then(()=>{
-                console.log('hitting line 38')
-                const collectionId = Object.values(collections).at(-1)?.id;
-                console.table(Object.values(collections).at(-1));
-                console.log(`line 40 ${collectionId}`);
-                console.log(`line 42 ${parseInt(productId)}`);
-                dispatch(addItemToCollection(collectionId, parseInt(productId)))
-            });
+            dispatch(createNewCollection(collectionPayload))
+            const latestCollection = Math.max.apply(null,Object.keys(collections));
+            console.table(product);
+            dispatch(addItemToCollection(collections[latestCollection].id+1, product))
+            setAddToNewCollectionButton(false);
+            setAddToNewCollectionPrompt(true);
         }
 
     }

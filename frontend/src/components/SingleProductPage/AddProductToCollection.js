@@ -17,6 +17,9 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
 
     const [collectionId, setCollectionId] = useState(0);
 
+    const product= useSelector(state=>state.products[parseInt(productId)])
+
+
     const [ addToNewCollectionButton, setAddToNewCollectionButton] = useState(false);
     const [ addToNewCollectionPrompt, setAddToNewCollectionPrompt] = useState(true);
 
@@ -39,7 +42,8 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
         console.table(collectionId, parseInt(productId));
 
         if (collectionId===0) errors.push("Please select a collection");
-        dispatch(addItemToCollection(collectionId, parseInt(productId) ));
+        console.table(product);
+        dispatch(addItemToCollection(collectionId, product));
         setShowAddToCollectionButton(true);
         setShowAddToCollectionStatus(false);
     }
