@@ -98,14 +98,17 @@ router.put('/:collectionId', asyncHandler(async function(req, res){
 
 router.post('/items', asyncHandler(async function (req, res){
     const temp = await req.body;
+    console.log("line 101 from collection.js")
     console.table(temp);
 
     const selector = {
         where: {
-            productId: temp.productId, 
+            productId: temp.product.id, 
             collectionId: temp.collectionId
         }
     };
+
+    console.table(selector);
 
     // console.trace('now posting item')
     await db.Collectionitem.findOrCreate(selector);

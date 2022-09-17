@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addItemToCollection, createNewCollection } from '../../store/collection';
+import { addItemToCollection, createNewCollection, loadAllCollections } from '../../store/collection';
 
 
 
@@ -34,12 +34,17 @@ function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionP
         if (newCollectionName.length > 30) errors.push ("Please Name It Under 30 Characters!") 
 
         if (!errors.length){
-            dispatch(createNewCollection(collectionPayload))
-            const latestCollection = Math.max.apply(null,Object.keys(collections));
-            console.table(product);
-            dispatch(addItemToCollection(collections[latestCollection].id+1, product))
-            setAddToNewCollectionButton(false);
-            setAddToNewCollectionPrompt(true);
+            await dispatch(createNewCollection(collectionPayload))
+            .then(()=>{
+                const latestCollection = Math.max.apply(null,Object.keys(collections));
+                console.table(collections[latestCollection].id+1);
+                console.table(product);
+                dispatch(addItemToCollection(collections[latestCollection].id+1, product))
+            })
+            .then(()=>{
+                setAddToNewCollectionButton(false);
+                setAddToNewCollectionPrompt(true);
+            });
         }
 
     }

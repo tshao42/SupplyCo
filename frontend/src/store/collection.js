@@ -108,18 +108,21 @@ export const deleteExistingCollection = (collectionId) => async dispatch =>{
     }
 }
 
-export const addItemToCollection = (collectionId, productId) => async dispatch=> {
+export const addItemToCollection = (collectionId, product) => async dispatch=> {
+    console.table(JSON.stringify({collectionId, product}))
+
     const response = await csrfFetch(`/api/collections/items`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({collectionId, productId})
+        body: JSON.stringify({collectionId, product})
     });
+
 
     if (response.ok) {
         const newItemCollection = await response.json();
-        dispatch (add_product_to_collection(collectionId, productId));
+        dispatch (add_product_to_collection(collectionId, product));
     }
 }
 
@@ -158,7 +161,7 @@ const collectionReducer = (state = initialState, action) => {
                 collection =>{
                     const {Collectionitems, ...collectionProperty} = collection;
                     // console.table(Collectionitems);
-                    console.log(collection.id);
+                    // console.log(collection.id);
                     loadAllUsercollectionsTemp[collection.id] = collectionProperty;
                     loadAllUsercollectionsTemp[collection.id].Collectionitems = {};
                     Collectionitems?.forEach(
@@ -182,7 +185,7 @@ const collectionReducer = (state = initialState, action) => {
             return editTemp;
         case ADD_PRODUCT_TO_COLLECTION:
             const addProductTemp = { ...state };
-            addProductTemp[action.collectionId].Collectionitems[action.product.id] = action.product;
+            addProductTemp[action.collectionId].Collectionitems[action?.product.id] = action?.product;
             return addProductTemp;
         case REMOVE_PRODUCT_FROM_COLLECTION:
             const removeProductTemp = {...state};

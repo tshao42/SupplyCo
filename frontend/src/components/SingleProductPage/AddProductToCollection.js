@@ -42,7 +42,8 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
         console.table(collectionId, parseInt(productId));
 
         if (collectionId===0) errors.push("Please select a collection");
-        console.table(product);
+        console.table((collectionId));
+        console.table(product);        
         dispatch(addItemToCollection(collectionId, product));
         setShowAddToCollectionButton(true);
         setShowAddToCollectionStatus(false);
