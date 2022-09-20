@@ -9,6 +9,7 @@ import NotFound from '../NotFound';
 import ReviewDisplay from '../ReviewDisplay';
 import AddProductToCollection from './AddProductToCollection';
 import "./singleproductpage.css"
+import "./addToCollection.css"
 
 
 function SingleProductPage(){
@@ -80,7 +81,7 @@ function SingleProductPage(){
                         {currentUserId &&
                             <div>
                                 {showAddToCollectionButton &&
-                                    <button onClick={collapseCollection}>Add to collection</button>
+                                    <div id="add-to-collection-option" onClick={collapseCollection}><i class="fa-regular fa-heart"></i>{`   Add to collection`}</div>
                                 }
                                 {showAddToCollectionStatus &&
                                     <AddProductToCollection 

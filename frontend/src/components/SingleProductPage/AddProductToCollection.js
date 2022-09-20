@@ -22,6 +22,7 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
 
     const [ addToNewCollectionButton, setAddToNewCollectionButton] = useState(false);
     const [ addToNewCollectionPrompt, setAddToNewCollectionPrompt] = useState(true);
+    const [ addToExistingCollectionPrompt, setAddToExistingCollectionPrompt] = useState(true);
 
     const [ addToExistingCollectionOptions, setAddToExistingCollectionOptions] = useState(false);
     
@@ -59,15 +60,19 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
         loaded &&
         <>
         {/* {console.log('hitting AddProductToCollection Line7')} */}
-            {Object.values(collections).length!==0 &&
+            {Object.values(collections).length!==0 && 
             <div>
+                {addToExistingCollectionPrompt &&
                 <button
                 onClick={e=>{
                     e.preventDefault();
                     setAddToExistingCollectionOptions(true);
-                }}>
-                    Add To Existing Collection
+                    setAddToExistingCollectionPrompt(false);
+                }}
+                id="add-to-existing-collection">
+                    <i class="fa-solid fa-folder"></i> {`   Add To Existing Collection`}
                 </button>
+                }       
             {addToExistingCollectionOptions &&
             <form>
                 <select name="collections"
@@ -116,7 +121,7 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
             }
             <div>
                 { addToNewCollectionPrompt &&
-                    <button onClick={expandAddToNewCollection}>Add To New Collection</button>
+                    <button id="add-to-new-collection" onClick={expandAddToNewCollection}><i class="fa-solid fa-folder-plus"></i>{`   Add To New Collection`}</button>
                 }
                 {
                     addToNewCollectionButton && 

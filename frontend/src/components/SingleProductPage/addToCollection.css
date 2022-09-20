@@ -1,0 +1,44 @@
+#add-to-collection-option{
+    color: #565656;
+    text-align: center;
+}
+
+#add-to-collection-option:hover{
+    color: darkgray;
+    cursor: pointer;
+}
+
+#add-to-existing-collection{
+    border: none;
+    background-color: #565656;
+    margin-top:15px;
+    color: white;
+    width: 45%;
+    font-size: 11pt;
+    height:30px;
+    font-family: futura-pt, sans-serif;
+}
+
+
+#add-to-existing-collection:hover{
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+
+#add-to-new-collection{
+    border: none;
+    background-color: #565656;
+    margin-top:15px;
+    color: white;
+    width: 45%;
+    font-size: 11pt;
+    height:30px;
+    font-family: futura-pt, sans-serif;
+}
+
+
+#add-to-new-collection:hover{
+    background-color: darkgray;
+    cursor: pointer;
+}
