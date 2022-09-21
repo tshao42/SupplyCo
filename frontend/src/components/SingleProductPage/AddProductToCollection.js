@@ -16,6 +16,7 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
     const currentUserId = useSelector (state => state.session.user?.id);
 
     const [collectionId, setCollectionId] = useState(0);
+    const [errors, setErrors] = useState([])
 
     const product= useSelector(state=>state.products[parseInt(productId)])
 
@@ -39,15 +40,21 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
     const handleSubmit = async e => {
         e.preventDefault();
         //actions pertaining to submission of collection
-        let errors = [];
         console.table(collectionId, parseInt(productId));
 
-        if (collectionId===0) errors.push("Please select a collection");
-        console.table((collectionId));
-        console.table(product);        
-        dispatch(addItemToCollection(collectionId, product));
-        setShowAddToCollectionButton(true);
-        setShowAddToCollectionStatus(false);
+        if (collectionId===0){
+            setErrors(["Please select a collection"])
+        }else{
+            setErrors([]);
+        }
+        // console.table((collectionId));
+        // console.table(product);      
+        if(collectionId!==0){ 
+            dispatch(addItemToCollection(collectionId, product));
+            setShowAddToCollectionButton(true);
+            setShowAddToCollectionStatus(false);
+            // setErrors([]);
+        }
     }
 
     const expandAddToNewCollection = async e => {
@@ -60,8 +67,12 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
     return (
         loaded &&
         <>
-        {/* {console.log('hitting AddProductToCollection Line7')} */}
-            {/* Object.values(collections).length!==0 &&  */}
+        {/* {console.log(errors)} */}
+        {errors.length!==0 &&
+        <div>
+            {errors}
+        </div>
+        }
             <div id="collection-option-item-container">
                 {addToExistingCollectionPrompt &&  Object.values(collections).length!==0 && 
                 //the button for add to existing collections
@@ -124,16 +135,18 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
                     })}
                 
                 </select>
-                <button onClick={handleSubmit}>Add</button>
-                <button
+                <span onClick={handleSubmit} id="add-to-existing-col-prompt">{`Add`}</span>
+                <span
+                id="cancel-from-existing-col-prompt"
                 onClick={
                     e=>{
                         e.preventDefault();
                         setAddToExistingCollectionOptions(false);
                         setAddToExistingCollectionPrompt(true);
                         setAddToNewCollectionPrompt(true);
+                        setErrors([]);
                     }
-                }>Cancel</button>
+                }>{`Cancel`}</span>
             </form>
             }
             </div>
@@ -145,12 +158,11 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
                     addToNewCollectionButton && 
                     <AddToNewCollection setAddToNewCollectionButton={setAddToNewCollectionButton} setAddToNewCollectionPrompt={setAddToNewCollectionPrompt} setAddToExistingCollectionPrompt={setAddToExistingCollectionPrompt}/>
                 }
-                <br />
                 <div 
                 id="quit-selection-prompt"
                 onClick={(e)=>{
                     e.preventDefault();
-                    setShowAddToCollectionStatus(false)
+                    setShowAddToCollectionStatus(false);
                     setShowAddToCollectionButton(true);
                 }}>Cancel</div>
             </div>

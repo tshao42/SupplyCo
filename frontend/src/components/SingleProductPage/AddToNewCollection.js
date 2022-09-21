@@ -42,6 +42,7 @@ function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionP
                 dispatch(addItemToCollection(collections[latestCollection].id+1, product))
             })
             .then(()=>{
+                setAddToExistingCollectionPrompt(true);
                 setAddToNewCollectionButton(false);
                 setAddToNewCollectionPrompt(true);
             });

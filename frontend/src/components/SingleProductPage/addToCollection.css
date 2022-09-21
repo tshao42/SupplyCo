@@ -31,12 +31,13 @@
 }
 
 #quit-selection-prompt{
-    color: #565656;
+    color: darkgray;
     font-size: 16px;
+    text-align: center;
 }
 
 #quit-selection-prompt:hover{
-    color: darkgray;
+    color: #565656;
     cursor: pointer;
 }
 
@@ -44,4 +45,24 @@
 #collection-option-item-container{
     display: flex;
     justify-content: space-evenly;
+}
+
+#add-to-existing-col-prompt{
+    margin-left: 30px;
+    color: #565656;
+}
+
+#add-to-existing-col-prompt:hover{
+    color: darkgray;
+    cursor: pointer;
+}
+
+#cancel-from-existing-col-prompt{
+    margin-left: 30px;
+    color: darkgray;
+}
+
+#cancel-from-existing-col-prompt:hover{
+    color: #565656;
+    cursor: pointer;
 }

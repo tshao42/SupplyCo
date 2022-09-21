@@ -185,6 +185,11 @@ const collectionReducer = (state = initialState, action) => {
             return editTemp;
         case ADD_PRODUCT_TO_COLLECTION:
             const addProductTemp = { ...state };
+            // console.table(action.product);
+            if (!addProductTemp[action.collectionId].Collectionitems){
+                addProductTemp[action.collectionId].Collectionitems={}
+            }
+            // console.log('hitting line 192')
             addProductTemp[action.collectionId].Collectionitems[action?.product.id] = action?.product;
             return addProductTemp;
         case REMOVE_PRODUCT_FROM_COLLECTION:
