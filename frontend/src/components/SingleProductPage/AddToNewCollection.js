@@ -51,21 +51,23 @@ function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionP
     }
     return(
         <>
-        <div>
+        <div id="new-collection-add">
             <br />
             <form onSubmit={handleAddingToNewCollection}>
                 <label>
-                    New Collection Name
+                    New Collection Name: {`   `}
                     <input type="text"
                     value={newCollectionName}
                     onChange={e=>setNewCollectionName(e.target.value)}>
                         
                     </input>
                 </label>
-            <button type="submit">
+            <span id="add-to-new-prompt" type="submit">
                 Add
-            </button>
-            <button onClick={e=>{
+            </span>
+            <span 
+            id="cancel-from-new-prompt"
+            onClick={e=>{
                 e.preventDefault();
                 cancelNewCollectionOptions();
                 setAddToNewCollectionPrompt(true);
@@ -73,7 +75,7 @@ function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionP
                 setAddToNewCollectionButton(false);
             }}>
                 Cancel
-            </button>
+            </span>
             </form>
         </div>
         </>

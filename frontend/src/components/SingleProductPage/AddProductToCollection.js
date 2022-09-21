@@ -97,6 +97,7 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
             {addToExistingCollectionOptions &&
             <form>
                 <select name="collections"
+                id="select-collection-dropdown"
                 onChange={
                     e=>{
                         setCollectionId(e.target.value)

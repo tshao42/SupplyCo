@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { add_cart_item_function } from '../../store/cart';
+import { add_cart_item_function, load_cart_items_function, update_quantity_function } from '../../store/cart';
 import { loadOneCollection } from '../../store/collection';
 import { loadAllProducts } from '../../store/product';
 import { loadAllProductsImages } from '../../store/productimage';
@@ -16,6 +16,7 @@ function CollectionInfo(){
     const collection = useSelector(state => state?.collections)[collectionId]
     const collectionItems = useSelector(state => state?.collections)[collectionId]?.Collectionitems;
 
+    const cart = useSelector(state => state?.cart)
 
     const images = useSelector(state=>state.productImages)
 
@@ -39,7 +40,10 @@ function CollectionInfo(){
     const addEverythingToCart = async e=>{
         e.preventDefault();
         Object.values(collectionItems).map(({productId})=>{
-            dispatch(add_cart_item_function(productId, parseFloat(products[productId].price)))
+            //only add items that are not in cart yet
+            if (cart[productId]===undefined){
+                dispatch(add_cart_item_function(productId, parseFloat(products[productId].price)))
+            } 
         })
     }
 

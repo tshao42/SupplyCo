@@ -66,3 +66,29 @@
     color: #565656;
     cursor: pointer;
 }
+
+#select-collection-dropdown{
+    font-family: futura-pt, sans-serif;
+    zoom: 1.1;
+}
+
+#add-to-new-prompt{
+    margin-left: 30px;
+    color: #565656;
+}
+#add-to-new-prompt:hover{
+    color: darkgray;
+    cursor: pointer;
+}
+#cancel-from-new-prompt{
+    margin-left: 30px;
+    color: darkgray;
+}
+#cancel-from-new-prompt:hover{
+    color: #565656;
+    cursor: pointer;
+}
+
+#new-collection-add{
+    text-align:center;
+}
