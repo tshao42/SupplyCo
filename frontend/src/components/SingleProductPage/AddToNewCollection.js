@@ -5,7 +5,7 @@ import { addItemToCollection, createNewCollection, loadAllCollections } from '..
 import './addToCollection.css'
 
 
-function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionPrompt}){
+function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionPrompt, setAddToExistingCollectionPrompt}){
 
     const {productId} = useParams();
 
@@ -61,12 +61,16 @@ function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionP
                         
                     </input>
                 </label>
-                <br />
             <button type="submit">
-                Add to New Collection
+                Add
             </button>
-            <br />
-            <button onClick={cancelNewCollectionOptions}>
+            <button onClick={e=>{
+                e.preventDefault();
+                cancelNewCollectionOptions();
+                setAddToNewCollectionPrompt(true);
+                setAddToExistingCollectionPrompt(true)
+                setAddToNewCollectionButton(false);
+            }}>
                 Cancel
             </button>
             </form>

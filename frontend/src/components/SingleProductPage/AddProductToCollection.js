@@ -54,25 +54,35 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
         e.preventDefault();
         setAddToNewCollectionButton(true);
         setAddToNewCollectionPrompt(false);
+        setAddToExistingCollectionPrompt(false);
     }
     
     return (
         loaded &&
         <>
         {/* {console.log('hitting AddProductToCollection Line7')} */}
-            {Object.values(collections).length!==0 && 
-            <div>
-                {addToExistingCollectionPrompt &&
-                <button
+            {/* Object.values(collections).length!==0 &&  */}
+            <div id="collection-option-item-container">
+                {addToExistingCollectionPrompt &&  Object.values(collections).length!==0 && 
+                //the button for add to existing collections
+                //rendered when there are already collections for the current user
+                <div
                 onClick={e=>{
                     e.preventDefault();
                     setAddToExistingCollectionOptions(true);
                     setAddToExistingCollectionPrompt(false);
+                    setAddToNewCollectionPrompt(false);
                 }}
                 id="add-to-existing-collection">
                     <i class="fa-solid fa-folder"></i> {`   Add To Existing Collection`}
-                </button>
-                }       
+                </div>
+                }     
+                { addToNewCollectionPrompt &&
+                <div id="add-to-new-collection" 
+                onClick={expandAddToNewCollection}>
+                    <i class="fa-solid fa-folder-plus"></i>{`   Add To New Collection`}
+                </div>
+                }  
             {addToExistingCollectionOptions &&
             <form>
                 <select name="collections"
@@ -115,23 +125,34 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
                 
                 </select>
                 <button onClick={handleSubmit}>Add</button>
+                <button
+                onClick={
+                    e=>{
+                        e.preventDefault();
+                        setAddToExistingCollectionOptions(false);
+                        setAddToExistingCollectionPrompt(true);
+                        setAddToNewCollectionPrompt(true);
+                    }
+                }>Cancel</button>
             </form>
             }
             </div>
-            }
             <div>
-                { addToNewCollectionPrompt &&
+                {/* { addToNewCollectionPrompt &&
                     <button id="add-to-new-collection" onClick={expandAddToNewCollection}><i class="fa-solid fa-folder-plus"></i>{`   Add To New Collection`}</button>
-                }
+                } */}
                 {
                     addToNewCollectionButton && 
-                    <AddToNewCollection setAddToNewCollectionButton={setAddToNewCollectionButton} setAddToNewCollectionPrompt={setAddToNewCollectionPrompt}/>
+                    <AddToNewCollection setAddToNewCollectionButton={setAddToNewCollectionButton} setAddToNewCollectionPrompt={setAddToNewCollectionPrompt} setAddToExistingCollectionPrompt={setAddToExistingCollectionPrompt}/>
                 }
                 <br />
-                <button onClick={(e)=>{
+                <div 
+                id="quit-selection-prompt"
+                onClick={(e)=>{
                     e.preventDefault();
-                    setShowAddToCollectionButton(false)
-                }}>Cancel</button>
+                    setShowAddToCollectionStatus(false)
+                    setShowAddToCollectionButton(true);
+                }}>Cancel</div>
             </div>
         </>
     )
