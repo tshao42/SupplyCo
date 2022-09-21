@@ -7,7 +7,9 @@ import { loadSingleProductImages } from '../../store/productimage';
 import { loadAllReviewsForProduct } from '../../store/review';
 import NotFound from '../NotFound';
 import ReviewDisplay from '../ReviewDisplay';
+import AddProductToCollection from './AddProductToCollection';
 import "./singleproductpage.css"
+import "./addToCollection.css"
 
 
 function SingleProductPage(){
@@ -23,7 +25,11 @@ function SingleProductPage(){
     const [loaded, setLoaded] = useState(false);
     const [isInCart, setIsInCart] = useState(cart);
 
+    const currentUserId = useSelector (state => state.session.user?.id);
 
+
+    const [showAddToCollectionStatus, setShowAddToCollectionStatus] = useState(false);
+    const [showAddToCollectionButton, setShowAddToCollectionButton] = useState(true);
 
     useEffect(()=>{
         async function hydrate(){
@@ -41,6 +47,11 @@ function SingleProductPage(){
         .then(()=>setIsInCart(true));
     }
 
+    const collapseCollection = async e => {
+        e.preventDefault();
+        setShowAddToCollectionStatus(true);
+        setShowAddToCollectionButton(false);
+    }
     return(
         loaded
         ?<div>
@@ -48,8 +59,8 @@ function SingleProductPage(){
                 <Link to='/products' id="single-product-navigate-back">{"< "}Back to products</Link>
                 <div id="single-product-middle-container">
                     <div id="single-product-image-container">
-                        {Object.values(images).map(({siteUrl})=>{
-                            return <img src={siteUrl} className="single-product-page-picture"/>
+                        {Object.values(images).map(({siteUrl,id})=>{
+                            return <img key={id} src={siteUrl} className="single-product-page-picture"/>
                         })}
                     </div>
                     <div id="single-product-information-container">
@@ -66,6 +77,19 @@ function SingleProductPage(){
                         }
                         {isInCart &&
                                 <button className="single-product-information-cart-button">In Cart</button>
+                        }
+                        {currentUserId &&
+                            <div>
+                                {showAddToCollectionButton &&
+                                    <div id="add-to-collection-option" onClick={collapseCollection}><i class="fa-regular fa-heart"></i>{`   Add to collection`}</div>
+                                }
+                                {showAddToCollectionStatus &&
+                                    <AddProductToCollection 
+                                        setShowAddToCollectionStatus={setShowAddToCollectionStatus}
+                                        setShowAddToCollectionButton={setShowAddToCollectionButton}
+                                    />
+                                }
+                            </div>
                         }
                     </div>
                 </div>

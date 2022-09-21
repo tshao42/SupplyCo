@@ -53,31 +53,57 @@ function Navigation({ isLoaded }){
       </ul>
       <ul id="nav-bar-top-right-account-options">
         <li>
-          <Link exact to="/cart">Cart{`(${Object.values(cart).length-1})`}</Link>
+          <Link exact to="/cart">
+            {/* Cart{`(${Object.values(cart).length-1})`} */}
+            <i class="fa-solid fa-cart-shopping"></i>
+            {`   (${Object.values(cart).length-1})`}
+          </Link>
         </li>
         {isLoaded && sessionUser &&
         <li>
-          <Link exact to="/myorders">My orders</Link>
+          <Link exact to="/myorders">
+            {/* My orders */}
+            <i class="fa-solid fa-bag-shopping"></i>
+          </Link>
         </li>
         }
         {isLoaded && sessionUser &&
         <li>
-          <div className="nav-top-right-adjust" id="log-out-nav" onClick={logout}>Log Out</div>
+          <Link exact to="/mycollections">
+            {/* My Collections */}
+            <i class="fa-solid fa-heart"></i>
+          </Link>
+        </li>
+        }
+        {isLoaded && sessionUser &&
+        <li>
+          <div className="nav-top-right-adjust" id="log-out-nav" onClick={logout}>
+            {/* Log Out */}
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </div>
         </li>
         }
         {isLoaded && !sessionUser &&
           <li>
-            <div className="nav-top-right-adjust"  id="try-demo" onClick={e => setDemo(e)}>Try Demo</div>
+            <div className="nav-top-right-adjust"  id="try-demo" onClick={e => setDemo(e)}>
+              Demo
+            </div>
           </li>
         }
         {isLoaded && !sessionUser && 
         <li>
-            <Link className="nav-top-right-adjust" to="/login">Log In</Link>
+            <Link className="nav-top-right-adjust" to="/login">
+              {/* Log In */}
+              <i class="fa-solid fa-right-to-bracket"></i>
+            </Link>
         </li>
         }
         {isLoaded && !sessionUser && 
         <li>
-            <Link className="nav-top-right-adjust" to="/signup">Sign Up</Link>
+            <Link className="nav-top-right-adjust" to="/signup">
+              {/* Sign Up */}
+              <i class="fa-solid fa-user-plus"></i>
+            </Link>
         </li>
         }
       </ul>

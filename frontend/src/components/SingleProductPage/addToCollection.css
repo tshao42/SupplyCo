@@ -1,0 +1,94 @@
+#add-to-collection-option{
+    color: #565656;
+    text-align: center;
+}
+
+#add-to-collection-option:hover{
+    color: darkgray;
+    cursor: pointer;
+}
+
+#add-to-existing-collection{
+    color: #565656;
+}
+
+
+#add-to-existing-collection:hover{
+    color: darkgray;
+    cursor: pointer;
+}
+
+
+#add-to-new-collection{
+    color: #565656;
+    font-size: 16px;
+}
+
+
+#add-to-new-collection:hover{
+    color: darkgray;
+    cursor: pointer;
+}
+
+#quit-selection-prompt{
+    color: darkgray;
+    font-size: 16px;
+    text-align: center;
+}
+
+#quit-selection-prompt:hover{
+    color: #565656;
+    cursor: pointer;
+}
+
+
+#collection-option-item-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#add-to-existing-col-prompt{
+    margin-left: 30px;
+    color: #565656;
+}
+
+#add-to-existing-col-prompt:hover{
+    color: darkgray;
+    cursor: pointer;
+}
+
+#cancel-from-existing-col-prompt{
+    margin-left: 30px;
+    color: darkgray;
+}
+
+#cancel-from-existing-col-prompt:hover{
+    color: #565656;
+    cursor: pointer;
+}
+
+#select-collection-dropdown{
+    font-family: futura-pt, sans-serif;
+    zoom: 1.1;
+}
+
+#add-to-new-prompt{
+    margin-left: 30px;
+    color: #565656;
+}
+#add-to-new-prompt:hover{
+    color: darkgray;
+    cursor: pointer;
+}
+#cancel-from-new-prompt{
+    margin-left: 30px;
+    color: darkgray;
+}
+#cancel-from-new-prompt:hover{
+    color: #565656;
+    cursor: pointer;
+}
+
+#new-collection-add{
+    text-align:center;
+}

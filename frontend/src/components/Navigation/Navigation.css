@@ -41,6 +41,7 @@
     text-decoration: none;
     color: black;
     font-family: futura-pt, sans-serif;
+    margin-top: 1px;
 }
 #log-out-nav:hover{
     color: #8C8C8C;

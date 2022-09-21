@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     Product.hasMany(models.ProductImage, { foreignKey: 'productId', onDelete: 'CASCADE', hooks: true });
     Product.hasMany(models.Review, {foreignKey: 'productId', onDelete: 'CASCADE', hooks: true });
     Product.hasMany(models.Orderitem, { foreignKey: 'productId',onDelete: 'CASCADE', hooks: true });
+    Product.hasMany(models.Collectionitem, { foreignKey: 'productId',onDelete: 'CASCADE', hooks: true });
+
   };
   return Product;
 };

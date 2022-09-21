@@ -7,6 +7,7 @@ import cartReducer from "./cart";
 import mapsReducer from "./map";
 import reviewReducer from "./review";
 import productimageReducer from "./productimage";
+import collectionReducer from "./collection";
 //reducer
 
 const rootReducer = combineReducers({
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   reviews: reviewReducer,
   productImages: productimageReducer,
-  map: mapsReducer
+  map: mapsReducer,
+  collections: collectionReducer
 });
 
 
