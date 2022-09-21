@@ -118,7 +118,7 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
                                 disabled
                                 key={id}
                             >
-                                {id} {collectionName} (Added)
+                                {collectionName} (Added)
                             </option>
                         )
                         //otherwise there would be options that are not disabled
@@ -128,7 +128,7 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
                                     value={id}
                                     key={id}
                                 >
-                                    {id} {collectionName}
+                                    {collectionName}
                                 </option>
                             ) 
                         }
