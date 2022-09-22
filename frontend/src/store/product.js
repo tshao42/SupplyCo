@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 export const LOAD_PRODUCTS = "products/LOAD_PRODUCTS";
 export const LOAD_SINGLE_PRODUCT = "products/LOAD_SINGLE_PRODUCT"
 export const ADD_SINGLE_PRODUCT = "products/ADD_SINGLE_PRODUCT"
-export const UPDATE_SINGLE_PRODUCT = "products/UPDATE_SINGLE_PRODUCT"
+export const EDIT_SINGLE_PRODUCT = "products/EDIT_SINGLE_PRODUCT"
 export const DELETE_SINGLE_PRODUCT = "products/DELETE_SINGLE_PRODUCT"
 
 const load_products = (products) => ({
@@ -21,8 +21,8 @@ const add_single_product = (product) => ({
     product
 })
 
-const update_single_product = (productId, product) => ({
-    type: UPDATE_SINGLE_PRODUCT,
+const edit_single_product = (productId, product) => ({
+    type: EDIT_SINGLE_PRODUCT,
     productId,
     product
 })
@@ -106,7 +106,13 @@ const productReducer = (state = initialState, action) =>{
             );
             return allProducts;
         case LOAD_SINGLE_PRODUCT:
-            return {[action.product.id]: action.product}
+            return {[action.product.id]: action.product};
+        case ADD_SINGLE_PRDUCT:
+            return {[action.product.id]: action.product};
+        case EDIT_SINGLE_PRODUCT:
+            return {[action.productId]: action.product};
+        case DELETE_SINGLE_PRODUCT:
+            return {};
         default: return state;
     }
 }
