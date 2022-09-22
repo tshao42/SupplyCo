@@ -107,7 +107,7 @@ const productReducer = (state = initialState, action) =>{
             return allProducts;
         case LOAD_SINGLE_PRODUCT:
             return {[action.product.id]: action.product};
-        case ADD_SINGLE_PRDUCT:
+        case ADD_SINGLE_PRODUCT:
             return {[action.product.id]: action.product};
         case EDIT_SINGLE_PRODUCT:
             return {[action.productId]: action.product};
