@@ -28,12 +28,14 @@ router.get('/', asyncHandler(async function (req, res) {
 
 router.post('/', asyncHandler (async function (req, res){
     const temp = await req.body;
+    console.table(temp);
     const newImageInfo = {
         productId: temp.productId,
         siteUrl: temp.siteUrl
     }
     
-    const newImage = await newImageInfo.save();
-    res.json(newImage);
+    const newImage = await db.ProductImage.save(newImageInfo);
+    const newImageFeed = newImage.save();
+    res.json(newImageFeed);
 }))
 module.exports = router;
