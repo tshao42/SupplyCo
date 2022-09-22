@@ -23,6 +23,42 @@ router.get('/:productId', asyncHandler(async function (req, res) {
     return res.json(product);
 }));
 
+//for business owner: post
+router.post('/', asyncHandler (async function (req,res){
+    //two parts
+    //first, product has: name, price, info
+    //second, there are images
+    //ProductImage database contains productId and siteUrl
+    const temp = await req.body;
+    const newProductDetail = {
+        name: temp.name,
+        price: temp.price,
+        info: temp.info
+    }
+    const newProduct = await newProductDetail.save();
+    res.json(newProduct);
+}))
+
+//for business owner: edit
+router.put('/:productId', asyncHandler(async function (req,res){
+    const productId = req.params.productId;
+
+    const product = await db.Product.findByPk(productId);
+    await product.update(req.body);
+    const updatedProduct = await db.Product.findByPk(productId);
+    return res.json(updatedProduct);
+}))
+
+router.delete('/:productId', asyncHandler(async function(req, res){
+    const productId = req.params.productId;
+    await db.Product.destroy({
+        where: {
+            id: productId
+        }
+    })
+    return res.json(productId);
+}))
+//for business owner: delete
 
 
 

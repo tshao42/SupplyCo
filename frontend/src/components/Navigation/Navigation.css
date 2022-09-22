@@ -59,3 +59,19 @@
     color: #8C8C8C;
     cursor: pointer;
 }
+.management-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#mgmt-options{
+    text-decoration: none;
+    color: black;
+    font-family: futura-pt, sans-serif;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+#mgmt-options:hover{
+    color: #8C8C8C;
+    cursor: pointer;
+}

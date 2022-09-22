@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewCollection } from '../../store/collection';
-
+import "./myCollections.css"
 
 
 function CreationForm({setShowModal}){
@@ -29,10 +29,9 @@ function CreationForm({setShowModal}){
         
     }
     return(
-        <form onSubmit = {handleSubmit}>
+        <form id="submit-new-collection-form-container" onSubmit = {handleSubmit}>
             <label>
                 Create New Collection
-                <br />
                 <input 
                     type="text"
                     value = {collectionName}

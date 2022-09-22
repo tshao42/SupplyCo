@@ -24,6 +24,7 @@ import { loadAllUserOrders } from "./store/order";
 import NotFound from "./components/NotFound";
 import CollectionInfo from "./components/CollectionInfo";
 import MyCollections from "./components/MyCollections";
+import ProductManagement from "./components/ProductManagement";
 
 function App() {
   const dispatch = useDispatch();
@@ -90,6 +91,9 @@ function App() {
           </Route>
           <Route exact path='/mycollections/:collectionId'>
             <CollectionInfo />
+          </Route>
+          <Route exact path='/management/products'>
+            <ProductManagement />
           </Route>
           <Route default>
             <NotFound />

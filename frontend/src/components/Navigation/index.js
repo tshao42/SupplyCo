@@ -32,6 +32,20 @@ function Navigation({ isLoaded }){
       // });
   }
 
+
+  const setOwnerDemo = (e) => {
+    e.preventDefault();
+
+    const payload={
+      credential: "BusinessOwner", 
+      password: "password2"
+    }
+    return dispatch(sessionActions.login(payload))
+      // .catch(async (res) => {
+      //   await res.json();
+      // });
+  }
+
   return (
     <ul id="nav-bar-holder">
       <div id="nav-bar-logo-holder">
@@ -52,26 +66,57 @@ function Navigation({ isLoaded }){
         </li>
       </ul>
       <ul id="nav-bar-top-right-account-options">
+      {isLoaded && !sessionUser &&
+          <li>
+            <div className="nav-top-right-adjust"  id="try-demo" onClick={e=>setOwnerDemo(e)}>
+              Owner Demo
+            </div>
+          </li>
+      }
+      {isLoaded && !sessionUser &&
+          <li>
+            <div className="nav-top-right-adjust"  id="try-demo" onClick={e => setDemo(e)}>
+              Shopper Demo
+            </div>
+          </li>
+        }
         <li>
+          {!sessionUser?.ownerStatus &&
           <Link exact to="/cart">
             {/* Cart{`(${Object.values(cart).length-1})`} */}
-            <i class="fa-solid fa-cart-shopping"></i>
+            <i className="fa-solid fa-cart-shopping"></i>
             {`   (${Object.values(cart).length-1})`}
           </Link>
+        }
+        {sessionUser?.ownerStatus && sessionUser && 
+        <div className="management-options">
+          <div className="nav-top-right-adjust"  id="mgmt-options">
+            <i className="fa-solid fa-book"></i>Orders
+          </div>
+          <div className="nav-top-right-adjust"  id="mgmt-options" onClick={e=>{
+          e.preventDefault();
+          history.push('/management/products');}}>
+            <i className="fa-solid fa-cubes"></i>Products
+          </div>
+          <div className="nav-top-right-adjust"  id="mgmt-options">
+            <i className="fa-solid fa-circle-info"></i>Statistics
+          </div>
+        </div>
+        }
         </li>
-        {isLoaded && sessionUser &&
+        {isLoaded && sessionUser && !sessionUser?.ownerStatus &&
         <li>
           <Link exact to="/myorders">
             {/* My orders */}
-            <i class="fa-solid fa-bag-shopping"></i>
+            <i className="fa-solid fa-bag-shopping"></i>
           </Link>
         </li>
         }
-        {isLoaded && sessionUser &&
+        {isLoaded && sessionUser && !sessionUser?.ownerStatus &&
         <li>
           <Link exact to="/mycollections">
             {/* My Collections */}
-            <i class="fa-solid fa-heart"></i>
+            <i className="fa-solid fa-heart"></i>
           </Link>
         </li>
         }
@@ -79,22 +124,15 @@ function Navigation({ isLoaded }){
         <li>
           <div className="nav-top-right-adjust" id="log-out-nav" onClick={logout}>
             {/* Log Out */}
-            <i class="fa-solid fa-right-from-bracket"></i>
+            <i className="fa-solid fa-right-from-bracket"></i>
           </div>
         </li>
-        }
-        {isLoaded && !sessionUser &&
-          <li>
-            <div className="nav-top-right-adjust"  id="try-demo" onClick={e => setDemo(e)}>
-              Demo
-            </div>
-          </li>
         }
         {isLoaded && !sessionUser && 
         <li>
             <Link className="nav-top-right-adjust" to="/login">
               {/* Log In */}
-              <i class="fa-solid fa-right-to-bracket"></i>
+              <i className="fa-solid fa-right-to-bracket"></i>
             </Link>
         </li>
         }
@@ -102,7 +140,7 @@ function Navigation({ isLoaded }){
         <li>
             <Link className="nav-top-right-adjust" to="/signup">
               {/* Sign Up */}
-              <i class="fa-solid fa-user-plus"></i>
+              <i className="fa-solid fa-user-plus"></i>
             </Link>
         </li>
         }

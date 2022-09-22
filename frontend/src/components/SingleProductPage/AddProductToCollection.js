@@ -85,13 +85,13 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
                     setAddToNewCollectionPrompt(false);
                 }}
                 id="add-to-existing-collection">
-                    <i class="fa-solid fa-folder"></i> {`   Add To Existing Collection`}
+                    <i className="fa-solid fa-folder"></i> {`   Add To Existing Collection`}
                 </div>
                 }     
                 { addToNewCollectionPrompt &&
                 <div id="add-to-new-collection" 
                 onClick={expandAddToNewCollection}>
-                    <i class="fa-solid fa-folder-plus"></i>{`   Add To New Collection`}
+                    <i className="fa-solid fa-folder-plus"></i>{`   Add To New Collection`}
                 </div>
                 }  
             {addToExistingCollectionOptions &&
@@ -110,7 +110,7 @@ function AddProductToCollection({setShowAddToCollectionStatus, setShowAddToColle
                     </option>
                     {Object.values(collections).map(({id, collectionName})=>{
                         // {console.log(collections[id])}
-                        //this is for collections that it has been in
+                        // this is for collections that it has been in
                         if (collections[id].Collectionitems[productId]){
                         return(
                             <option 

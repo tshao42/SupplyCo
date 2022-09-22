@@ -22,6 +22,11 @@ module.exports = {
         type: Sequelize.STRING.BINARY,
         allowNull: false
       },
+      ownerStatus:{
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

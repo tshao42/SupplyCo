@@ -26,4 +26,14 @@ router.get('/', asyncHandler(async function (req, res) {
     return res.json(images);
 }));
 
+router.post('/', asyncHandler (async function (req, res){
+    const temp = await req.body;
+    const newImageInfo = {
+        productId: temp.productId,
+        siteUrl: temp.siteUrl
+    }
+    
+    const newImage = await newImageInfo.save();
+    res.json(newImage);
+}))
 module.exports = router;
