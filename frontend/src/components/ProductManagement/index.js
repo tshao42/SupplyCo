@@ -13,6 +13,7 @@ function ProductManagement () {
     const products = useSelector( state => state.products );
     const [loaded, setLoaded] = useState(false);
     const [newItemForm, setNewItemForm] = useState(false);
+    const [latestProductId, setLatestProductId] = useState();
 
     let errors = {}; //set empty object for error handling markers
 
@@ -30,6 +31,11 @@ function ProductManagement () {
         }
         hydrate();
     }, [dispatch]);
+
+    useEffect(()=>{
+        setLatestProductId(Object.keys(products)[Object.keys(products).length-1])
+    }, [products])
+
 
     const handleCreateNewProduct = (e) =>{
         e.preventDefault();
@@ -85,9 +91,17 @@ function ProductManagement () {
                 info: newProductInfo,
             }
             
-            dispatch(addSingleProduct(payload));
-            const newProductId = Math.max.apply(null,Object.keys(Object.keys(products)));
-            dispatch(addSingleProductImage(newProductId, newProductImageUrl));
+            const updateProductList = async ()=>{
+                await dispatch(addSingleProduct(payload))
+                .then(()=>console.table(Object.keys(products)))
+            }
+            console.log();
+            updateProductList();
+            // console.table(Object.keys(products))
+            dispatch(addSingleProductImage(parseInt(latestProductId)+1, newProductImageUrl));
+            
+            setNewItemForm(false);
+
         }
     }
 
@@ -100,6 +114,8 @@ function ProductManagement () {
     return (
         loaded &&
         <div>
+        {/* {console.log(latestProductId)} */}
+        {/* {console.table(Object.keys(products))} */}
             { sessionUserIsOwner?
             <div>
                  {Object.values(products).map(({id, name})=>{return(

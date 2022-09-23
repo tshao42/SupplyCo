@@ -28,14 +28,15 @@ router.get('/', asyncHandler(async function (req, res) {
 
 router.post('/', asyncHandler (async function (req, res){
     const temp = await req.body;
+    console.log("image tracking")
     console.table(temp);
     const newImageInfo = {
         productId: temp.productId,
         siteUrl: temp.siteUrl
     }
     
-    const newImage = await db.ProductImage.save(newImageInfo);
-    const newImageFeed = newImage.save();
+    const newImage = await db.ProductImage.build(newImageInfo);
+    const newImageFeed = await newImage.save();
     res.json(newImageFeed);
 }))
 module.exports = router;

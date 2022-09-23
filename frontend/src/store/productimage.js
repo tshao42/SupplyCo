@@ -37,8 +37,7 @@ export const loadAllProductsImages = () => async dispatch => {
     }
 }
 
-export const addSingleProductImage = (productId, payload) => async dispatch => {
-    const { siteUrl } = payload;
+export const addSingleProductImage = (productId, siteUrl) => async dispatch => {
     const response = await csrfFetch (`/api/productimages`, {
         method: 'POST',
         headers: {
@@ -46,7 +45,7 @@ export const addSingleProductImage = (productId, payload) => async dispatch => {
         },
         body: JSON.stringify({
             productId,
-            siteUrl
+            siteUrl: siteUrl
         })
     });
     if (response.ok) {
