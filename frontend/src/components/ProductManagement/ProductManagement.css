@@ -1,0 +1,117 @@
+#product-management-page-container{
+    margin-top: 4%;
+    margin-left: 8%;
+    min-height: 80%;
+}
+
+
+#product-management-page-title{
+    font-family: futura-pt;
+    
+}
+
+.prodcut-management-item-lines{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30%;
+}
+.product-management-item-listings{
+    line-height: 1.5;
+}
+
+.product-management-item-deletion{
+    margin-left: 30%;
+    width: 1px;
+    font-family: futura-pt;
+    color: darkgray;
+}
+
+.product-management-item-deletion:hover{
+    cursor: pointer;
+    color: #565656;
+}
+
+#product-management-add-new-product{
+    font-family: futura-pt;
+    color: #565656;
+    margin-bottom: 10%;
+}
+#product-management-add-new-product:hover{
+    color: darkgray;
+    cursor: pointer;
+}
+
+
+.product-management-form{
+    display: flex;
+    flex-direction: column;
+    font-family: futura-pt;
+}
+
+.product-management-form-labels{
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+#product-management-form-name{
+    border: 0.5px lightgray solid;
+    font-family: futura-pt, sans-serif;
+    width: 60%;
+}
+#product-management-form-price{
+    border: 0.5px lightgray solid;
+    font-family: futura-pt, sans-serif;
+    width: 10%;
+}
+#product-management-form-description{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    width: 60%;
+    height: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    border: 0.5px solid lightgray;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 15px;
+    resize: none;
+    text-align: justify;
+    white-space: normal;
+    font-family: futura-pt, sans-serif;
+}
+#product-management-imageurl{
+    border: 0.5px lightgray solid;
+    font-family: futura-pt, sans-serif;
+    width: 60%;
+    margin-bottom: 1%;
+}
+
+#product-management-form-submission-add{
+    border: none;
+    background-color: #565656;
+    color: lightgray;
+    width: 15%;
+    height: 40px;
+    font-family: futura-pt, sans-serif;
+    font-size: 13pt;
+}
+#product-management-form-submission-add:hover{
+    background-color: lightgray;
+    color: #565656;
+    cursor: pointer;
+}
+#product-management-form-cancel{
+    color: darkgray;
+    margin-top: 10px;
+}
+#product-management-form-cancel:hover{
+   cursor: pointer;
+   color: #565656; 
+}
+
+#errors-message-product-management{
+    color: crimson;
+}

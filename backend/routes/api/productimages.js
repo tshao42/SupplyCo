@@ -39,4 +39,14 @@ router.post('/', asyncHandler (async function (req, res){
     const newImageFeed = await newImage.save();
     res.json(newImageFeed);
 }))
+
+router.delete('/:productId', asyncHandler (async function(req,res){
+    const productId = req.params.productId;
+    await db.ProductImage.destroy({
+        where: {
+            productId: productId
+        }
+    })
+    return res.json(productId);
+}))
 module.exports = router;

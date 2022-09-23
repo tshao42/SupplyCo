@@ -25,6 +25,8 @@ import NotFound from "./components/NotFound";
 import CollectionInfo from "./components/CollectionInfo";
 import MyCollections from "./components/MyCollections";
 import ProductManagement from "./components/ProductManagement";
+import OrderManagement from "./components/OrderManagement";
+import StorefrontStatistics from "./components/StorefrontStatistics";
 
 function App() {
   const dispatch = useDispatch();
@@ -94,6 +96,12 @@ function App() {
           </Route>
           <Route exact path='/management/products'>
             <ProductManagement />
+          </Route>
+          <Route exact path='/management/orders'>
+            <OrderManagement />
+          </Route>
+          <Route exact path='/management/statistics'>
+            <StorefrontStatistics />
           </Route>
           <Route default>
             <NotFound />

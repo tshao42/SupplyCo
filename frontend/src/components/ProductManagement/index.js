@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { csrfFetch } from '../../store/csrf';
 import { addSingleProduct, deleteSingleProduct, loadAllProducts } from '../../store/product';
 import { addSingleProductImage } from '../../store/productimage';
+import "./ProductManagement.css";
 
 
 
@@ -15,7 +17,7 @@ function ProductManagement () {
     const [newItemForm, setNewItemForm] = useState(false);
     const [latestProductId, setLatestProductId] = useState();
 
-    let errors = {}; //set empty object for error handling markers
+    let [allErrors, setAllErrors] = useState([]); //set empty object for error handling markers
 
 
     //for the new products
@@ -39,52 +41,46 @@ function ProductManagement () {
 
     const handleCreateNewProduct = (e) =>{
         e.preventDefault();
-        
+        let errors = [];        
         //error handling
         //productName: must be longer than 10 characters, shorter than 120 characters
         if (newProductName.length < 10) {
-            errors["name"] = "Product Name Must Be Longer Than 10 Characters";
+            errors.push("Product Name Must Be Longer Than 10 Characters");
         } else{
             if (newProductName.length > 120) {
-                errors["name"] = "Product Name Must Be Shorter Than 120 Characters";
-            } else{
-                delete errors.name;
+                errors.push("Product Name Must Be Shorter Than 120 Characters");
             }
         }
 
         //productPrice:
         if (newProductPrice <= 0) {
-            errors["price"] = "Product Price Must Be Positive"
-        } else{
-            delete errors.price;
+            errors.push("Product Price Must Be Positive");
         }
 
         //productInfo:
         //cannot be <10char or >1500char
         if (newProductInfo.length < 10){
-            errors["info"] = "Product Information Must Be Longer Than 10 Characters"
+            errors.push ("Product Information Must Be Longer Than 10 Characters");
         } else {
             if (newProductInfo.length > 1500){
-                errors["info"] = "Product Information Must Be Shorter Than 1500 Characters"
-            } else {
-                delete errors.info;
+                errors.push("Product Information Must Be Shorter Than 1500 Characters");
             }
         }
 
         //siteUrl
         if (newProductImageUrl.length === 0) {
-            errors["url"] = "Image  URL cannot be empty"
+            errors.push("Image  URL cannot be empty");
         } else {
            if (!isImage(newProductImageUrl)){
-            errors["url"] = "The URL must end in .jpg, .jpeg, .png, .webp, .avif, .gif, .svg"
-           } else {
-            delete errors.url;
+            errors.push("The URL must end in .jpg, .jpeg, .png, .webp, .avif, .gif, .svg");
            }
 
         }
 
-        console.table(errors);
-        if (errors["name"] === undefined && errors["price"] === undefined && errors["info"] === undefined) {
+        setAllErrors(errors);
+        // console.table(errors);
+        // console.log(errors["name"])
+        if (errors.length===0) {
             const payload = {
                 name: newProductName,
                 price: newProductPrice,
@@ -113,74 +109,96 @@ function ProductManagement () {
 
     return (
         loaded &&
-        <div>
+        <div id="product-management-page-container">
         {/* {console.log(latestProductId)} */}
         {/* {console.table(Object.keys(products))} */}
             { sessionUserIsOwner?
             <div>
+                <h1 id="product-management-page-title">Product Management</h1>
                  {Object.values(products).map(({id, name})=>{return(
-                        <div key={id} >
-                            <Link to={`/products/${id}`} >No.{id}: {name}</Link>
-                            <span onClick={
-                                e=>{
+                        <div key={id} className="product-management-item-lines">
+                            <Link className="product-management-item-listings" to={`/products/${id}`} >No.{id}: {name}</Link>
+                            <div className="product-management-item-deletion" onClick={
+                                async e=>{
                                     e.preventDefault();
-                                    dispatch(deleteSingleProduct(parseInt(id)));
+                                    console.log(JSON.stringify({productId: id}));
+                                    await csrfFetch(`/api/productimages/${id}`, {
+                                        method: 'DELETE',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({productId: id})
+                                    })
+                                    .then(()=>dispatch(deleteSingleProduct(parseInt(id))));
                                 }
-                            }>Delete</span>
+                            }>Delete#{id}</div>
                         </div>
                     )
                   })}
                   {!newItemForm &&
-                  <div onClick={e=>{
+                  <div 
+                  id="product-management-add-new-product"
+                  onClick={e=>{
                     e.preventDefault();
                     setNewItemForm(true);
                   }}> 
-                    Add New Product 
+                    + Add New Product 
                   </div>
                   }
                   {newItemForm &&
                   <div>
-                    <form>
-                        <label>
-                            Name
+                    <form className="product-management-form">
+                        <ul id="errors-message-product-management">
+                        {allErrors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
+                        <label className="product-management-form-labels">
+                            Name                            
+                            <br />
                             <input 
+                            id="product-management-form-name"
                             onChange={e=>setNewProductName(e.target.value)}
                             type="text" />
                         </label>
-                        <label>
-                            Price
+                        <label className="product-management-form-labels">
+                            Price: 
+                            <br />
                             <input 
+                            id="product-management-form-price"
                             onChange={e=>setNewProductPrice(e.target.value)}
                             type="number" 
                             step="any"/>
                         </label>
-                        <label>
-                            Description
-                            <input 
+                        <label className="product-management-form-labels">
+                            Description:
+                            <br />
+                            <textarea 
+                            id="product-management-form-description"
                             onChange={e=>setNewProductInfo(e.target.value)}
                             type="text" />
                         </label>
-                        <label>
-                            Image URL
+                        <label className="product-management-form-labels">
+                            Image URL: 
+                            <br />
                             <input
+                            id="product-management-imageurl"
                             onChange={e=>setNewProductImageUrl(e.target.value)}
                             type="text" />
                         </label>
                         <button
+                        id="product-management-form-submission-add"
                          onClick={e=>handleCreateNewProduct(e)}>
                             Add to Product Listing        
                         </button>
-                        <span onClick={e=>{
+                        <div 
+                        id="product-management-form-cancel" onClick={e=>{
                             e.preventDefault();
                             setNewItemForm(false);
-                        }}>Cancel</span>
+                        }}>Cancel</div>
                     </form>
                   </div>}
             </div>
             :
-            <div>
-                Not Authorized
-            </div>
+            <Redirect to="/" />
             }
         </div>
     )

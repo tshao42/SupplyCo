@@ -90,15 +90,24 @@ function Navigation({ isLoaded }){
         }
         {sessionUser?.ownerStatus && sessionUser && 
         <div className="management-options">
-          <div className="nav-top-right-adjust"  id="mgmt-options">
+          <div className="nav-top-right-adjust"  id="mgmt-options"
+          onClick={e=>{
+            e.preventDefault();
+            history.push('/management/orders');}}>
             <i className="fa-solid fa-book"></i>Orders
           </div>
-          <div className="nav-top-right-adjust"  id="mgmt-options" onClick={e=>{
+          <div className="nav-top-right-adjust"  id="mgmt-options" 
+          onClick={e=>{
           e.preventDefault();
           history.push('/management/products');}}>
             <i className="fa-solid fa-cubes"></i>Products
           </div>
-          <div className="nav-top-right-adjust"  id="mgmt-options">
+          <div className="nav-top-right-adjust"  
+          id="mgmt-options"
+          onClick={e=>{
+            e.preventDefault();
+            history.push('/management/statistics');}}
+          >
             <i className="fa-solid fa-circle-info"></i>Statistics
           </div>
         </div>
