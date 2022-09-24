@@ -142,6 +142,7 @@ const collectionReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SINGLE_COLLECTION:
             const loadSingleCollectionTemp = {};
+            
             // console.table(action.collection[0])
             const { Collectionitems, ...collectionProperty } = action.collection[0];
             // console.table(Collectionitems);

@@ -48,8 +48,13 @@ function CreationForm({setShowModal}){
                 />
             </label>
             <br />
-            <button type = "submit">Confirm</button>
-            <span>Cancel</span>
+            <button id="new-collection-submit" type = "submit">Confirm</button>
+            <span onClick={
+                e=>{
+                    e.preventDefault();
+                    setShowModal(false);
+                }
+            } id="new-collection-cancel">Cancel</span>
             <ul id="new-collection-form-errors">
                 {allErrors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>

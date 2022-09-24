@@ -40,8 +40,33 @@
 
 #new-collection-form{
     margin-top: 10px;
-    margin-bottom: 15px;
     border: 1px darkgray solid;
     font-family: futura-pt;
     font-weight: 700;
+}
+
+#new-collection-submit{
+    background-color: #565656;
+    color: white;
+    border: none;
+    width:30%;
+    height: 7%;
+    font-size: 15pt;
+    font-family: futura-pt, sans-serif;
+    font-weight: 200;
+    margin-top: 5%;
+}
+#new-collection-submit:hover{
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+#new-collection-cancel{
+    margin-left: 10px;
+    color: darkgray;
+}
+
+#new-collection-cancel:hover{
+    color: #565656;
+    cursor:pointer;
 }

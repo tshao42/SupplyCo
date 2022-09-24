@@ -53,16 +53,15 @@ function AddToNewCollection({setAddToNewCollectionButton, setAddToNewCollectionP
         <>
         <div id="new-collection-add">
             <br />
-            <form onSubmit={handleAddingToNewCollection}>
+            <form>
                 <label>
                     New Collection Name: {`   `}
                     <input type="text"
                     value={newCollectionName}
                     onChange={e=>setNewCollectionName(e.target.value)}>
-                        
                     </input>
                 </label>
-            <span id="add-to-new-prompt" type="submit">
+            <span id="add-to-new-prompt" onClick={e=>handleAddingToNewCollection(e)}>
                 Add
             </span>
             <span 

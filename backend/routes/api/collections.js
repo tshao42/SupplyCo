@@ -32,7 +32,7 @@ router.get('/:collectionId', asyncHandler(async function(req,res){
             id: collectionId
         }, include:{
             model: db.Collectionitem,
-            required: true
+            required: false
         }
     })
     return res.json(collection);
