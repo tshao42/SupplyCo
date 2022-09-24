@@ -64,6 +64,7 @@ export const addSingleProduct = (product)=> async dispatch =>{
     if (response.ok) {
         const newProduct = await response.json();
         dispatch(add_single_product(newProduct));
+        return newProduct;
     }
 }
 

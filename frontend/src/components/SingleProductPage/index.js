@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  useParams, Link } from 'react-router-dom';
 import { add_cart_item_function } from '../../store/cart';
-import { loadSingleProduct } from '../../store/product';
+import { loadSingleProduct, updateSingleProduct } from '../../store/product';
 import { loadSingleProductImages } from '../../store/productimage';
 import { loadAllReviewsForProduct } from '../../store/review';
 import NotFound from '../NotFound';
@@ -25,6 +25,10 @@ function SingleProductPage(){
     const [loaded, setLoaded] = useState(false);
     const [isInCart, setIsInCart] = useState(cart);
     const [editMode, setEditMode] = useState(false);
+    const [allErrors, setAllErrors] = useState([]); //set empty object for error handling markers
+
+
+    const [showEditButton, setShowEditButton] = useState(true);
 
 
     //for editing purposes
@@ -62,6 +66,45 @@ function SingleProductPage(){
 
     const handleEditSubmit = async e => {
         e.preventDefault();
+        let errors = [];        
+        //error handling
+        //productName: must be longer than 10 characters, shorter than 120 characters
+        if (productName.length < 10) {
+            errors.push("Product Name Must Be Longer Than 10 Characters");
+        } else{
+            if (productName.length > 120) {
+                errors.push("Product Name Must Be Shorter Than 120 Characters");
+            }
+        }
+
+        //productPrice:
+        if (productPrice <= 0) {
+            errors.push("Product Price Must Be Positive");
+        }
+
+        //productInfo:
+        //cannot be <10char or >1500char
+        if (description.length < 10){
+            errors.push ("Product Information Must Be Longer Than 10 Characters");
+        } else {
+            if (description.length > 1500){
+                errors.push("Product Information Must Be Shorter Than 1500 Characters");
+            }
+        }
+
+        setAllErrors(errors);
+        // console.table(errors);
+        // console.log(errors["name"])
+        if (errors.length===0) {
+            const payload = {
+                name: productName,
+                price: productPrice,
+                info: description,
+            }
+            dispatch(updateSingleProduct(productIdInt, payload));
+            setEditMode(false);
+            setShowEditButton(true);
+        }
     }
     const collapseCollection = async e => {
         e.preventDefault();
@@ -93,11 +136,16 @@ function SingleProductPage(){
                         </div>
                         }
                         {editMode &&
-                        <form>
-                            <div>
+                        <form id="edit-product-form">
+                            <ul id="errors-message-single-product">
+                                {allErrors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            </ul>
+                            <div className="edit-product-fields">
                                 <label>
                                     Name: 
+                                    <br />
                                     <input
+                                    id="edit-product-form-name"
                                     type="text"
                                     value={productName}
                                     onChange={
@@ -106,11 +154,13 @@ function SingleProductPage(){
                                     </input>
                                 </label>
                             </div>
-                            <div>
+                            <div className="edit-product-fields">
                                 <label>
                                     Price:
+                                    <br />
                                     <input
-                                    type="text"
+                                    id="edit-product-form-price"
+                                    type="number"
                                     value={productPrice}
                                     onChange={
                                         e=>setProductPrice(e.target.value)
@@ -118,9 +168,10 @@ function SingleProductPage(){
                                     </input>
                                 </label>
                             </div>
-                            <div id="single-product-information-block-2">
-                                <div id="single-product-item-description">Description: </div>
+                            <div id="single-product-information-block-2" className="edit-product-fields">
+                                <div >Description: </div>
                                 <textarea
+                                id="edit-product-info"
                                 // type="text"
                                 value={description}
                                 onChange= {
@@ -130,10 +181,17 @@ function SingleProductPage(){
                             </div>
                             <div>
                                 <input
+                                id="edit-product-info-submit"
                                 type="submit"
                                 onClick={handleEditSubmit}>
                                 </input>
                             </div>
+                            <div id="edit-product-info-cancel"
+                            onClick={e=>{
+                                e.preventDefault();
+                                setEditMode(false);
+                                setShowEditButton(true);
+                            }}>Cancel</div>
                         </form>
                         }
                         {!isInCart && !currentUserIsOwner &&
@@ -155,12 +213,14 @@ function SingleProductPage(){
                                 }
                             </div>
                         }
-                        {currentUserIsOwner &&
+                        {currentUserIsOwner && showEditButton &&
                             <button
+                            id="single-product-page-edit-product-information"
                             onClick={
                                 e=>{
                                     e.preventDefault();
                                     setEditMode(true);
+                                    setShowEditButton(false);
                                 }
                             }>Edit Product Information</button>
                         }

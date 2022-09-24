@@ -15,9 +15,9 @@ function ProductManagement () {
     const products = useSelector( state => state.products );
     const [loaded, setLoaded] = useState(false);
     const [newItemForm, setNewItemForm] = useState(false);
-    const [latestProductId, setLatestProductId] = useState();
+    // const [latestProductId, setLatestProductId] = useState();
 
-    let [allErrors, setAllErrors] = useState([]); //set empty object for error handling markers
+    const [allErrors, setAllErrors] = useState([]); //set empty object for error handling markers
 
 
     //for the new products
@@ -34,12 +34,8 @@ function ProductManagement () {
         hydrate();
     }, [dispatch]);
 
-    useEffect(()=>{
-        setLatestProductId(Object.keys(products)[Object.keys(products).length-1])
-    }, [products])
 
-
-    const handleCreateNewProduct = (e) =>{
+    const handleCreateNewProduct = async (e) =>{
         e.preventDefault();
         let errors = [];        
         //error handling
@@ -87,14 +83,9 @@ function ProductManagement () {
                 info: newProductInfo,
             }
             
-            const updateProductList = async ()=>{
-                await dispatch(addSingleProduct(payload))
-                .then(()=>console.table(Object.keys(products)))
-            }
-            console.log();
-            updateProductList();
-            // console.table(Object.keys(products))
-            dispatch(addSingleProductImage(parseInt(latestProductId)+1, newProductImageUrl));
+            const latestProduct = await dispatch(addSingleProduct(payload));
+            // console.log(latestProduct);
+            dispatch(addSingleProductImage(parseInt(latestProduct.id), newProductImageUrl));
             
             setNewItemForm(false);
 
