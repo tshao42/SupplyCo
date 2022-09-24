@@ -26,4 +26,22 @@
 #submit-new-collection-form-container{
     width: 500px;
     font-family: futura-pt;
+    padding: 50px;
+}
+
+#new-collection-form-errors{
+    color:crimson;
+}
+
+#new-collection-title{
+    font-size: 17px;
+}
+
+
+#new-collection-form{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 1px darkgray solid;
+    font-family: futura-pt;
+    font-weight: 700;
 }
