@@ -1,0 +1,66 @@
+#collection-info-container{
+    margin-top: 7%;
+    margin-left: 8.5%;
+    font-family: futura-pt;
+    min-height: 80%;
+}
+
+.rename-option{
+    font-size: 16px;
+    font-weight:400;
+    margin-left: 30px;
+    color: darkgray;
+}
+
+.rename-option:hover{
+    cursor:pointer;
+    color: #565656;
+}
+
+#collection-name-rename-form{
+    border: 1px darkgray solid;
+    font-family: futura-pt;
+    zoom: 2;
+    font-weight: 700;
+}
+
+#collection-name-submit-change{
+    margin-left: 1%;
+    color: #565656;
+}
+#collection-name-submit-change:hover{
+    color: darkgray;
+}
+
+#collection-delete-option{
+    color: #565656;
+}
+
+#collection-delete-option:hover{
+    color: darkgray;
+    cursor:pointer;
+}
+
+#remove-collection-option{
+    color: #565656;
+}
+
+#remove-collection-option:hover{
+    color: darkgray;
+    cursor:pointer;
+}
+
+#add-collection-items-to-cart{
+    background-color: #565656;
+    color: white;
+    border: none;
+    width: 8%;
+    height: 3%;
+    font-family: futura-pt, sans-serif;
+    font-weight: 400;
+    margin-top: 5%;
+}
+#add-collection-items-to-cart:hover{
+    background-color: darkgray;
+    cursor: pointer;
+}

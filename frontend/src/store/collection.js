@@ -127,7 +127,7 @@ export const addItemToCollection = (collectionId, product) => async dispatch=> {
 }
 
 export const removeItemFromCollection = (collectionId, productId) => async dispatch =>{
-    const response = await csrfFetch(`/api/collections/${collectionId}/${productId}`, {
+    const response = await csrfFetch(`/api/collections/items/${collectionId}/${productId}`, {
         method: 'DELETE'
     });
 
@@ -142,6 +142,7 @@ const collectionReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SINGLE_COLLECTION:
             const loadSingleCollectionTemp = {};
+            
             // console.table(action.collection[0])
             const { Collectionitems, ...collectionProperty } = action.collection[0];
             // console.table(Collectionitems);
@@ -181,7 +182,7 @@ const collectionReducer = (state = initialState, action) => {
             return deleteCopy;
         case EDIT_COLLECTION:
             const editTemp = { ...state };
-            editTemp[action.collectionId] = action.collection;
+            editTemp[action.collectionId] = action.collection[0];
             return editTemp;
         case ADD_PRODUCT_TO_COLLECTION:
             const addProductTemp = { ...state };

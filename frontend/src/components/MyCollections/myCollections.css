@@ -26,4 +26,47 @@
 #submit-new-collection-form-container{
     width: 500px;
     font-family: futura-pt;
+    padding: 50px;
+}
+
+#new-collection-form-errors{
+    color:crimson;
+}
+
+#new-collection-title{
+    font-size: 17px;
+}
+
+
+#new-collection-form{
+    margin-top: 10px;
+    border: 1px darkgray solid;
+    font-family: futura-pt;
+    font-weight: 700;
+}
+
+#new-collection-submit{
+    background-color: #565656;
+    color: white;
+    border: none;
+    width:30%;
+    height: 7%;
+    font-size: 15pt;
+    font-family: futura-pt, sans-serif;
+    font-weight: 200;
+    margin-top: 5%;
+}
+#new-collection-submit:hover{
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+#new-collection-cancel{
+    margin-left: 10px;
+    color: darkgray;
+}
+
+#new-collection-cancel:hover{
+    color: #565656;
+    cursor:pointer;
 }

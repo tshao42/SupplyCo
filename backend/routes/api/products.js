@@ -30,13 +30,15 @@ router.post('/', asyncHandler (async function (req,res){
     //second, there are images
     //ProductImage database contains productId and siteUrl
     const temp = await req.body;
+    console.table(req.body);
     const newProductDetail = {
         name: temp.name,
-        price: temp.price,
+        price: parseFloat(temp.price),
         info: temp.info
     }
-    const newProduct = await newProductDetail.save();
-    res.json(newProduct);
+    const newProduct = await db.Product.build(newProductDetail);
+    const newProductFinished = await newProduct.save();
+    res.json(newProductFinished);
 }))
 
 //for business owner: edit

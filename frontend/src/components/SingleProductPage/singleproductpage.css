@@ -57,3 +57,92 @@
 #single-product-page-review-container{
     margin-top: 7%;
 }
+
+#edit-product-form-name{
+    border: 0.5px lightgray solid;
+    font-family: futura-pt, sans-serif;
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+#edit-product-form-price{
+    border: 0.5px lightgray solid;
+    font-family: futura-pt, sans-serif;
+    width: 50%;
+    margin-bottom: 1%;
+}
+
+#edit-product-info{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    width: 100%;
+    height:100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    border: 0.5px solid lightgray;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 15px;
+    resize: none;
+    text-align: justify;
+    white-space: normal;
+    font-family: futura-pt, sans-serif;
+}
+
+#edit-product-form{
+    width: 150%;
+}
+
+#errors-message-single-product{
+    width: 100%;
+    color: crimson;
+}
+
+.edit-product-fields{
+    min-width: 400px;
+}
+
+#single-product-page-edit-product-information{
+    background-color: #565656;
+    color: white;
+    border: none;
+    width: 100%;
+    height: 7%;
+    font-size: 15pt;
+    font-family: futura-pt, sans-serif;
+    font-weight: 200;
+    margin-top: 5%;
+}
+#single-product-page-edit-product-information:hover{
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+#edit-product-info-submit{
+    background-color: #565656;
+    color: white;
+    border: none;
+    width: 100%;
+    height: 11%;
+    font-size: 15pt;
+    font-family: futura-pt, sans-serif;
+    font-weight: 200;
+    margin-top: 5%;
+}
+#edit-product-info-submit:hover{
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+#edit-product-info-cancel{
+    margin-top: 3px;
+    text-align: center;
+    color: darkgray;
+}
+
+#edit-product-info-cancel:hover{
+    color: #565656;
+    cursor: pointer;
+}

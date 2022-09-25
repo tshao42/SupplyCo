@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { loadAllCollections } from '../../store/collection';
 import { loadAllProducts } from '../../store/product';
 import CollectionModal from './CreationModal';
@@ -24,7 +24,9 @@ function MyCollections() {
     
     return(
     loaded &&
-    <div id="my-collections-page-container">
+    <div>
+    {currentUserId!==undefined
+    ?<div id="my-collections-page-container">
     {/* {console.table(collections)} */}
     {/* {console.table(s)}; */}
         <h1 id="my-collection-page-header">My Collections</h1>
@@ -45,6 +47,12 @@ function MyCollections() {
         }
         <CollectionModal />
     </ div>
+    :
+    <div>
+        <Redirect to={`/login`} />
+    </div>
+    }
+    </div>
     )
 }
 
